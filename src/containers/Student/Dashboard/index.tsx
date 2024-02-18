@@ -1,7 +1,8 @@
-"use client"
+"use client";
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
 const StudentDashboardContainer: React.FC = () => {
   const pathname = usePathname();
   return (

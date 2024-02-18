@@ -1,7 +1,8 @@
-"use client"
+"use client";
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
 type PropsType = {
   assignment_id: string;
   qn_id: string;
@@ -15,7 +16,10 @@ const QuestionDetailContainer: React.FC<PropsType> = ({
   return (
     <div>
       <div className="text-2xl">
-        You are seeing <strong>QUESTION: {qn_id} under ASSIGNMENT: { assignment_id}</strong>
+        You are seeing{" "}
+        <strong>
+          QUESTION: {qn_id} under ASSIGNMENT: {assignment_id}
+        </strong>
       </div>
       This pages shows the specific question. It contains the IDE and Problem
       statement. Please refer to leetcode for the specific design.{" "}
@@ -27,9 +31,7 @@ const QuestionDetailContainer: React.FC<PropsType> = ({
         to see past submissions
         <div className="flex justify-center">
           <button className="bg-black text-white p-5 rounded-lg">
-            <Link
-              href={`${pathname}/past-submissions`}
-            >
+            <Link href={`${pathname}/past-submissions`}>
               See Past Submissions
             </Link>
           </button>

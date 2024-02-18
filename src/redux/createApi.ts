@@ -30,7 +30,7 @@ const plainBaseQuery = () =>
   });
 
 const itsBaseQueryWithReauth: BaseQueryFn<
-  string | FetchArgs,
+  any | FetchArgs,
   unknown,
   FetchBaseQueryError
 > = async (args, api, extraOptions) => {
@@ -63,7 +63,7 @@ const itsBaseQueryWithReauth: BaseQueryFn<
             },
           },
           api,
-          extraOptions
+          extraOptions,
         );
         // If the request is successful, update the redux store with the new access token and retry the initial query.
         if (!isEmpty(data)) {
@@ -75,7 +75,7 @@ const itsBaseQueryWithReauth: BaseQueryFn<
           result = await dynamicBaseQueryWithAuth(role)(
             args,
             api,
-            extraOptions
+            extraOptions,
           );
         } else {
           // If the request is unsuccessful, dispatch an action to logout the user.
@@ -94,8 +94,8 @@ const itsBaseQueryWithReauth: BaseQueryFn<
   return result;
 };
 
-export const itsApi = createApi({
-  reducerPath: "itsApi",
+export const ITSApi = createApi({
+  reducerPath: "ITSApi",
   baseQuery: itsBaseQueryWithReauth,
   endpoints: () => ({}),
 });

@@ -1,7 +1,8 @@
-import { itsApi } from "@/redux/createApi";
+import { ITSApi } from "@/redux/createApi";
 import { setAuthSuccess } from "@/redux/slices/auth";
 import { isEmpty } from "lodash";
-export const authApi = itsApi.injectEndpoints({
+
+export const authApi = ITSApi.injectEndpoints({
   endpoints: (builder) => ({
     authLogin: builder.query<IAuthLoginResponse, IAuthLoginRequest>({
       query: (params) => ({
@@ -19,3 +20,5 @@ export const authApi = itsApi.injectEndpoints({
     // TODO: Add authSignup, authLogout, authDeleteAccount, authSetNewPassword, authForgetPassword services
   }),
 });
+
+export const { useLazyAuthLoginQuery } = authApi;
