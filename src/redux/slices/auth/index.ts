@@ -7,6 +7,11 @@ const initialState: IAuthState = {
   user: {
     // NOTE: just for demo, will change to empty string on production
     email: "some_fake_email@fake.com",
+    profile: {
+      role: "STUDENT",
+      username: "emrys",
+      organisation: "NUS",
+    },
   },
   tokens: {
     accessToken: "",
