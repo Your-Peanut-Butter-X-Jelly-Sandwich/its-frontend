@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import StoreProvider from "./StoreProvider";
+import AuthGuard from "@/common/HOCs/AuthGuard";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
   description: "ITS System",
 };
 
-export default function LocaleLayout({
+function LocaleLayout({
   children,
   params: { locale },
 }: Readonly<{
@@ -19,8 +20,14 @@ export default function LocaleLayout({
   return (
     <html lang={locale}>
       <body className={inter.className}>
-        <StoreProvider>{children}</StoreProvider>
+        <StoreProvider>
+          <AuthGuard>
+            <div className="bg-teal-800 h-screen">{children}</div>
+          </AuthGuard>
+        </StoreProvider>
       </body>
     </html>
   );
 }
+
+export default LocaleLayout;
