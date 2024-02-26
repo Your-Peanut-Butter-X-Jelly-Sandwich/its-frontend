@@ -13,13 +13,13 @@ import { setAuthTokens, setLogout } from "./slices/auth";
 
 const mutex = new Mutex();
 
-const dynamicBaseQueryWithAuth = (role: IUser["profile"]["role"] | "") =>
+const baseQueryWithAuth = () =>
   fetchBaseQuery({
-    baseUrl: `${HOST_API}/${role.toLowerCase()}`,
+    baseUrl: `${HOST_API}/`,
     prepareHeaders: (headers, { getState }) => {
       const { tokens } = (getState() as RootState).auth;
-      if (tokens.accessToken) {
-        headers.set("Authorization", `Bearer ${tokens.accessToken}`);
+      if (tokens.access) {
+        headers.set("Authorization", `Bearer ${tokens.access}`);
       }
     },
   });
@@ -37,9 +37,8 @@ const itsBaseQueryWithReauth: BaseQueryFn<
   // wait until the mutex is available without locking it
   await mutex.waitForUnlock();
   // retrieve the role of the current user, which is used to construct the base query url
-  const role = (api.getState() as RootState).auth.user?.profile?.role || "";
   // send query
-  let result = await dynamicBaseQueryWithAuth(role)(args, api, extraOptions);
+  let result = await baseQueryWithAuth()(args, api, extraOptions);
 
   /* When user tries to access data that requires authentication */
   // If encountering 401 Unauthorized error, an additional request is sent to attempt to refresh an authorization token,
@@ -52,7 +51,7 @@ const itsBaseQueryWithReauth: BaseQueryFn<
 
         // Retrieve the current refresh token from redux
         const { tokens } = (api.getState() as RootState).auth;
-        const refreshToken = tokens.refreshToken;
+        const refreshToken = tokens.refresh;
         // Request new access token with refresh token
         const { data } = await plainBaseQuery()(
           {
@@ -72,11 +71,7 @@ const itsBaseQueryWithReauth: BaseQueryFn<
           // Update redux with the new tokens
           api.dispatch(setAuthTokens(newTokens));
           // retry the initial query
-          result = await dynamicBaseQueryWithAuth(role)(
-            args,
-            api,
-            extraOptions,
-          );
+          result = await baseQueryWithAuth()(args, api, extraOptions);
         } else {
           // If the request is unsuccessful, dispatch an action to logout the user.
           api.dispatch(setLogout());
@@ -88,7 +83,7 @@ const itsBaseQueryWithReauth: BaseQueryFn<
     } else {
       // wait until the mutex is available without locking it
       await mutex.waitForUnlock();
-      result = await dynamicBaseQueryWithAuth(role)(args, api, extraOptions);
+      result = await baseQueryWithAuth()(args, api, extraOptions);
     }
   }
   return result;

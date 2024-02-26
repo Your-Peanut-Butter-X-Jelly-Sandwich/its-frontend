@@ -12,11 +12,7 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   useEffect(() => {
     if (!isAuthenticated) {
-      if (
-        !pathname.includes("auth") ||
-        pathname.includes("student") ||
-        pathname.includes("tutor")
-      ) {
+      if (pathname.includes("student") || pathname.includes("tutor")) {
         router.push(
           `/${pathname.match(`${SUPPORTED_LANGUAGES.join("|")}`)}/auth`,
         );

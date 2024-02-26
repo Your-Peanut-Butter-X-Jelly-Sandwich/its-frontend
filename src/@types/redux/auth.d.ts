@@ -1,6 +1,6 @@
 interface IAuthState {
   isAuthenticated: boolean;
-  user: Partial<IUser>;
+  user: IUser;
   tokens: IUserTokens;
 }
 
@@ -10,12 +10,17 @@ interface IAuthLoginRequest {
 }
 
 interface IAuthLoginResponse {
-  user: IUser;
   tokens: IUserTokens;
+  user: IUser;
+}
+interface IAuthSignUpRequest extends IAuthLoginRequest {}
+
+interface IAuthSocialSignUpRequest {
+  provider: string;
 }
 
-interface IAuthSignUpRequest extends IUser {
-  password: string;
-}
+interface IAuthSignUpResponse extends IAuthLoginResponse {}
 
-interface IAuthSignUpResponse extends IAuthSignUpRequest {}
+interface IAuthRetrieveUserResponse {
+  user: IUser;
+}

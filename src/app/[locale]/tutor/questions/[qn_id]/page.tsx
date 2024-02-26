@@ -3,7 +3,6 @@ import QuestionDetailContainer from "@/containers/Tutor/QuestionDetail";
 
 type ParamsType = {
   params: {
-    assignment_id: string;
     qn_id: string;
   };
 };

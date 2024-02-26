@@ -2,7 +2,6 @@ import { NextPage } from "next";
 import SubmissionsContainer from "@/containers/Tutor/Submissions";
 type ParamsType = {
   params: {
-    assignment_id: string;
     qn_id: string;
   };
 };

@@ -4,22 +4,15 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 type PropsType = {
-  assignment_id: string;
   qn_id: string;
 };
 
-const QuestionDetailContainer: React.FC<PropsType> = ({
-  assignment_id,
-  qn_id,
-}: PropsType) => {
+const QuestionDetailContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
   const pathname = usePathname();
   return (
     <div>
       <div className="text-2xl">
-        You are seeing{" "}
-        <strong>
-          QUESTION: {qn_id} under ASSIGNMENT: {assignment_id}
-        </strong>
+        You are seeing <strong>QUESTION: {qn_id}</strong>
       </div>
       This pages shows the specific question. It contains the IDE and Problem
       statement. Please refer to leetcode for the specific design.{" "}

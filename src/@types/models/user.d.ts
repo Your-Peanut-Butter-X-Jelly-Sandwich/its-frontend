@@ -1,14 +1,13 @@
 interface IUser {
-    email: string;
-    profile: {
-        role: "STUDENT" | "TUTOR";
-        username: string;
-        organisation: string;
-  };
+  email: string;
+  organisation: string;
+  username: string;
+  is_student: boolean;
+  is_tutor: boolean;
+  is_manager: boolean;
 }
 
-
 interface IUserTokens {
-    refreshToken: string;
-    accessToken: string;
+  refresh: string;
+  access: string;
 }
