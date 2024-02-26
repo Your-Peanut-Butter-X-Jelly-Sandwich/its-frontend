@@ -7,15 +7,15 @@ const initialState: IAuthState = {
   user: {
     // NOTE: just for demo, will change to empty string on production
     email: "some_fake_email@fake.com",
-    profile: {
-      role: "STUDENT",
-      username: "emrys",
-      organisation: "NUS",
-    },
+    is_manager: false,
+    is_student: false,
+    is_tutor: false,
+    username: "emrys",
+    organisation: "NUS",
   },
   tokens: {
-    accessToken: "",
-    refreshToken: "",
+    access: "",
+    refresh: "",
   },
 };
 
@@ -29,14 +29,22 @@ const authSlice = createSlice({
       state.tokens = payload.tokens;
     },
     setAuthTokens: (state, { payload }: PayloadAction<IUserTokens>) => {
-      state.tokens.accessToken = payload.accessToken;
-      state.tokens.refreshToken = payload.refreshToken;
+      state.tokens.access = payload.access;
+      state.tokens.refresh = payload.refresh;
+      state.isAuthenticated = true;
+    },
+    setAuthUser: (
+      state,
+      { payload }: PayloadAction<IAuthRetrieveUserResponse>,
+    ) => {
+      state.user = payload.user;
       state.isAuthenticated = true;
     },
     setLogout: () => initialState,
   },
 });
 
-export const { setAuthSuccess, setAuthTokens, setLogout } = authSlice.actions;
+export const { setAuthSuccess, setAuthTokens, setAuthUser, setLogout } =
+  authSlice.actions;
 export const authSelector = (state: RootState) => state.auth;
 export default authSlice.reducer;

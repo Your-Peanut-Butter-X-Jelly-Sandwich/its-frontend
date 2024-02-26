@@ -1,20 +1,16 @@
-"use client"
+"use client";
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-type PropsType = {
-  assignment_id: string;
-};
-const AssignmentDetailContainer: React.FC<PropsType> = ({
-  assignment_id,
-}: PropsType) => {
+
+const QuestionsContainer: React.FC = () => {
   const pathname = usePathname();
   return (
     <div>
-      Assignment {assignment_id} details
+      List of Questions
       <div>
-        This page will show a list of all <strong>questions</strong> for the
-        specific assignment, ie. assignment {assignment_id}{" "}
+        This page will show a list of all <strong>questions</strong> assigned to
+        the student
       </div>
       <button className="bg-black text-white p-5 rounded-lg">
         <Link href={`${pathname}/1`}>Check out question 1</Link>
@@ -26,4 +22,4 @@ const AssignmentDetailContainer: React.FC<PropsType> = ({
   );
 };
 
-export default AssignmentDetailContainer;
+export default QuestionsContainer;

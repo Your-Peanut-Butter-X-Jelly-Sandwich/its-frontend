@@ -12,9 +12,9 @@ const StudentDashboardContainer: React.FC = () => {
       as: activity, qns solved etc. from this page students can navigate to see
       their assignments.
       <div className="flex justify-center">
-        <Link href={`${pathname}/assignments`}>
+        <Link href={`${pathname}/questions`}>
           <button className="bg-black text-white rounded-lg p-5">
-            Check Out Assignments
+            Check Out Questions
           </button>
         </Link>
       </div>
