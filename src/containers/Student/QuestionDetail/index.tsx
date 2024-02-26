@@ -2,6 +2,8 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Editor from "@monaco-editor/react";
+import { Viewer, Worker } from "@react-pdf-viewer/core";
 
 type PropsType = {
   qn_id: string;
@@ -9,24 +11,34 @@ type PropsType = {
 
 const QuestionDetailContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
   const pathname = usePathname();
+  const [code, setCode] = React.useState<string | undefined>("// some code");
+
   return (
-    <div>
-      <div className="text-2xl">
-        You are seeing <strong>QUESTION: {qn_id}</strong>
+    <div className="flex">
+      <div className="w-[50%]">
+        <button className="bg-green-400 text-white p-2 rounded-lg">
+          <Link href={`${pathname}/past-submissions`}>
+            See Past Submissions
+          </Link>
+        </button>
+        {/* Problem Statement */}
+        <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
+          <div style={{ height: "750px" }}>
+            <Viewer fileUrl="./test.pdf" />
+          </div>
+        </Worker>
       </div>
-      This pages shows the specific question. It contains the IDE and Problem
-      statement. Please refer to leetcode for the specific design.{" "}
-      <span className="text-red-600 font-bold text-2xl">
-        This is our task for week 6!
-      </span>
-      <div>
-        If student has submitted this question, there will be a button for them
-        to see past submissions
-        <div className="flex justify-center">
-          <button className="bg-black text-white p-5 rounded-lg">
-            <Link href={`${pathname}/past-submissions`}>
-              See Past Submissions
-            </Link>
+      {/* Code Editor */}
+      <div className="w-[50%]">
+        <Editor
+          height="90vh"
+          defaultLanguage="c"
+          value={code}
+          onChange={(newValue, e) => setCode(newValue)}
+        />
+        <div className="h-[5vh] w-full flex justify-center mt-1">
+          <button className="bg-green-400 text-white p-2 rounded-lg">
+            Submit
           </button>
         </div>
       </div>
