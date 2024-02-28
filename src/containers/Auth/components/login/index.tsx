@@ -1,7 +1,9 @@
 "use client"
 import React from "react";
-import { Row, Col, Form, Input, Button } from "antd";
+import { Row, Col, Form, Input, Button, Card } from "antd";
 const { Item } = Form;
+import CustomButton from "../Buttons/CustomButton/CustomButton";
+import SocialSignupButton from "../Buttons/SocialSignupButton/SocialSignupButton";
 
 const LoginContainer:React.FC<{isSignedUp: boolean; setSignedUp: (value: boolean) => void }> = ({isSignedUp, setSignedUp}) => {
 
@@ -12,12 +14,15 @@ const LoginContainer:React.FC<{isSignedUp: boolean; setSignedUp: (value: boolean
     const handleSignUpClick = () => {
         setSignedUp(false);
     }
+    const handleLogin = async () => {
+        
+    };
 
     
     return ( 
-      <Row justify="center" align="middle" style={{ minHeight: '100vh' }}>
+        <Row justify="center" align="middle" style={{ minHeight: '100vh' }}>
         <Col xs={24} sm={12} md={10} lg={8}>
-          <div className="login-container">
+          <Card title="Sign Up" style={{ width: '100%', maxWidth: 400, borderRadius: 8 }}>
             <Form form={form} layout="vertical">
               <Item label="Email" name="email" rules={[{ required: true, message: 'Please input your email!' }, { type: 'email', message: 'Please enter a valid email address!' }]}>
                 <Input />
@@ -26,29 +31,17 @@ const LoginContainer:React.FC<{isSignedUp: boolean; setSignedUp: (value: boolean
                 <Input.Password />
               </Item>
               <Item>
-                <Button type="primary" htmlType="submit">
-                  Log in
-                </Button>
+                <CustomButton type="primary" onClick={handleLogin} label="Login" />
               </Item>
-              <Row gutter={[16, 16]}>
-                <Col>
-                  <Item>
-                    <Button type="primary" onClick={() => handleSocialSignup("google")}>
-                      Google Signup
-                    </Button>
-                  </Item>
-                </Col>
-                <Col>
-                  <Item>
-                    <Button type="primary" onClick={() => handleSocialSignup("github")}>
-                      Github Signup
-                    </Button>
-                  </Item>
-                </Col>
-              </Row>
-              <Item>No account? <Button type="primary" onClick = {() => handleSignUpClick()}>Sign Up</Button> </Item>
+              <Item>
+                <SocialSignupButton type="primary" onClick={() => handleSocialSignup("google")} label="Google Signup"/>
+              </Item>
+              <Item>
+                <SocialSignupButton type="primary" onClick={() => handleSocialSignup("github")} label="Github Signup"/>
+              </Item>
+              <Item>Don't have an account? <CustomButton type="primary" onClick = {() => handleSignUpClick()} label="Sign Up" /> </Item>
             </Form>
-          </div>
+          </Card>
         </Col>
       </Row>
 
