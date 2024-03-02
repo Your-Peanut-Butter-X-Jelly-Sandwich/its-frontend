@@ -7,16 +7,24 @@ const QuestionsContainer: React.FC = () => {
   const pathname = usePathname();
   return (
     <div>
-      List of Questions
-      <div>
-        This page will show a list of all <strong>questions</strong> assigned to
-        the student
-      </div>
-      <button className="bg-black text-white p-5 rounded-lg">
-        <Link href={`${pathname}/1`}>Check out question 1</Link>
+      <button className="bg-black text-white p-5 m-4 rounded-lg block w-3/5">
+        <Link href={`${pathname}/1`}>Back to Student Dashboard</Link>
       </button>
-      <button className="bg-black text-white p-5 rounded-lg">
-        <Link href={`${pathname}/2`}>Check out question 2</Link>
+      Select the question you want to attempt
+      <button className="bg-black text-white p-5 m-4 rounded-lg block w-3/5">
+        <Link href={`${pathname}/1`}>Question 1</Link>
+      </button>
+      <button className="bg-black text-white p-5 m-4 rounded-lg block w-3/5">
+        <Link href={`${pathname}/2`}>Question 2</Link>
+      </button>
+      <button className="bg-black text-white p-5 m-4 rounded-lg block w-3/5">
+        <Link href={`${pathname}/3`}>Question 3</Link>
+      </button>
+      <button className="bg-black text-white p-5 m-4 rounded-lg block w-3/5">
+        <Link href={`${pathname}/4`}>Question 4</Link>
+      </button>
+      <button className="bg-black text-white p-5 m-4 rounded-lg block w-3/5">
+        <Link href={`${pathname}/5`}>Question 5</Link>
       </button>
     </div>
   );
