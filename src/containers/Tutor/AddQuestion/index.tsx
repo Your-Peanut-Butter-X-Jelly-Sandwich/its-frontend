@@ -1,21 +1,18 @@
 "use client"
 
 import React, { useState } from 'react';
-import { Button, Upload, message, Row, Col } from 'antd';
+import { Button, Upload, message, Space } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
-import MdEditor from 'react-markdown-editor-lite';
-import 'react-markdown-editor-lite/lib/index.css';
-import ReactMarkdown from 'react-markdown';
-import { RcFile } from 'antd/lib/upload';
+import MDEditor from '@uiw/react-md-editor';
 
-const AddQuestionContainer: React.FC = () => {
+const AddQuestionContainer = () => {
   const [markdown, setMarkdown] = useState('');
 
-  const handleEditorChange = ({ text }: { html: string; text: string }) => {
-    setMarkdown(text);
+  const handleEditorChange = (newMarkdown) => {
+    setMarkdown(newMarkdown);
   };
 
-  const handleFileUpload = (file: RcFile) => {
+  const handleFileUpload = (file) => {
     const fileReader = new FileReader();
     fileReader.onload = (e) => {
       const content = e.target?.result;
@@ -24,7 +21,7 @@ const AddQuestionContainer: React.FC = () => {
       }
     };
     fileReader.readAsText(file);
-    return false;
+    return false; // Prevent default upload behavior
   };
 
   const publishQuestion = () => {
@@ -34,20 +31,21 @@ const AddQuestionContainer: React.FC = () => {
 
   return (
     <div>
-      <MdEditor
-        value={markdown}
-        style={{ height: '500px' }}
-        renderHTML={(text) => <ReactMarkdown children={text} />}
-        onChange={handleEditorChange}
-      />
-      <div style={{ marginTop: '20px' }}>
+      <div style={{ marginBottom: '20px' }}>
+        <MDEditor
+          value={markdown}
+          onChange={handleEditorChange}
+          height={500}
+        />
+      </div>
+      <Space style={{ marginTop: '20px' }}>
         <Upload beforeUpload={handleFileUpload} showUploadList={false}>
-          <Button icon={<UploadOutlined />}>Upload Markdown/LaTeX File</Button>
+          <Button icon={<UploadOutlined />}>Upload Markdown File</Button>
         </Upload>
-        <Button type="primary" onClick={publishQuestion} style={{ marginLeft: '10px' }}>
+        <Button type="primary" onClick={publishQuestion}>
           Publish
         </Button>
-      </div>
+      </Space>
     </div>
   );
 };
