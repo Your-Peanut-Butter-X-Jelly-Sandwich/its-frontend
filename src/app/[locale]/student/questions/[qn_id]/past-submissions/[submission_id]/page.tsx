@@ -11,7 +11,7 @@ type ParamsType = {
 
 const PastSubmissionDetailPage: NextPage<ParamsType> = ({ params }) => {
   return (
-    <div style={{ padding: '20px' }}>
+    <div>
       <SubmissionDetailContainer submission_id={params.submission_id} />
     </div>
   );
