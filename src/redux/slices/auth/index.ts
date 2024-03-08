@@ -3,13 +3,13 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "@/redux";
 
 const initialState: IAuthState = {
-  isAuthenticated: false,
+  isAuthenticated: true,
   user: {
     // NOTE: just for demo, will change to empty string on production
     email: "some_fake_email@fake.com",
     is_manager: false,
     is_student: false,
-    is_tutor: false,
+    is_tutor: true,
     username: "emrys",
     organisation: "NUS",
   },
