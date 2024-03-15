@@ -30,7 +30,7 @@ const QuestionDetailContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
         </Button>
         <Editor
           height="87vh"
-          defaultLanguage="c"
+          defaultLanguage="python"
           value={code}
           onChange={(newValue, e) => setCode(newValue)}
         />
