@@ -19,7 +19,7 @@ const QuestionDetailContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
     <div className="flex bg-gray-100 h-full">
       <div className="w-[50%] p-10">
         {/* Problem Statement */}
-        <div className="h-[90vh] overflow-auto">
+        <div className="h-[80vh] overflow-auto">
           <Markdown>{markdown}</Markdown>
         </div>
       </div>
@@ -29,13 +29,13 @@ const QuestionDetailContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
           <Link href={`${pathname}/past-submissions`}>Submissions</Link>
         </Button>
         <Editor
-          height="87vh"
-          defaultLanguage="python"
+          height="85vh"
+          defaultLanguage="c"
           value={code}
           onChange={(newValue, e) => setCode(newValue)}
         />
-        <div className="w-full flex justify-center mt-2">
-          <Button type="primary" className="ml-2 bg-blue-500">
+        <div className="w-full flex justify-center items-center">
+          <Button type="primary" className="ml-2 mt-2.5 bg-blue-500">
             Submit
           </Button>
         </div>
