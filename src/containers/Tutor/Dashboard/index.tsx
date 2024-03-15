@@ -25,7 +25,7 @@ const TutorDashboardContainer: React.FC = () => {
             <Link href={`${pathname}/questions`}>Check Questions</Link>
           </Menu.Item>
           <Menu.Item key="1" icon={<MessageOutlined />}>
-            <Link href={`${pathname}/add-questions`}>Add New Questions</Link>
+            <Link href={`${pathname}/add-question`}>Add New Questions</Link>
           </Menu.Item>
 
         </Menu>
