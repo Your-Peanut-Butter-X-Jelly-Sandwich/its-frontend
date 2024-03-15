@@ -44,7 +44,9 @@ const SignUpContainer:React.FC<{isSignedUp: boolean; setSignedUp: (value: boolea
               <Item>
                 <SocialSignupButton type="primary" onClick={() => handleSocialSignup("github")} label="Github Signup"/>
               </Item>
-              <Item>Already have an account? <CustomButton type="primary" onClick = {() => handleLoginClick()} label="Login" /> </Item>
+              <Item>
+                Already have an account? <a onClick={() => handleLoginClick()} style={{ textDecoration: 'underline' }}>Login</a> 
+              </Item>
             </Form>
           </Card>
         </Col>
