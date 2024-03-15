@@ -22,7 +22,7 @@ const LoginContainer:React.FC<{isSignedUp: boolean; setSignedUp: (value: boolean
     return ( 
         <Row justify="center" align="middle" style={{ minHeight: '100vh' }}>
         <Col xs={24} sm={12} md={10} lg={8}>
-          <Card title="Sign Up" style={{ width: '100%', maxWidth: 400, borderRadius: 8 }}>
+          <Card title="Login" style={{ width: '100%', maxWidth: 400, borderRadius: 8 }}>
             <Form form={form} layout="vertical">
               <Item label="Email" name="email" rules={[{ required: true, message: 'Please input your email!' }, { type: 'email', message: 'Please enter a valid email address!' }]}>
                 <Input />
@@ -39,7 +39,7 @@ const LoginContainer:React.FC<{isSignedUp: boolean; setSignedUp: (value: boolean
               <Item>
                 <SocialSignupButton type="primary" onClick={() => handleSocialSignup("github")} label="Github Signup"/>
               </Item>
-              <Item>Don't have an account? <CustomButton type="primary" onClick = {() => handleSignUpClick()} label="Sign Up" /> </Item>
+              <Item>Don't have an account? <a onClick={() => handleSignUpClick()} style={{ textDecoration: 'underline' }}>Sign up</a> </Item>
             </Form>
           </Card>
         </Col>
