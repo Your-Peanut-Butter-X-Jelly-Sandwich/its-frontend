@@ -1,9 +1,10 @@
 "use client";
-import React from "react";
+import React, { use } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Editor from "@monaco-editor/react";
-import { Viewer, Worker } from "@react-pdf-viewer/core";
+import Markdown from "react-markdown";
+import { Button } from "antd";
 
 type PropsType = {
   qn_id: string;
@@ -12,34 +13,31 @@ type PropsType = {
 const QuestionDetailContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
   const pathname = usePathname();
   const [code, setCode] = React.useState<string | undefined>("// some code");
+  const markdown = "# Hi, *Pluto*!";
 
   return (
-    <div className="flex">
-      <div className="w-[50%]">
-        <button className="bg-green-400 text-white p-2 rounded-lg">
-          <Link href={`${pathname}/past-submissions`}>
-            See Past Submissions
-          </Link>
-        </button>
+    <div className="flex bg-gray-100 h-full">
+      <div className="w-[50%] p-10">
         {/* Problem Statement */}
-        <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
-          <div style={{ height: "750px" }}>
-            <Viewer fileUrl="./test.pdf" />
-          </div>
-        </Worker>
+        <div className="h-[90vh] overflow-auto">
+          <Markdown>{markdown}</Markdown>
+        </div>
       </div>
       {/* Code Editor */}
-      <div className="w-[50%]">
+      <div className="w-[50%] bg-gray-400">
+        <Button type="link" className="text-black">
+          <Link href={`${pathname}/past-submissions`}>Submissions</Link>
+        </Button>
         <Editor
-          height="90vh"
+          height="87vh"
           defaultLanguage="c"
           value={code}
           onChange={(newValue, e) => setCode(newValue)}
         />
-        <div className="h-[5vh] w-full flex justify-center mt-1">
-          <button className="bg-green-400 text-white p-2 rounded-lg">
+        <div className="w-full flex justify-center mt-2">
+          <Button type="primary" className="ml-2 bg-blue-500">
             Submit
-          </button>
+          </Button>
         </div>
       </div>
     </div>

@@ -11,7 +11,6 @@
   "dependencies": {
     "@monaco-editor/react": "^4.6.0",
     "@react-native-async-storage/async-storage": "^1.22.3",
-    "@react-pdf-viewer/core": "^3.12.0",
     "@reduxjs/toolkit": "^2.2.1",
     "@typescript-eslint/parser": "^5.0.1",
     "@uiw/react-md-editor": "^4.0.3",
@@ -26,11 +25,11 @@
     "monaco-editor": "^0.46.0",
     "next": "^14.1.0",
     "next-intl": "^3.7.0",
-    "pdfjs-dist": "^3.4.120",
     "prettier": "^3.2.5",
     "prettier-eslint": "^16.3.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-markdown": "^9.0.1",
     "react-redux": "^9.1.0",
     "redux-persist": "^6.0.0"
   },
