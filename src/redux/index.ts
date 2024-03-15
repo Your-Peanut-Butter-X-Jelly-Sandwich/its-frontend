@@ -7,17 +7,42 @@ import {
   useStore,
 } from "react-redux";
 import { ITSApi } from "@/redux/createApi";
+import {
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
+import persistStore from "redux-persist/es/persistStore";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+const persistConfig = {
+  key: "root",
+  storage: AsyncStorage,
+  whitelist: ["auth"], // Add reducer names you want to persist here
+};
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 // makeStore function returns a new store for each request
-export const makeStore = () =>
-  configureStore({
-    reducer: rootReducer,
+export const makeStore = () => {
+  const store = configureStore({
+    reducer: persistedReducer,
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(ITSApi.middleware),
+      getDefaultMiddleware({
+        serializableCheck: {
+          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        },
+      }).concat(ITSApi.middleware),
   });
+  const persistor = persistStore(store);
+  return { store: store, persistor: persistor };
+};
 
 // Infer the type of makeStore
-export type AppStore = ReturnType<typeof makeStore>;
+export type AppStore = ReturnType<typeof makeStore>["store"];
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<AppStore["getState"]>;

@@ -1,21 +1,18 @@
 "use client"
 
 import React, { useState } from 'react';
-import { Button, Upload, message, Row, Col } from 'antd';
+import { Button, Upload, message, Space } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
-import MdEditor from 'react-markdown-editor-lite';
-import 'react-markdown-editor-lite/lib/index.css';
-import ReactMarkdown from 'react-markdown';
-import { RcFile } from 'antd/lib/upload';
+import MDEditor from '@uiw/react-md-editor';
 
-const AddQuestionContainer: React.FC = () => {
+const AddQuestionContainer = () => {
   const [markdown, setMarkdown] = useState('');
 
-  const handleEditorChange = ({ text }: { html: string; text: string }) => {
-    setMarkdown(text);
+  const handleEditorChange = (newMarkdown:any) => {
+    setMarkdown(newMarkdown);
   };
 
-  const handleFileUpload = (file: RcFile) => {
+  const handleMarkdownFileUpload = (file:any) => {
     const fileReader = new FileReader();
     fileReader.onload = (e) => {
       const content = e.target?.result;
@@ -24,7 +21,13 @@ const AddQuestionContainer: React.FC = () => {
       }
     };
     fileReader.readAsText(file);
-    return false;
+    return false; // Prevent default upload behavior
+  };
+
+  const handleCodeFileUpload = (file:any) => {
+    console.log('Reference code file uploaded:', file.name);
+    message.success(`Reference code file '${file.name}' uploaded successfully!`);
+    return false; // Prevent default upload behavior
   };
 
   const publishQuestion = () => {
@@ -32,22 +35,32 @@ const AddQuestionContainer: React.FC = () => {
     message.success('Question published successfully!');
   };
 
+  const buttonStyle = {
+    backgroundColor: '#1890ff',
+    color: '#fff',
+    borderColor: '#1890ff',
+  };
+
   return (
-    <div>
-      <MdEditor
-        value={markdown}
-        style={{ height: '500px' }}
-        renderHTML={(text) => <ReactMarkdown children={text} />}
-        onChange={handleEditorChange}
-      />
-      <div style={{ marginTop: '20px' }}>
-        <Upload beforeUpload={handleFileUpload} showUploadList={false}>
-          <Button icon={<UploadOutlined />}>Upload Markdown/LaTeX File</Button>
+    <div style={{ height: '96vh', width: '100vw', backgroundColor: 'lightgrey', display: 'flex', flexDirection: 'column' }}>
+      <div style={{ flexGrow: 1, overflow: 'auto' }}>
+        <MDEditor
+          value={markdown}
+          onChange={handleEditorChange}
+          height= '100%' 
+        />
+      </div>
+      <Space style={{ marginTop: '20px', padding: '10px' }}>
+        <Upload beforeUpload={handleMarkdownFileUpload} showUploadList={false}>
+          <Button style={buttonStyle} icon={<UploadOutlined />}>Upload Markdown File</Button>
         </Upload>
-        <Button type="primary" onClick={publishQuestion} style={{ marginLeft: '10px' }}>
+        <Upload beforeUpload={handleCodeFileUpload} showUploadList={false}>
+          <Button style={buttonStyle} icon={<UploadOutlined />}>Upload Reference Code</Button>
+        </Upload>
+        <Button type="primary" style={buttonStyle} onClick={publishQuestion}>
           Publish
         </Button>
-      </div>
+      </Space>
     </div>
   );
 };
