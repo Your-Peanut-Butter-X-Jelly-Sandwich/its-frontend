@@ -18,18 +18,6 @@ const TutorDashboardContainer: React.FC = () => {
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
-      <Sider theme="light" style={{ borderRight: '1px solid #e8e8e8' }}>
-        <div className="logo" />
-        <Menu mode="inline" defaultSelectedKeys={['1']} style={{ height: '100%', borderRight: 0 }}>
-          <Menu.Item key="1" icon={<MessageOutlined />}>
-            <Link href={`${pathname}/questions`}>Check Questions</Link>
-          </Menu.Item>
-          <Menu.Item key="1" icon={<MessageOutlined />}>
-            <Link href={`${pathname}/add-question`}>Add New Questions</Link>
-          </Menu.Item>
-
-        </Menu>
-      </Sider>
       <Layout style={{ padding: '0px' }}>
         <Content
           style={{
