@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { Row, Col, Card, Typography, Button } from 'antd';
+import { useGetSubmissionDetailQuery } from '@/redux/apis/student/SubmissionDetail/submissionApi'; 
 const { Title, Paragraph } = Typography;
 
 type SubmissionDetailProps = {
@@ -18,8 +19,8 @@ const SubmissionDetailContainer: React.FC<SubmissionDetailProps> = ({ submission
   };
 
   const cardStyle = {
-    minHeight: '100vh', // Adjust based on expected header/footer height
-    border: '1px solid #d9d9d9', // Adding border for visibility
+    minHeight: '100vh', 
+    border: '1px solid #d9d9d9',
   };
 
   const backButtonStyle = {
@@ -28,7 +29,6 @@ const SubmissionDetailContainer: React.FC<SubmissionDetailProps> = ({ submission
     borderColor: '#1890ff',
   };
 
-  // Dummy data for report and feedback
   const reportContent = `
     This is a detailed report of the submission. It includes statistics, 
     analysis, and performance metrics that provide insight into the submission quality.
@@ -38,6 +38,15 @@ const SubmissionDetailContainer: React.FC<SubmissionDetailProps> = ({ submission
     The tutor's feedback goes here. This includes constructive criticism, 
     areas for improvement, and commendations for what was done well in the submission.
   `;
+
+  const numericSubmissionId = Number(submission_id);
+  // const { data, error, isLoading } = useGetSubmissionDetailQuery(numericSubmissionId);
+
+
+  // if (isLoading) return <div>Loading...</div>;
+  // if (error) return <div>An error occurred</div>;
+  // if (!data) return <div>Submission not found</div>;
+  // <Paragraph>{data.submission_report}</Paragraph> // Displaying the submission report
 
   return (
     <div style={pageStyle}>
@@ -52,12 +61,12 @@ const SubmissionDetailContainer: React.FC<SubmissionDetailProps> = ({ submission
       <Row gutter={[24, 24]}>
         <Col xs={24} lg={12}>
           <Card title="Submission Report" bordered style={cardStyle}>
-            <Paragraph>{reportContent}</Paragraph>
+          <Paragraph> {reportContent} </Paragraph>
           </Card>
         </Col>
         <Col xs={24} lg={12}>
           <Card title="Tutor Feedback" bordered style={cardStyle}>
-            <Paragraph>{feedbackContent}</Paragraph>
+          <Paragraph> {feedbackContent} </Paragraph>
           </Card>
         </Col>
       </Row>
