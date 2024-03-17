@@ -8,7 +8,6 @@ const { Header } = Layout;
 const items = [
   { key: "1", label: <Link href="/en/student">Dashboard</Link> },
   { key: "2", label: <Link href="/en/student/questions">Questions</Link> },
-  { key: "3", label: "Profile" },
 ];
 
 const HeaderStudent: React.FC = () => {
