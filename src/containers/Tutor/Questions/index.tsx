@@ -1,11 +1,9 @@
 "use client";
 
-"use client";
-
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Button, Typography, List, Card, Row, Col } from "antd";
+import { Button, Typography, List, Card, Row, Col, message } from "antd";
 const { Title, Text } = Typography;
 
 type QuestionType = {
@@ -22,9 +20,13 @@ const QuestionsContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
   const [questions, setQuestions] = useState<QuestionType[]>([]);
 
   useEffect(() => {
-    const baseUrl = "http://127.0.0.1:8000";
-    const authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEwNjc5NTcxLCJpYXQiOjE3MTA1OTMxNzEsImp0aSI6IjJlNGZjYjE5MDJjNzQxNDQ5OTU3YTg4Nzg0MTM4MGNmIiwidXNlcl9pZCI6MTF9.4YliXiwUPmhhAgTsNayaAET_0RXL7FWMK2pE4iiLJdk"; 
+    fetchQuestions();
+  }, []);
 
+  const baseUrl = "http://127.0.0.1:8000";
+  const authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEwNjc5NTcxLCJpYXQiOjE3MTA1OTMxNzEsImp0aSI6IjJlNGZjYjE5MDJjNzQxNDQ5OTU3YTg4Nzg0MTM4MGNmIiwidXNlcl9pZCI6MTF9.4YliXiwUPmhhAgTsNayaAET_0RXL7FWMK2pE4iiLJdk";
+
+  const fetchQuestions = () => {
     fetch(`${baseUrl}/tutor/question`, {
       headers: {
         "Authorization": `Bearer ${authToken}`, 
@@ -37,7 +39,28 @@ const QuestionsContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
       .catch((error) => {
         console.error("Error fetching questions:", error);
       });
-  }, []);
+  };
+
+  const handleDeleteQuestion = (pk: number) => {
+    fetch(`${baseUrl}/tutor/question/${pk}`, {
+      method: 'DELETE',
+      headers: {
+        "Authorization": `Bearer ${authToken}`,
+      },
+    })
+      .then(response => {
+        if (response.ok) {
+          setQuestions(prevQuestions => prevQuestions.filter(question => question.pk !== pk));
+          message.success('Question deleted successfully');
+        } else {
+          message.error('Error deleting question');
+        }
+      })
+      .catch((error) => {
+        console.error("Error deleting question:", error);
+        message.error('Error deleting question');
+      });
+  };
 
   const pageStyle = {
     padding: '20px',
@@ -55,12 +78,20 @@ const QuestionsContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
     borderColor: '#1890ff', 
   };
 
+
   const backButtonStyle = {
     backgroundColor: '#1890ff', 
     color: '#fff', 
     borderColor: '#1890ff', 
   };
 
+  const deleteButtonStyle = {
+    backgroundColor: '#ff4d4f', 
+    color: '#fff', 
+    borderColor: '#ff4d4f',
+    marginLeft: '10px', 
+  };
+  
   return (
     <div style={pageStyle}>
       <div style={{ marginBottom: '20px' }}>
@@ -89,6 +120,12 @@ const QuestionsContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
                   <Link href={`${pathname}/${item.pk}`} passHref>
                     <Button style={viewReportButtonStyle}>View Question Insight</Button>
                   </Link>
+                  <Button 
+                    style={deleteButtonStyle} 
+                    onClick={() => handleDeleteQuestion(item.pk)}
+                  >
+                    Delete
+                  </Button>
                 </Col>
               </Row>
             </Card>
@@ -97,6 +134,6 @@ const QuestionsContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
       />
     </div>
   );
-};
+}
 
-export default QuestionsContainer;
+export default QuestionsContainer
