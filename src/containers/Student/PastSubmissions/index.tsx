@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -39,7 +40,7 @@ const PastSubmissionsContainer: React.FC<PropsType> = ({
       <Title level={2} style={{ marginBottom: "1.5%" }}>
         Past Submissions
       </Title>
-      {submissions?.map((submission: ISubmission) => (
+      {submissions?.slice().reverse().map((submission: ISubmission) => (
         <Card style={CARD} key={submission.pk}>
           <Row justify="space-between" align="middle">
             <Col>

@@ -63,3 +63,24 @@ interface IPastSubmissionsResponse {
 interface IPastSubmissionsRequest {
   qn_id: number;
 }
+
+interface ISubmissionDetailResponse {
+  id: number;
+  qn_id: number;
+  language: string;
+  submission_number: number;
+  submission_date: string;
+  submitted_by: number;
+  program: string;
+  report: string;
+  score: number;
+  total_score: number;
+  tutor_feedback: string;
+  its_feedback_hint_student: {
+    message: string;
+  };
+}
+
+interface ISubmissionDetailRequest {
+  id: number;
+}

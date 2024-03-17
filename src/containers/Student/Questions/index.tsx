@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -32,12 +33,16 @@ const QuestionsContainer: React.FC = () => {
 
   return (
     <div style={PAGE}>
-      <Title level={2} style={{marginBottom: "1.5%"}}>Select the question you want to attempt!</Title>
+      <Title level={2} style={{ marginBottom: "1.5%" }}>
+        Select the question you want to attempt!
+      </Title>
       {questions?.map((question: IQuestion) => (
         <Card style={CARD} key={question.pk}>
           <Row justify="space-between" align="middle">
             <Col>
-              <Text style={{fontSize: "1.3rem"}}>{question.question_title}</Text>
+              <Text style={{ fontSize: "1.3rem" }}>
+                {question.question_title}
+              </Text>
             </Col>
             <Col>
               <Link href={`${pathname}/${question.pk}`} passHref>
