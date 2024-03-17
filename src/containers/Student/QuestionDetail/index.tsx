@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import Editor from "@monaco-editor/react";
 import Markdown from "react-markdown";
 import { Button } from "antd";
+import { useGetQuestionDetailQuery } from "@/redux/apis/student/QuestionDetail";
 
 type PropsType = {
   qn_id: string;
@@ -13,14 +14,14 @@ type PropsType = {
 const QuestionDetailContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
   const pathname = usePathname();
   const [code, setCode] = React.useState<string | undefined>("// some code");
-  const markdown = "# Hi, *Pluto*!";
+  const { data } = useGetQuestionDetailQuery(Number(qn_id));
 
   return (
     <div className="flex bg-gray-100 h-full">
       <div className="w-[50%] p-10">
         {/* Problem Statement */}
         <div className="h-[80vh] overflow-auto">
-          <Markdown>{markdown}</Markdown>
+          <Markdown>{data?.question_statement}</Markdown>
         </div>
       </div>
       {/* Code Editor */}
