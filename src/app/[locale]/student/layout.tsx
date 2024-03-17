@@ -13,8 +13,8 @@ export default function StudentLayout({
 }>) {
   return (
     <>
-      <div className="h-[6%]"><HeaderStudent /></div>
-      <div className="h-[94%]">{children}</div>
+      <HeaderStudent />
+      {children}
     </>
   );
 }

@@ -14,7 +14,6 @@ const HeaderStudent: React.FC = () => {
   return (
     <Header
       style={{ display: "flex", alignItems: "center" }}
-      className="h-full"
     >
       <Menu
         theme="dark"

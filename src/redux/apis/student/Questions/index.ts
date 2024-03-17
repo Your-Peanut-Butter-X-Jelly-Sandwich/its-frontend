@@ -1,6 +1,6 @@
 import { ITSApi } from "@/redux/createApi";
 
-export const questions = ITSApi.injectEndpoints({
+export const questionsApi = ITSApi.injectEndpoints({
   endpoints: (builder) => ({
     getQuestions: builder.query<IQuestionsResponse, IQuestionsRequest>({
       query: () => ({
@@ -11,4 +11,4 @@ export const questions = ITSApi.injectEndpoints({
   }),
 });
 
-export const { useGetQuestionsQuery } = questions;
+export const { useGetQuestionsQuery } = questionsApi;

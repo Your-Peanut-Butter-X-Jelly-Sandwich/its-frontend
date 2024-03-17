@@ -14,7 +14,7 @@ type PropsType = {
 const QuestionDetailContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
   const pathname = usePathname();
   const [code, setCode] = React.useState<string | undefined>("");
-  const { data } = useGetQuestionDetailQuery({ questionId: Number(qn_id) });
+  const { data } = useGetQuestionDetailQuery({ qn_id: Number(qn_id) });
 
   return (
     <div className="flex bg-gray-100 h-full">
