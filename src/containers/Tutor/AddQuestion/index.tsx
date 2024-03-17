@@ -1,16 +1,20 @@
 "use client"
 
 import React, { useState } from 'react';
-import { Button, message, Space, Input, Select, Divider } from 'antd';
+import { Button, message, Space, Input, Select, Divider, DatePicker  } from 'antd';
+import moment from 'moment';
 import MdEditor from '@uiw/react-md-editor';
 import Editor from '@monaco-editor/react';
 
 const AddQuestionContainer = () => {
   const [markdown, setMarkdown] = useState('');
   const [testCases, setTestCases] = useState([{ input: '', expectedOutput: '' }]);
-  const [currentMode, setCurrentMode] = useState('markdown'); // markdown or testCases
+  const [currentMode, setCurrentMode] = useState('markdown'); 
   const [language, setLanguage] = useState('python');
   const [codeContent, setCodeContent] = useState('');
+  const [questionTitle, setQuestionTitle] = useState(''); 
+  const [dueDate, setDueDate] = useState(null); 
+
 
   const handleEditorChange = (newMarkdown) => {
     setMarkdown(newMarkdown);
@@ -42,9 +46,42 @@ const AddQuestionContainer = () => {
     setLanguage(value);
   };
 
+  const handleDueDateChange = (date, dateString) => {
+    setDueDate(dateString); // Update the due date state
+  };
+
   const handleSubmission = () => {
-    console.log('Submission data:', { markdown, testCases, language });
-    message.success('Submission successful!');
+    const data = {
+      language: language.toLowerCase(),
+      question_title: questionTitle,
+      question_statement: markdown,
+      ref_program: codeContent,
+      due_date: dueDate,
+      test_cases: testCases.map(tc => ({ input: tc.input, output: tc.expectedOutput }))
+    };
+
+    console.log('Submission data:', data);
+    
+    const baseUrl = "http://127.0.0.1:8000";
+    const authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEwNjc5NTcxLCJpYXQiOjE3MTA1OTMxNzEsImp0aSI6IjJlNGZjYjE5MDJjNzQxNDQ5OTU3YTg4Nzg0MTM4MGNmIiwidXNlcl9pZCI6MTF9.4YliXiwUPmhhAgTsNayaAET_0RXL7FWMK2pE4iiLJdk"; 
+
+    fetch(`${baseUrl}/tutor/question`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": `Bearer ${authToken}`, 
+      },
+      body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+      message.success('Question added successfully!');
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+      message.error('An error occurred while adding the question.');
+    });
   };
 
   const buttonStyle = {
@@ -59,8 +96,28 @@ const AddQuestionContainer = () => {
     minHeight: '100vh',
   };
 
+  const flexContainerStyle = {
+    display: 'flex',
+    justifyContent: 'space-between', 
+    marginBottom: '20px', 
+  };
+
   return (
     <div style={pageStyle}>
+      <div style={flexContainerStyle}>
+        <Input
+          placeholder="Question Title"
+          value={questionTitle}
+          onChange={(e) => setQuestionTitle(e.target.value)}
+          style={{ width: '70%' }} 
+        />
+        <DatePicker
+          format="YYYY-MM-DD"
+          placeholder="Select Due Date"
+          onChange={handleDueDateChange}
+          style={{ width: '28%' }} 
+        />
+      </div>
       {currentMode === 'markdown' ? (
         <div style={{ flexGrow: 1, overflow: 'auto', height: '85vh'}}>
           <MdEditor
