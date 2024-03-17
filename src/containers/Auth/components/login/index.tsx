@@ -1,5 +1,8 @@
 "use client"
 import React from "react";
+import { useLazyAuthLoginQuery } from "@/redux/apis/auth";
+import { usePathname } from "next/navigation";
+import getLocale from "@/common/utils/extractLocale";
 import { Row, Col, Form, Input, Button, Card } from "antd";
 const { Item } = Form;
 import CustomButton from "../Buttons/CustomButton/CustomButton";
@@ -8,6 +11,10 @@ import SocialSignupButton from "../Buttons/SocialSignupButton/SocialSignupButton
 const LoginContainer:React.FC<{isSignedUp: boolean; setSignedUp: (value: boolean) => void }> = ({isSignedUp, setSignedUp}) => {
 
     const [form] = Form.useForm();
+    const [authLogin, data] = useLazyAuthLoginQuery();
+    const pathname = usePathname();
+    
+
     const handleSocialSignup = (provider: string) => {
         window.location.href = `http://127.0.0.1:8000/auth/${provider}/login`;
     };
@@ -15,7 +22,27 @@ const LoginContainer:React.FC<{isSignedUp: boolean; setSignedUp: (value: boolean
         setSignedUp(false);
     }
     const handleLogin = async () => {
-        
+      try {
+        //const values = await form.validateFields(); // Validate form fields
+        const email = form.getFieldValue('email')
+        const password = form.getFieldValue('password')
+        const result = await authLogin({email, password}).unwrap()
+        if (result) {
+          console.log(result)
+          const {user} = result
+          const locale = getLocale(pathname);
+
+          if (user.is_tutor) {
+            window.location.href = `/${locale}/tutor`;
+          } else if (user.is_student) {
+            window.location.href = `/${locale}/student` // Redirect to student page if user is a student
+          } else if (user.is_manager) {
+            window.location.href = `/${locale}/tutor` // Redirect to manager page if user is a manager
+          }
+        }
+      } catch (error) {
+        console.error("Login error:", error);
+      }
     };
 
     
