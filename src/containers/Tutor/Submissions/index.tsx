@@ -71,7 +71,7 @@ const SubmissionsContainer: React.FC<PropsType> = ({ qn_id }) => {
       key: "action",
       render: (_, record) => (
         <Link href={`/en/tutor/questions/${qn_id}/submissions/${record.pk}`} passHref>
-          <Button type="primary">View Detail</Button>
+          <Button style={backButtonStyle} type="primary">View Detail</Button>
         </Link>
       ),
     },
