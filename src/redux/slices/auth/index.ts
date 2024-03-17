@@ -9,7 +9,7 @@ const initialState: IAuthState = {
     email: "some_fake_email@fake.com",
     is_manager: false,
     is_student: false,
-    is_tutor: true,
+    is_tutor: false,
     username: "emrys",
     organisation: "NUS",
   },
