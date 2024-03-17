@@ -6,8 +6,8 @@ export const questionDetailApi = ITSApi.injectEndpoints({
       IQuestionDetailResponse,
       IQuestionDetailRequest
     >({
-      query: ({ questionId }) => ({
-        url: `/student/question/${questionId}`,
+      query: ({ qn_id }) => ({
+        url: `/student/question/${qn_id}`,
         method: "GET",
       }),
     }),
