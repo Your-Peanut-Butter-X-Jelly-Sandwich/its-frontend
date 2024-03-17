@@ -1,20 +1,43 @@
 "use client";
 
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button, Typography, List, Card, Row, Col } from "antd";
 const { Title, Text } = Typography;
 
+type QuestionType = {
+  pk: number;
+  question_title: string;
+  pub_date: string;
+  due_date: string;
+};
+
 type PropsType = { qn_id: string };
 
 const QuestionsContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
   const pathname = usePathname();
-  const questions = [
-    { id: 1, title: "Question 1" },
-    { id: 2, title: "Question 2" },
-    { id: 3, title: "Question 3" },
-  ];
+  const [questions, setQuestions] = useState<QuestionType[]>([]);
+
+  useEffect(() => {
+    const baseUrl = "http://127.0.0.1:8000";
+    const authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEwNjc5NTcxLCJpYXQiOjE3MTA1OTMxNzEsImp0aSI6IjJlNGZjYjE5MDJjNzQxNDQ5OTU3YTg4Nzg0MTM4MGNmIiwidXNlcl9pZCI6MTF9.4YliXiwUPmhhAgTsNayaAET_0RXL7FWMK2pE4iiLJdk"; 
+
+    fetch(`${baseUrl}/tutor/question`, {
+      headers: {
+        "Authorization": `Bearer ${authToken}`, 
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setQuestions(data.questions);
+      })
+      .catch((error) => {
+        console.error("Error fetching questions:", error);
+      });
+  }, []);
 
   const pageStyle = {
     padding: '20px',
@@ -51,15 +74,19 @@ const QuestionsContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
       <List
         grid={{ gutter: 16, column: 1 }}
         dataSource={questions}
-        renderItem={(item, index) => (
+        renderItem={(item) => (
           <List.Item>
             <Card style={cardStyle}>
               <Row justify="space-between" align="middle">
-                <Col>
-                  <Text>Question {index + 1}</Text>
+                <Col span={12}>
+                  <Text strong>{item.question_title}</Text>
+                  <br />
+                  <Text>Published: {item.pub_date}</Text>
+                  <br />
+                  <Text>Due by: {item.due_date}</Text>
                 </Col>
                 <Col>
-                  <Link href={`${pathname}/${item.id}`} passHref>
+                  <Link href={`${pathname}/${item.pk}`} passHref>
                     <Button style={viewReportButtonStyle}>View Question Insight</Button>
                   </Link>
                 </Col>
@@ -73,4 +100,3 @@ const QuestionsContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
 };
 
 export default QuestionsContainer;
-
