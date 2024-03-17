@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useSelector } from 'react-redux';
+import { authSelector } from '@/redux/slices/auth'; 
 import { Button, Typography, List, Card, Row, Col, message } from "antd";
 const { Title, Text } = Typography;
 
@@ -19,13 +21,19 @@ const QuestionsContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
   const pathname = usePathname();
   const [questions, setQuestions] = useState<QuestionType[]>([]);
 
+  const auth = useSelector(authSelector);
+  console.log('Auth:', auth);
+
+  const accessToken = auth.tokens.access;
+  console.log('Access Token:', accessToken);
+
   useEffect(() => {
     fetchQuestions();
   }, []);
 
   const baseUrl = "http://127.0.0.1:8000";
   const authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEwNjc5NTcxLCJpYXQiOjE3MTA1OTMxNzEsImp0aSI6IjJlNGZjYjE5MDJjNzQxNDQ5OTU3YTg4Nzg0MTM4MGNmIiwidXNlcl9pZCI6MTF9.4YliXiwUPmhhAgTsNayaAET_0RXL7FWMK2pE4iiLJdk";
-
+  // const authToken = accessToken;
   const fetchQuestions = () => {
     fetch(`${baseUrl}/tutor/question`, {
       headers: {
