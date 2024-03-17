@@ -3,7 +3,7 @@ import React from "react";
 import { useLazyAuthLoginQuery } from "@/redux/apis/auth";
 import { usePathname } from "next/navigation";
 import getLocale from "@/common/utils/extractLocale";
-import { Row, Col, Form, Input, Button, Card } from "antd";
+import { Row, Col, Form, Input, message, Card } from "antd";
 const { Item } = Form;
 import CustomButton from "../Buttons/CustomButton/CustomButton";
 import SocialSignupButton from "../Buttons/SocialSignupButton/SocialSignupButton";
@@ -23,10 +23,10 @@ const LoginContainer:React.FC<{isSignedUp: boolean; setSignedUp: (value: boolean
     }
     const handleLogin = async () => {
       try {
-        //const values = await form.validateFields(); // Validate form fields
         const email = form.getFieldValue('email')
         const password = form.getFieldValue('password')
         const result = await authLogin({email, password}).unwrap()
+        
         if (result) {
           console.log(result)
           const {user} = result
@@ -42,6 +42,7 @@ const LoginContainer:React.FC<{isSignedUp: boolean; setSignedUp: (value: boolean
         }
       } catch (error) {
         console.error("Login error:", error);
+        message.error('Email or password is incorrect');
       }
     };
 
