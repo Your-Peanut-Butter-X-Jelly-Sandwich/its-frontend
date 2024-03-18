@@ -21,7 +21,7 @@ const AddQuestionContainer = () => {
     setMarkdown(newMarkdown);
   };
 
-  const handleCodeEditorChange = (newCodeContent) => {
+  const handleCodeEditorChange = (newCodeContent:any) => {
     setCodeContent(newCodeContent);
   };
 
@@ -37,17 +37,18 @@ const AddQuestionContainer = () => {
     }
   };
 
-  const updateTestCase = (index, field, value) => {
+  const updateTestCase = (index:any, field:any, value:any) => {
     const updatedTestCases = [...testCases];
+    // @ts-ignore
     updatedTestCases[index][field] = value;
     setTestCases(updatedTestCases);
   };
 
-  const handleLanguageChange = (value) => {
+  const handleLanguageChange = (value:any) => {
     setLanguage(value);
   };
 
-  const handleDueDateChange = (date, dateString) => {
+  const handleDueDateChange = (date:any, dateString:any) => {
     setDueDate(dateString); // Update the due date state
   };
 

@@ -5,7 +5,7 @@ interface QuestionStatistics  {
 }
 
 interface PropsType  {
-    qn_id: string;
+    qn_id: number;
 };
   
 interface QuestionData {
@@ -39,3 +39,38 @@ interface QuestionContent {
     due_date: string;
 };
 
+interface SubmissionType {
+    pk: number;
+    submission_number: number;
+    submitted_by: {
+      email: string;
+      organisation: string;
+      username: string;
+      is_student: boolean;
+      is_tutor: boolean;
+      is_manager: boolean;
+    };
+    score: number;
+    total_score: number;
+    submission_date: string;
+};
+
+
+interface SubmissionDetail {
+    pk: number;
+    qn_id: number;
+    submission_number: number;
+    language: "python"|"c";
+    submission_date: string;
+    program: string;
+    its_feedback_fix_tutor: string;
+    tutor_feedback: string;
+    status: string;
+    total_score: number;
+    score: number;
+}
+
+interface SubmissionDataType {
+    qn_id: number;
+    submission_id: number;
+  };
