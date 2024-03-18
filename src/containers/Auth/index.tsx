@@ -1,8 +1,8 @@
 "use client"
 import React from "react";
 import { useState } from "react";
-import LoginContainer from "./components/login";
-import SignUpContainer from "./components/register";
+import LoginContainer from "./components/Login";
+import SignUpContainer from "./components/Register";
 
 const AuthContainer:React.FC = () => {
 
