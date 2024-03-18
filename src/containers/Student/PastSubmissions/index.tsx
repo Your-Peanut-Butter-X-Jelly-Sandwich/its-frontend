@@ -40,22 +40,30 @@ const PastSubmissionsContainer: React.FC<PropsType> = ({
       <Title level={2} style={{ marginBottom: "1.5%" }}>
         Past Submissions
       </Title>
-      {submissions?.slice().reverse().map((submission: ISubmission) => (
-        <Card style={CARD} key={submission.pk}>
-          <Row justify="space-between" align="middle">
-            <Col>
-              <Text style={{ fontSize: "1.3rem" }}>
-                Submission Number: {submission.submission_number}
-              </Text>
-            </Col>
-            <Col>
-              <Link href={`${pathname}/${submission.pk}`} passHref>
-                <Button style={VIEW_BUTTON}>View</Button>
-              </Link>
-            </Col>
-          </Row>
-        </Card>
-      ))}
+      {submissions
+        ?.slice()
+        .reverse()
+        .map((submission: ISubmission) => (
+          <Card style={CARD} key={submission.pk}>
+            <Row justify="space-between" align="middle">
+              <Col>
+                <Text style={{ fontSize: "1.3rem" }}>
+                  Submission Number: {submission.submission_number}
+                </Text>
+              </Col>
+              <Col>
+                <div>
+                  <Text style={{ fontSize: "1.3rem", marginRight: "15px" }}>
+                    Score: {submission.score} / {submission.total_score}
+                  </Text>
+                  <Link href={`${pathname}/${submission.pk}`} passHref>
+                    <Button style={VIEW_BUTTON}>View</Button>
+                  </Link>
+                </div>
+              </Col>
+            </Row>
+          </Card>
+        ))}
     </div>
   );
 };

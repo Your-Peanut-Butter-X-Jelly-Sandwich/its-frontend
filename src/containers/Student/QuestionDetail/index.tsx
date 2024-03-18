@@ -1,12 +1,17 @@
 "use client";
 
-import React, { use } from "react";
+import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Editor from "@monaco-editor/react";
 import Markdown from "react-markdown";
-import { Button } from "antd";
-import { useGetQuestionDetailQuery } from "@/redux/apis/student/QuestionDetail";
+import { Button, Typography } from "antd";
+import {
+  useGetQuestionDetailQuery,
+  usePostCodeSubmissionMutation,
+} from "@/redux/apis/student/QuestionDetail";
+
+const { Text } = Typography;
 
 type PropsType = {
   qn_id: string;
@@ -14,30 +19,68 @@ type PropsType = {
 
 const QuestionDetailContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
   const pathname = usePathname();
+
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [code, setCode] = React.useState<string | undefined>("");
   const { data } = useGetQuestionDetailQuery({ qn_id: Number(qn_id) });
+  const [postCodeSubmission] = usePostCodeSubmissionMutation();
+
+  const problemStatement = `
+  # **${data?.question_title}**
+
+  ${data?.question_statement}
+  `;
+
+  const handleSubmit = async () => {
+    setIsLoading(true);
+    try {
+      if (code) {
+        const result = await postCodeSubmission({
+          qn_id: Number(qn_id),
+          language: data?.language || "",
+          program: code,
+        });
+
+        if ("data" in result && result.data) {
+          window.location.href = `${pathname}/past-submissions`;
+        }
+      }
+    } catch (error) {
+      alert("Error in submitting the code");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="flex bg-gray-100 h-full">
       <div className="w-[50%] p-10">
         {/* Problem Statement */}
         <div className="h-[80vh] overflow-auto">
-          <Markdown>{data?.question_statement}</Markdown>
+          <Markdown>{problemStatement}</Markdown>
         </div>
       </div>
       {/* Code Editor */}
       <div className="w-[50%] bg-gray-400">
-        <Button type="link" className="text-black">
-          <Link href={`${pathname}/past-submissions`}>Submissions</Link>
-        </Button>
+        <div className="flex justify-between">
+          <Button type="link">
+            <Link href={`${pathname}/past-submissions`}>Submissions</Link>
+          </Button>
+          <Text className="mr-4 mt-1">{data?.language}</Text>
+        </div>
         <Editor
-          height="85vh"
-          defaultLanguage="python"
+          height="90vh"
+          defaultLanguage={data?.language}
           value={code}
           onChange={(newValue, e) => setCode(newValue)}
         />
         <div className="w-full flex justify-center items-center">
-          <Button type="primary" className="ml-2 mt-2.5 bg-blue-500">
+          <Button
+            type="primary"
+            className="ml-2 mt-5 bg-blue-500"
+            onClick={handleSubmit}
+            disabled={isLoading}
+          >
             Submit
           </Button>
         </div>
