@@ -1,11 +1,11 @@
-import { ITSApi } from "@/redux/createApi";
+import { ITSApi } from '@/redux/createApi';
 
 export const submissionApi = ITSApi.injectEndpoints({
-    endpoints: (builder) => ({
-      getSubmissionDetail: builder.query<SubmissionDetail, number>({
-        query: (submission_id) => `/tutor/submission/${submission_id}`,
-      }),
-  
+  endpoints: (builder) => ({
+    getSubmissionDetail: builder.query<SubmissionDetail, number>({
+      query: (submission_id) => `/tutor/submission/${submission_id}`,
+    }),
+
     //   updateSubmissionDetail: builder.mutation<void, SubmissionDetail>({
     //     query: ({ pk }) => ({
     //       url: `/tutor/submission/${pk}`,
@@ -14,22 +14,17 @@ export const submissionApi = ITSApi.injectEndpoints({
     //     }),
     //   }),
 
-      updateSubmissionDetail: builder.mutation({
-        query: (body) => ({
-          url: `/tutor/submission/${body.pk}`,
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json', // Ensure this is set correctly
-          },
-          body,
-        }),
+    updateSubmissionDetail: builder.mutation({
+      query: (body) => ({
+        url: `/tutor/submission/${body.pk}`,
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json', // Ensure this is set correctly
+        },
+        body,
       }),
     }),
-  });
-  
-  
-  export const {
-    useGetSubmissionDetailQuery,
-    useUpdateSubmissionDetailMutation
-  } = submissionApi;
-  
+  }),
+});
+
+export const { useGetSubmissionDetailQuery, useUpdateSubmissionDetailMutation } = submissionApi;

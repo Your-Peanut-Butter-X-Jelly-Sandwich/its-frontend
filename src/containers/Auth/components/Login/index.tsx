@@ -86,7 +86,7 @@ const LoginContainer: React.FC<{ isSignedUp: boolean; setSignedUp: (value: boole
               />
             </Item>
             <Item>
-              Don't have an account?{' '}
+              Don&apos;t have an account?{' '}
               <a onClick={() => handleSignUpClick()} style={{ textDecoration: 'underline' }}>
                 Sign up
               </a>{' '}

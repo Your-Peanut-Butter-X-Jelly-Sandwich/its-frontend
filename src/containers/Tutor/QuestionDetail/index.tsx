@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
-import React from "react";
-import { usePathname } from "next/navigation";
+import React from 'react';
+import { usePathname } from 'next/navigation';
 import { Button, Row, Col, Statistic, Card } from 'antd';
-import { useLazyGetQuestionDetailQuery } from "@/redux/apis/tutor/QuestionDetail";
+import { useLazyGetQuestionDetailQuery } from '@/redux/apis/tutor/QuestionDetail';
 import Link from 'next/link';
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 const QuestionDetailContainer: React.FC<PropsType> = ({ qn_id }) => {
   const pathname = usePathname();
-  const [getQuestionDetail ] = useLazyGetQuestionDetailQuery();
+  const [getQuestionDetail] = useLazyGetQuestionDetailQuery();
 
-  const [questionDetail, setQuestionDetail] = useState<QuestionData|undefined>(undefined);
+  const [questionDetail, setQuestionDetail] = useState<QuestionData | undefined>(undefined);
 
   const fetchQuestionDetail = async () => {
-    const result: QuestionData = await getQuestionDetail({qn_id}).unwrap() as QuestionData;
+    const result: QuestionData = (await getQuestionDetail({ qn_id }).unwrap()) as QuestionData;
     setQuestionDetail(result);
-  }
+  };
   useEffect(() => {
     fetchQuestionDetail();
-  }, [])
+  }, []);
 
   const cardStyle = {
     padding: '24px',
@@ -76,8 +76,12 @@ const QuestionDetailContainer: React.FC<PropsType> = ({ qn_id }) => {
       </Row>
       <div style={{ marginTop: '24px', textAlign: 'center' }}>
         <div style={{ display: 'inline-flex', gap: '10px', justifyContent: 'center' }}>
-          <Button type="primary" href={`${pathname}/edit`}>Edit Question</Button>
-          <Button type="default" href={`${pathname}/submissions`}>View Student Submissions</Button>
+          <Button type="primary" href={`${pathname}/edit`}>
+            Edit Question
+          </Button>
+          <Button type="default" href={`${pathname}/submissions`}>
+            View Student Submissions
+          </Button>
         </div>
       </div>
     </div>
