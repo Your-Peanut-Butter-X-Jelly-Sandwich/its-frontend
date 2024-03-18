@@ -2,7 +2,6 @@
 import React from "react";
 import HeaderLanding from "@/components/Header/HeaderLanding";
 import { useTranslations } from "next-intl";
-import { useAppSelector } from "@/redux";
 
 const LandingContainer: React.FC = () => {
   const t = useTranslations("Landing");
