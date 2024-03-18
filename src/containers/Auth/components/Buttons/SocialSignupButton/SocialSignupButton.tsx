@@ -19,4 +19,3 @@ const SocialSignupButton: React.FC<SocialSignupButtonProps> = ({ type, onClick, 
 );
 
 export default SocialSignupButton;
-

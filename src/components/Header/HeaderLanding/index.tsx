@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 // import Link from "next/link";
-import { usePathname } from "next/navigation";
-import getLocale from "@/common/utils/extractLocale";
-import Link from "next/link";
+import { usePathname } from 'next/navigation';
+import getLocale from '@/common/utils/extractLocale';
+import Link from 'next/link';
 const HeaderLanding: React.FC = () => {
   // const router = useRouter();
   const pathname = usePathname();
@@ -23,7 +23,7 @@ const HeaderLanding: React.FC = () => {
               <Link
                 href={{
                   pathname: `/${locale}/auth`,
-                  query: { action: "login" },
+                  query: { action: 'login' },
                 }}
               >
                 Login
@@ -33,7 +33,7 @@ const HeaderLanding: React.FC = () => {
               <Link
                 href={{
                   pathname: `/${locale}/auth`,
-                  query: { action: "signup" },
+                  query: { action: 'signup' },
                 }}
               >
                 Signup

@@ -1,28 +1,15 @@
-import { Action, ThunkAction, configureStore } from "@reduxjs/toolkit";
-import rootReducer from "@/redux/reducers";
-import {
-  TypedUseSelectorHook,
-  useDispatch,
-  useSelector,
-  useStore,
-} from "react-redux";
-import { ITSApi } from "@/redux/createApi";
-import {
-  persistReducer,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from "redux-persist";
-import persistStore from "redux-persist/es/persistStore";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Action, ThunkAction, configureStore } from '@reduxjs/toolkit';
+import rootReducer from '@/redux/reducers';
+import { TypedUseSelectorHook, useDispatch, useSelector, useStore } from 'react-redux';
+import { ITSApi } from '@/redux/createApi';
+import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
+import persistStore from 'redux-persist/es/persistStore';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const persistConfig = {
-  key: "root",
+  key: 'root',
   storage: AsyncStorage,
-  whitelist: ["auth"], // Add reducer names you want to persist here
+  whitelist: ['auth'], // Add reducer names you want to persist here
 };
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
@@ -42,11 +29,11 @@ export const makeStore = () => {
 };
 
 // Infer the type of makeStore
-export type AppStore = ReturnType<typeof makeStore>["store"];
+export type AppStore = ReturnType<typeof makeStore>['store'];
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<AppStore["getState"]>;
-export type AppDispatch = AppStore["dispatch"];
+export type RootState = ReturnType<AppStore['getState']>;
+export type AppDispatch = AppStore['dispatch'];
 export type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,
   RootState,

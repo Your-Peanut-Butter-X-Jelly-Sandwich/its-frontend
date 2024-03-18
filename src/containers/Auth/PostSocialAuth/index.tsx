@@ -1,11 +1,11 @@
-"use client";
-import React from "react";
-import { useEffect } from "react";
-import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import { useAppDispatch } from "@/redux";
-import { setAuthTokens, setAuthUser } from "@/redux/slices/auth";
-import { useLazyAuthRetrieveUserQuery } from "@/redux/apis/auth";
-import getLocale from "@/common/utils/extractLocale";
+'use client';
+import React from 'react';
+import { useEffect } from 'react';
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
+import { useAppDispatch } from '@/redux';
+import { setAuthTokens, setAuthUser } from '@/redux/slices/auth';
+import { useLazyAuthRetrieveUserQuery } from '@/redux/apis/auth';
+import getLocale from '@/common/utils/extractLocale';
 
 const PostSocialAuthContainer: React.FC = () => {
   const searchParams = useSearchParams();
@@ -29,8 +29,8 @@ const PostSocialAuthContainer: React.FC = () => {
     }
   };
   useEffect(() => {
-    const access = searchParams.get("access");
-    const refresh = searchParams.get("refresh");
+    const access = searchParams.get('access');
+    const refresh = searchParams.get('refresh');
     if (access && refresh) {
       dispatch(setAuthTokens({ access, refresh }));
     }

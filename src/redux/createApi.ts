@@ -4,12 +4,12 @@ import {
   FetchBaseQueryError,
   createApi,
   fetchBaseQuery,
-} from "@reduxjs/toolkit/query/react";
-import { HOST_API } from "@/configs/env";
-import { RootState } from ".";
-import { Mutex } from "async-mutex";
-import { isEmpty } from "lodash";
-import { setAuthTokens, setLogout } from "./slices/auth";
+} from '@reduxjs/toolkit/query/react';
+import { HOST_API } from '@/configs/env';
+import { RootState } from '.';
+import { Mutex } from 'async-mutex';
+import { isEmpty } from 'lodash';
+import { setAuthTokens, setLogout } from './slices/auth';
 
 const mutex = new Mutex();
 
@@ -19,7 +19,7 @@ const baseQueryWithAuth = () =>
     prepareHeaders: (headers, { getState }) => {
       const { tokens } = (getState() as RootState).auth;
       if (tokens.access) {
-        headers.set("Authorization", `Bearer ${tokens.access}`);
+        headers.set('Authorization', `Bearer ${tokens.access}`);
       }
     },
   });
@@ -29,11 +29,11 @@ const plainBaseQuery = () =>
     baseUrl: `${HOST_API}/`,
   });
 
-const itsBaseQueryWithReauth: BaseQueryFn<
-  any | FetchArgs,
-  unknown,
-  FetchBaseQueryError
-> = async (args, api, extraOptions) => {
+const itsBaseQueryWithReauth: BaseQueryFn<any | FetchArgs, unknown, FetchBaseQueryError> = async (
+  args,
+  api,
+  extraOptions
+) => {
   // wait until the mutex is available without locking it
   await mutex.waitForUnlock();
   // retrieve the role of the current user, which is used to construct the base query url
@@ -55,14 +55,14 @@ const itsBaseQueryWithReauth: BaseQueryFn<
         // Request new access token with refresh token
         const { data } = await plainBaseQuery()(
           {
-            url: "/auth/token/refresh",
-            method: "POST",
+            url: '/auth/token/refresh',
+            method: 'POST',
             params: {
               refreshToken,
             },
           },
           api,
-          extraOptions,
+          extraOptions
         );
         // If the request is successful, update the redux store with the new access token and retry the initial query.
         if (!isEmpty(data)) {
@@ -90,7 +90,7 @@ const itsBaseQueryWithReauth: BaseQueryFn<
 };
 
 export const ITSApi = createApi({
-  reducerPath: "ITSApi",
+  reducerPath: 'ITSApi',
   baseQuery: itsBaseQueryWithReauth,
   endpoints: () => ({}),
 });

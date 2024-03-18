@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useSelector } from 'react-redux';
-import { authSelector } from '@/redux/slices/auth'; 
-import { Button, Typography, List, Card, Row, Col, message } from "antd";
+import { authSelector } from '@/redux/slices/auth';
+import { Button, Typography, List, Card, Row, Col, message } from 'antd';
 const { Title, Text } = Typography;
 
 type QuestionType = {
@@ -31,13 +31,14 @@ const QuestionsContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
     fetchQuestions();
   }, []);
 
-  const baseUrl = "http://127.0.0.1:8000";
-  const authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEwODIyNDcyLCJpYXQiOjE3MTA3MzYwNzIsImp0aSI6ImU0NTg3MWU3NTZlNzQyZjY4NTA1M2RmZjZlMGUwZjk4IiwidXNlcl9pZCI6MTF9.0N5z7xR4kNUhUOdUKPO2Gy_lI-Yk-LH5RXHxjvxvVgY";
+  const baseUrl = 'http://127.0.0.1:8000';
+  const authToken =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEwODIyNDcyLCJpYXQiOjE3MTA3MzYwNzIsImp0aSI6ImU0NTg3MWU3NTZlNzQyZjY4NTA1M2RmZjZlMGUwZjk4IiwidXNlcl9pZCI6MTF9.0N5z7xR4kNUhUOdUKPO2Gy_lI-Yk-LH5RXHxjvxvVgY';
   // const authToken = accessToken;
   const fetchQuestions = () => {
     fetch(`${baseUrl}/tutor/question`, {
       headers: {
-        "Authorization": `Bearer ${authToken}`, 
+        Authorization: `Bearer ${authToken}`,
       },
     })
       .then((response) => response.json())
@@ -45,7 +46,7 @@ const QuestionsContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
         setQuestions(data.questions);
       })
       .catch((error) => {
-        console.error("Error fetching questions:", error);
+        console.error('Error fetching questions:', error);
       });
   };
 
@@ -53,53 +54,52 @@ const QuestionsContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
     fetch(`${baseUrl}/tutor/question/${pk}`, {
       method: 'DELETE',
       headers: {
-        "Authorization": `Bearer ${authToken}`,
+        Authorization: `Bearer ${authToken}`,
       },
     })
-      .then(response => {
+      .then((response) => {
         if (response.ok) {
-          setQuestions(prevQuestions => prevQuestions.filter(question => question.pk !== pk));
+          setQuestions((prevQuestions) => prevQuestions.filter((question) => question.pk !== pk));
           message.success('Question deleted successfully');
         } else {
           message.error('Error deleting question');
         }
       })
       .catch((error) => {
-        console.error("Error deleting question:", error);
+        console.error('Error deleting question:', error);
         message.error('Error deleting question');
       });
   };
 
   const pageStyle = {
     padding: '20px',
-    backgroundColor: '#f0f2f5', 
+    backgroundColor: '#f0f2f5',
     minHeight: '100vh',
   };
 
   const cardStyle = {
-    backgroundColor: '#ffffff', 
+    backgroundColor: '#ffffff',
   };
 
   const viewReportButtonStyle = {
-    backgroundColor: '#1890ff', 
-    color: '#fff', 
-    borderColor: '#1890ff', 
+    backgroundColor: '#1890ff',
+    color: '#fff',
+    borderColor: '#1890ff',
   };
 
-
   const backButtonStyle = {
-    backgroundColor: '#1890ff', 
-    color: '#fff', 
-    borderColor: '#1890ff', 
+    backgroundColor: '#1890ff',
+    color: '#fff',
+    borderColor: '#1890ff',
   };
 
   const deleteButtonStyle = {
-    backgroundColor: '#ff4d4f', 
-    color: '#fff', 
+    backgroundColor: '#ff4d4f',
+    color: '#fff',
     borderColor: '#ff4d4f',
-    marginLeft: '10px', 
+    marginLeft: '10px',
   };
-  
+
   return (
     <div style={pageStyle}>
       <div style={{ marginBottom: '20px' }}>
@@ -107,9 +107,7 @@ const QuestionsContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
           <Button style={backButtonStyle}>Back to Dashboard</Button>
         </Link>
       </div>
-      <Title level={4}>
-        Here you can see ALL questions.
-      </Title>
+      <Title level={4}>Here you can see ALL questions.</Title>
       <List
         grid={{ gutter: 16, column: 1 }}
         dataSource={questions}
@@ -128,10 +126,7 @@ const QuestionsContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
                   <Link href={`${pathname}/${item.pk}`} passHref>
                     <Button style={viewReportButtonStyle}>View Question Insight</Button>
                   </Link>
-                  <Button 
-                    style={deleteButtonStyle} 
-                    onClick={() => handleDeleteQuestion(item.pk)}
-                  >
+                  <Button style={deleteButtonStyle} onClick={() => handleDeleteQuestion(item.pk)}>
                     Delete
                   </Button>
                 </Col>
@@ -142,6 +137,6 @@ const QuestionsContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
       />
     </div>
   );
-}
+};
 
-export default QuestionsContainer
+export default QuestionsContainer;

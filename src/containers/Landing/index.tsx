@@ -1,20 +1,18 @@
-"use client";
-import React from "react";
-import HeaderLanding from "@/components/Header/HeaderLanding";
-import { useTranslations } from "next-intl";
-import { useAppSelector } from "@/redux";
-import type { RootState } from "@/redux";
-import { useEffect } from "react";
-import { usePathname, useRouter } from "next/navigation";
-import getLocale from "@/common/utils/extractLocale";
+'use client';
+import React from 'react';
+import HeaderLanding from '@/components/Header/HeaderLanding';
+import { useTranslations } from 'next-intl';
+import { useAppSelector } from '@/redux';
+import type { RootState } from '@/redux';
+import { useEffect } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import getLocale from '@/common/utils/extractLocale';
 const LandingContainer: React.FC = () => {
-  const t = useTranslations("Landing");
+  const t = useTranslations('Landing');
   const router = useRouter();
   const pathname = usePathname();
   const locale = getLocale(pathname);
-  const { isAuthenticated, user } = useAppSelector(
-    (state: RootState) => state.auth,
-  );
+  const { isAuthenticated, user } = useAppSelector((state: RootState) => state.auth);
   useEffect(() => {
     if (isAuthenticated) {
       if (user.is_manager) {
@@ -32,7 +30,7 @@ const LandingContainer: React.FC = () => {
       <div className="h-full text-4xl font-bold flex justify-center">
         <div className="flex flex-col justify-center">
           <div>
-            <strong>{t("title")}</strong> !
+            <strong>{t('title')}</strong> !
           </div>
         </div>
       </div>

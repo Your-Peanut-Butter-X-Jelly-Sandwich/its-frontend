@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import React from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import Editor from "@monaco-editor/react";
-import Markdown from "react-markdown";
-import { Button, Typography } from "antd";
+import React from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import Editor from '@monaco-editor/react';
+import Markdown from 'react-markdown';
+import { Button, Typography } from 'antd';
 import {
   useGetQuestionDetailQuery,
   usePostCodeSubmissionMutation,
-} from "@/redux/apis/student/QuestionDetail";
+} from '@/redux/apis/student/QuestionDetail';
 
 const { Text } = Typography;
 
@@ -21,7 +21,7 @@ const QuestionDetailContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
   const pathname = usePathname();
 
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
-  const [code, setCode] = React.useState<string | undefined>("");
+  const [code, setCode] = React.useState<string | undefined>('');
   const { data } = useGetQuestionDetailQuery({ qn_id: Number(qn_id) });
   const [postCodeSubmission] = usePostCodeSubmissionMutation();
 
@@ -37,16 +37,16 @@ const QuestionDetailContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
       if (code) {
         const result = await postCodeSubmission({
           qn_id: Number(qn_id),
-          language: data?.language || "",
+          language: data?.language || '',
           program: code,
         });
 
-        if ("data" in result && result.data) {
+        if ('data' in result && result.data) {
           window.location.href = `${pathname}/past-submissions`;
         }
       }
     } catch (error) {
-      alert("Error in submitting the code");
+      alert('Error in submitting the code');
     } finally {
       setIsLoading(false);
     }
