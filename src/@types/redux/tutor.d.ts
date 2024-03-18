@@ -10,7 +10,7 @@ interface PropsType  {
   
 interface QuestionData {
     question: {
-        id: number;
+        id: string;
         test_cases: Array<{ pk: number; input: string; output: string }>;
         question_title: string;
         question_statement: string;
@@ -58,7 +58,7 @@ interface SubmissionType {
 
 interface SubmissionDetail {
     pk: number;
-    qn_id: number;
+    qn_id: string;
     submission_number: number;
     language: "python"|"c";
     submission_date: string;
