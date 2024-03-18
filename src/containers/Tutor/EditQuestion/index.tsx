@@ -28,6 +28,7 @@ const EditQuestionContainer: React.FC<PropsType> = ({ qn_id }) => {
       setDueDate(questionData.question.due_date);
       setCodeContent(questionData.question.ref_program);
       setMarkdown(questionData.question.question_statement);
+      // @ts-ignore
       setTestCases(questionData.question.test_cases.map(tc => _.omit(tc, 'pk')));
       setLanguage(questionData.question.language);
     }
