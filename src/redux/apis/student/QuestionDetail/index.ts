@@ -11,7 +11,19 @@ export const questionDetailApi = ITSApi.injectEndpoints({
         method: "GET",
       }),
     }),
+
+    postCodeSubmission: builder.mutation<
+      ICodeSubmissionResponse,
+      ICodeSubmissionRequest
+    >({
+      query: (body) => ({
+        url: "/student/submission",
+        method: "POST",
+        body,
+      }),
+    }),
   }),
 });
 
-export const { useGetQuestionDetailQuery } = questionDetailApi;
+export const { useGetQuestionDetailQuery, usePostCodeSubmissionMutation } =
+  questionDetailApi;

@@ -84,3 +84,36 @@ interface ISubmissionDetailResponse {
 interface ISubmissionDetailRequest {
   id: number;
 }
+
+interface ICodeSubmissionResponse {
+  pk: number;
+  qn_id: number;
+  submission_number: number;
+  language: string;
+  submission_date: string;
+  program: string;
+  its_feedback_hint_student: {
+    message: string;
+  };
+  its_feedback_fix_tutor: {
+    message: string;
+  };
+  tutor_feedback: string;
+  report: string;
+  score: number;
+  total_score: number;
+  submitted_by: {
+    email: string;
+    organisation: string;
+    username: string;
+    is_student: boolean;
+    is_tutor: boolean;
+    is_manager: boolean;
+  };
+}
+
+interface ICodeSubmissionRequest {
+  qn_id: number;
+  language: string;
+  program: string;
+}
