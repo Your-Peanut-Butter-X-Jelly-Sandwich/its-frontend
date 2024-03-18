@@ -14,12 +14,12 @@ export const authApi = ITSApi.injectEndpoints({
         method: "POST",
         body: params,
       }),
-      async onQueryStarted(_record, { dispatch, queryFulfilled }) {
-        const { data } = await queryFulfilled;
-        if (!isEmpty(data)) {
-          dispatch(setAuthSuccess(data));
-        }
-      },
+      // async onQueryStarted(_record, { dispatch, queryFulfilled }) {
+      //   const { data } = await queryFulfilled;
+      //   if (!isEmpty(data)) {
+      //     dispatch(setAuthSuccess(data));
+      //   }
+      // },
     }),
     authLogin: builder.query<IAuthLoginResponse, IAuthLoginRequest>({
       query: (params) => ({
