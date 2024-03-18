@@ -9,6 +9,7 @@ type ParamsType = {
 const EditPage: NextPage<ParamsType> = ({ params }: ParamsType) => {
   return (
     <div>
+      {/* @ts-ignore */}
       <EditQuestionContainer {...params} />
     </div>
   );

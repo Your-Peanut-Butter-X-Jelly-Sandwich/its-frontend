@@ -9,6 +9,7 @@ type ParamsType = {
 const SubmissionDetailPage: NextPage<ParamsType> = ({ params }: ParamsType) => {
   return (
     <div>
+      {/* @ts-ignore */}
       <SubmissionDetailContainer {...params} />
     </div>
   );

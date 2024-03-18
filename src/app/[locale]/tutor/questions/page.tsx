@@ -4,6 +4,7 @@ import QuestionsContainer from '@/containers/Tutor/Questions';
 const QuestionsPage: NextPage = () => {
   return (
     <div>
+      {/* @ts-ignore */}
       <QuestionsContainer />
     </div>
   );
