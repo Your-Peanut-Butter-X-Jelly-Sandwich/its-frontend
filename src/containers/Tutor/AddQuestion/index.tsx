@@ -88,7 +88,9 @@ const AddQuestionContainer = () => {
     backgroundColor: '#1890ff',
     color: '#fff',
     borderColor: '#1890ff',
+    height: '40px', 
   };
+  
 
   const pageStyle = {
     padding: '20px',
@@ -183,22 +185,25 @@ const AddQuestionContainer = () => {
           </div>
         </div>
       )}
-      <Space style={{ margin: '20px', padding: '10px', position: 'absolute', bottom: 0, left: 0 }}>
-        {currentMode === 'markdown' ? (
-          <Button style={buttonStyle} onClick={() => setCurrentMode('testCases')}>
-            Switch to Test Cases
+      <div style={{ position: 'absolute', bottom: '20px', left: 0, right: 0, display: 'flex', justifyContent: 'space-between', padding: '10px' }}>
+        <Space>
+          {currentMode === 'markdown' ? (
+            <Button style={buttonStyle} onClick={() => setCurrentMode('testCases')}>
+              Switch to Test Cases
+            </Button>
+          ) : (
+            <Button style={buttonStyle} onClick={() => setCurrentMode('markdown')}>
+              Switch to Question Editor
+            </Button>
+          )}
+        </Space>
+        <Space>
+          <Button type="primary" style={buttonStyle} onClick={handleSubmission}>
+            Submit
           </Button>
-        ) : (
-          <Button style={buttonStyle} onClick={() => setCurrentMode('markdown')}>
-            Switch to Question Editor
-          </Button>
-        )}
-      </Space>
-      <Space style={{ padding: '10px', position: 'absolute', bottom: 0, right: 0 }}>
-        <Button type="primary" style={buttonStyle} onClick={handleSubmission}>
-          Submit
-        </Button>
-      </Space>
+        </Space>
+      </div>
+
     </div>
   );
 };
