@@ -28,11 +28,10 @@ const submitButtonStyle = {
   backgroundColor: '#52c41a',
   color: '#fff',
   borderColor: '#52c41a',
-  float: 'right', // Position the submit button to the right
+  float: 'right',
 };
 
 const SubmissionDetailContainer: React.FC<PropsType> = ({ qn_id, submission_id }: PropsType) => {
-  // Configuration for the Monaco Editor
   const editorOptions = {
     selectOnLineNumbers: true,
     readOnly: true,

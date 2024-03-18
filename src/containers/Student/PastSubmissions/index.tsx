@@ -3,74 +3,61 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Button, Typography, List, Card, Row, Col } from "antd";
+import { Button, Typography, Card, Row, Col } from "antd";
+import { useGetPastSubmissionsQuery } from "@/redux/apis/student/PastSubmissions";
+
 const { Title, Text } = Typography;
+
+const PAGE = {
+  padding: "20px",
+  backgroundColor: "#f0f2f5",
+  minHeight: "100vh",
+};
+
+const CARD = {
+  backgroundColor: "#ffffff",
+  marginBottom: "20px",
+};
+
+const VIEW_BUTTON = {
+  backgroundColor: "#1890ff",
+  color: "#fff",
+  borderColor: "#1890ff",
+};
 
 type PropsType = { qn_id: string };
 
-const PastSubmissionsContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
+const PastSubmissionsContainer: React.FC<PropsType> = ({
+  qn_id,
+}: PropsType) => {
   const pathname = usePathname();
-  const submissions = [
-    { id: 1, title: "Submission 1" },
-    { id: 2, title: "Submission 2" },
-    { id: 3, title: "Submission 3" },
-  ];
 
-  const pageStyle = {
-    padding: '20px',
-    backgroundColor: '#f0f2f5', 
-    minHeight: '100vh',
-  };
-
-  const cardStyle = {
-    backgroundColor: '#ffffff', 
-  };
-
-  const viewReportButtonStyle = {
-    backgroundColor: '#1890ff', 
-    color: '#fff', 
-    borderColor: '#1890ff', 
-  };
-
-  const backButtonStyle = {
-    backgroundColor: '#1890ff', 
-    color: '#fff', 
-    borderColor: '#1890ff', 
-  };
+  const { data } = useGetPastSubmissionsQuery({ qn_id: Number(qn_id) });
+  const submissions = data?.submissions;
 
   return (
-    <div style={pageStyle}>
-      <div style={{ marginBottom: '20px' }}>
-        <Link href={`/en/student/questions/${qn_id}`} passHref>
-          <Button style={backButtonStyle}>Back to Question</Button>
-        </Link>
-      </div>
-      <Title level={4}>
-        Here you can see ALL past attempts for question <Text type="danger">{qn_id}</Text> and the corresponding reports.
+    <div style={PAGE}>
+      <Title level={2} style={{ marginBottom: "1.5%" }}>
+        Past Submissions
       </Title>
-      <List
-        grid={{ gutter: 16, column: 1 }}
-        dataSource={submissions}
-        renderItem={(item, index) => (
-          <List.Item>
-            <Card style={cardStyle}>
-              <Row justify="space-between" align="middle">
-                <Col>
-                  <Text>Submission {index + 1}</Text>
-                </Col>
-                <Col>
-                  <Link href={`${pathname}/${item.id}`} passHref>
-                    <Button style={viewReportButtonStyle}>View Report</Button>
-                  </Link>
-                </Col>
-              </Row>
-            </Card>
-          </List.Item>
-        )}
-      />
+      {submissions?.slice().reverse().map((submission: ISubmission) => (
+        <Card style={CARD} key={submission.pk}>
+          <Row justify="space-between" align="middle">
+            <Col>
+              <Text style={{ fontSize: "1.3rem" }}>
+                Submission Number: {submission.submission_number}
+              </Text>
+            </Col>
+            <Col>
+              <Link href={`${pathname}/${submission.pk}`} passHref>
+                <Button style={VIEW_BUTTON}>View</Button>
+              </Link>
+            </Col>
+          </Row>
+        </Card>
+      ))}
     </div>
   );
 };
 
 export default PastSubmissionsContainer;
-

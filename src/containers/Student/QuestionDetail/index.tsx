@@ -1,4 +1,5 @@
 "use client";
+
 import React, { use } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -13,8 +14,8 @@ type PropsType = {
 
 const QuestionDetailContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
   const pathname = usePathname();
-  const [code, setCode] = React.useState<string | undefined>("// some code");
-  const { data } = useGetQuestionDetailQuery(Number(qn_id));
+  const [code, setCode] = React.useState<string | undefined>("");
+  const { data } = useGetQuestionDetailQuery({ qn_id: Number(qn_id) });
 
   return (
     <div className="flex bg-gray-100 h-full">
