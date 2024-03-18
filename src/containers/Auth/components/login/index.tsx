@@ -37,7 +37,7 @@ const LoginContainer:React.FC<{isSignedUp: boolean; setSignedUp: (value: boolean
           } else if (user.is_student) {
             window.location.href = `/${locale}/student` 
           } else if (user.is_manager) {
-            window.location.href = `/${locale}/tutor` 
+            window.location.href = `/${locale}/manager` 
           }
         }
       } catch (error) {
