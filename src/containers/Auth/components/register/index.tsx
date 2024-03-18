@@ -1,6 +1,10 @@
 "use client"
-import React from "react";
-import { Row, Col, Form, Input, Button, Card } from "antd";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { authSelector } from "@/redux/slices/auth";
+import { Row, Col, Form, Input, message, Card } from "antd";
+import { usePathname } from "next/navigation";
+import getLocale from "@/common/utils/extractLocale";
 const { Item } = Form;
 import { useLazyAuthSignupQuery } from "@/redux/apis/auth";
 import CustomButton from "../Buttons/CustomButton/CustomButton";
@@ -10,22 +14,36 @@ import SocialSignupButton from "../Buttons/SocialSignupButton/SocialSignupButton
 const SignUpContainer:React.FC<{isSignedUp: boolean; setSignedUp: (value: boolean) => void }> = ({isSignedUp, setSignedUp}) => {
     
     const [form] = Form.useForm();
+    const pathname = usePathname();
     const handleSocialSignup = (provider: string) => {
         window.location.href = `http://127.0.0.1:8000/auth/${provider}/login`;
     };
     const [authSignup] = useLazyAuthSignupQuery();
+    const {isAuthenticated, user } = useSelector(authSelector)
+
+    useEffect(() => {
+      if(isAuthenticated) {
+        const locale = getLocale(pathname);
+        if (user.is_student) {
+          window.location.href = `/${locale}/student`
+        } else if (user.is_tutor) {
+          window.location.href = `/${locale}/tutor`;
+        } else if (user.is_manager) {
+          window.location.href = `/${locale}/manager` 
+        }
+      }
+    }, [isAuthenticated, user]);
+
     const handleSignup = async () => {
         try {
           const email = form.getFieldValue('email')
           const password = form.getFieldValue('password')
           const result = await authSignup({email, password}).unwrap()
-
           if (result) {
-            console.log(result)
             setSignedUp(true);
           }
         } catch (error) {
-          console.log(error)
+          message.error('Error signing up')
         }       
         
     };
