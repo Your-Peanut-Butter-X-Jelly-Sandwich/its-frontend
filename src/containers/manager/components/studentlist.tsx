@@ -27,7 +27,7 @@ const StudentList: React.FC<StudentListProps> = ({ students, onCheckboxChange })
             key: 'email',
         },
         {
-            title: 'Convert to Tutor',
+            title: 'Mark as Tutor',
             dataIndex: 'convert',
             key: 'convert',
             render: (text: string, record: Student) => (
