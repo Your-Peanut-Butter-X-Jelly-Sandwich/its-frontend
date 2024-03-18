@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
 import React, { useState, useEffect } from 'react';
 import { Input, Button, message } from 'antd'; // Import `message` for feedback
-import Link from 'next/link';
-import Editor from '@monaco-editor/react';
-import axios from 'axios';
+import Link from "next/link";
+import Editor from "@monaco-editor/react";
+import axios from 'axios'; 
 
 type PropsType = {
   qn_id: string;
@@ -15,10 +15,9 @@ const SubmissionDetailContainer: React.FC<PropsType> = ({ qn_id, submission_id }
   const [code, setCode] = useState('');
   const [feedback, setFeedback] = useState('');
 
-  const baseUrl = 'http://127.0.0.1:8000';
-  const authToken =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEwODIyNDcyLCJpYXQiOjE3MTA3MzYwNzIsImp0aSI6ImU0NTg3MWU3NTZlNzQyZjY4NTA1M2RmZjZlMGUwZjk4IiwidXNlcl9pZCI6MTF9.0N5z7xR4kNUhUOdUKPO2Gy_lI-Yk-LH5RXHxjvxvVgY';
-
+  const baseUrl = "http://127.0.0.1:8000";
+  const authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEwODIyNDcyLCJpYXQiOjE3MTA3MzYwNzIsImp0aSI6ImU0NTg3MWU3NTZlNzQyZjY4NTA1M2RmZjZlMGUwZjk4IiwidXNlcl9pZCI6MTF9.0N5z7xR4kNUhUOdUKPO2Gy_lI-Yk-LH5RXHxjvxvVgY";
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -28,7 +27,7 @@ const SubmissionDetailContainer: React.FC<PropsType> = ({ qn_id, submission_id }
           },
         });
         setCode(response.data.program);
-        setFeedback(response.data.tutor_feedback || '');
+        setFeedback(response.data.tutor_feedback || "");
       } catch (error) {
         console.error('Failed to fetch data:', error);
       }
@@ -43,17 +42,13 @@ const SubmissionDetailContainer: React.FC<PropsType> = ({ qn_id, submission_id }
 
   const handleSubmitFeedback = async () => {
     try {
-      await axios.patch(
-        `${baseUrl}/tutor/submission/${submission_id}`,
-        {
-          tutor_feedback: feedback,
+      await axios.patch(`${baseUrl}/tutor/submission/${submission_id}`, {
+        tutor_feedback: feedback,
+      }, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
         },
-        {
-          headers: {
-            Authorization: `Bearer ${authToken}`,
-          },
-        }
-      );
+      });
       message.success('Feedback submitted successfully');
     } catch (error) {
       console.error('Failed to submit feedback:', error);
@@ -77,18 +72,16 @@ const SubmissionDetailContainer: React.FC<PropsType> = ({ qn_id, submission_id }
   const editorOptions = {
     selectOnLineNumbers: true,
     readOnly: true,
-    language: 'python',
+    language: 'python', 
     theme: 'vs-light',
   };
 
   return (
-    <div style={{ padding: 24, backgroundColor: '#F0F2F5', minHeight: '100vh' }}>
+    <div style={{ padding: 24, backgroundColor: "#F0F2F5", minHeight: "100vh" }}>
       <Link href={`/en/tutor/questions/${qn_id}/submissions`} passHref>
         <Button style={backButtonStyle}>Back to Submissions</Button>
       </Link>
-      <Button style={submitButtonStyle} onClick={handleSubmitFeedback}>
-        Submit Feedback
-      </Button>
+      <Button style={submitButtonStyle} onClick={handleSubmitFeedback}>Submit Feedback</Button>
       <h1>Submissions for Question {qn_id}</h1>
       <div className="flex flex-col h-screen">
         <div className="flex flex-1 gap-5 p-3 overflow-hidden">

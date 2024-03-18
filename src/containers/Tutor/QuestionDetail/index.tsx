@@ -1,46 +1,24 @@
-'use client';
-import React, { useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
+"use client";
+
+import React from "react";
+import { usePathname } from "next/navigation";
 import { Button, Row, Col, Statistic, Card } from 'antd';
-import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
+import { useLazyGetQuestionDetailQuery } from "@/redux/apis/tutor/QuestionDetail";
 import Link from 'next/link';
-
-type QuestionStatistics = {
-  total_students: number;
-  passes: number;
-  total_submissions: number;
-};
-
-type PropsType = {
-  qn_id: string;
-};
-
+import { useEffect, useState } from "react";
 const QuestionDetailContainer: React.FC<PropsType> = ({ qn_id }) => {
   const pathname = usePathname();
-  const [statistics, setStatistics] = useState<QuestionStatistics>({
-    total_students: 0,
-    passes: 0,
-    total_submissions: 0,
-  });
-  const baseUrl = 'http://127.0.0.1:8000';
-  const authToken =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEwNzY1OTc3LCJpYXQiOjE3MTA2Nzk1NzcsImp0aSI6ImUyNzJkYzZhZWI0ZjQ2NGNhMjhkMzQ1NGU3NjQwMTk1IiwidXNlcl9pZCI6MTF9.4_QeJTep_Z1SW4Ndf7TZSJU50it52CQ9_ffDIU8yWPg';
+  const [getQuestionDetail ] = useLazyGetQuestionDetailQuery();
+
+  const [questionDetail, setQuestionDetail] = useState<QuestionData|undefined>(undefined);
+
+  const fetchQuestionDetail = async () => {
+    const result: QuestionData = await getQuestionDetail({qn_id}).unwrap() as QuestionData;
+    setQuestionDetail(result);
+  }
   useEffect(() => {
-    fetch(`${baseUrl}/tutor/question/${qn_id}`, {
-      headers: {
-        Authorization: `Bearer ${authToken}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setStatistics({
-          total_students: data.total_students,
-          passes: data.passes,
-          total_submissions: data.total_submissions,
-        });
-      })
-      .catch((error) => console.error('Failed to fetch question statistics:', error));
-  }, [qn_id]);
+    fetchQuestionDetail();
+  }, [])
 
   const cardStyle = {
     padding: '24px',
@@ -66,30 +44,30 @@ const QuestionDetailContainer: React.FC<PropsType> = ({ qn_id }) => {
       </div>
       <Row gutter={[16, 16]} justify="space-around">
         <Col xs={24} sm={24} md={12} lg={8}>
-          <Card style={cardStyle}>
+          <Card style={{ padding: '24px', textAlign: 'center' }}>
             <Statistic
               title="Total Students"
-              value={statistics.total_students}
+              value={questionDetail?.total_students}
               precision={0}
               valueStyle={{ color: '#3f8600' }}
             />
           </Card>
         </Col>
         <Col xs={24} sm={24} md={12} lg={8}>
-          <Card style={cardStyle}>
+          <Card style={{ padding: '24px', textAlign: 'center' }}>
             <Statistic
               title="Passes"
-              value={statistics.passes}
+              value={questionDetail?.passes}
               precision={0}
               valueStyle={{ color: '#cf1322' }}
             />
           </Card>
         </Col>
         <Col xs={24} sm={24} md={12} lg={8}>
-          <Card style={cardStyle}>
+          <Card style={{ padding: '24px', textAlign: 'center' }}>
             <Statistic
               title="Total Submissions"
-              value={statistics.total_submissions}
+              value={questionDetail?.total_submissions}
               precision={0}
               valueStyle={{ color: '#234abc' }}
             />
@@ -98,12 +76,8 @@ const QuestionDetailContainer: React.FC<PropsType> = ({ qn_id }) => {
       </Row>
       <div style={{ marginTop: '24px', textAlign: 'center' }}>
         <div style={{ display: 'inline-flex', gap: '10px', justifyContent: 'center' }}>
-          <Button type="primary" href={`${pathname}/edit`}>
-            Edit Question
-          </Button>
-          <Button type="default" href={`${pathname}/submissions`}>
-            View Student Submissions
-          </Button>
+          <Button type="primary" href={`${pathname}/edit`}>Edit Question</Button>
+          <Button type="default" href={`${pathname}/submissions`}>View Student Submissions</Button>
         </div>
       </div>
     </div>
