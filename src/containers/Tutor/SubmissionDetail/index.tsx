@@ -8,7 +8,7 @@ import { useGetSubmissionDetailQuery, useUpdateSubmissionDetailMutation } from "
 
 const SubmissionDetailContainer: React.FC<SubmissionDataType> = ({ qn_id, submission_id }) => {
   const [feedback, setFeedback] = useState('');
-  const { data: submissionDetail, isFetching } = useGetSubmissionDetailQuery(submission_id);
+  const { data: submissionDetail, isFetching, refetch } = useGetSubmissionDetailQuery(submission_id);
   const [updateSubmissionDetail] = useUpdateSubmissionDetailMutation();
   
   useEffect(() => {
@@ -34,6 +34,9 @@ const SubmissionDetailContainer: React.FC<SubmissionDataType> = ({ qn_id, submis
       console.log(submissionUpdate);
       
       await updateSubmissionDetail(submissionUpdate).unwrap(); // Execute the mutation.
+      
+      // Call refetch to get the latest submission detail after update
+      await refetch();
       message.success('Feedback submitted successfully');
     } catch (error) {
       console.error('Failed to submit feedback:', error);
@@ -51,7 +54,7 @@ const SubmissionDetailContainer: React.FC<SubmissionDataType> = ({ qn_id, submis
     backgroundColor: '#52c41a',
     color: '#fff',
     borderColor: '#52c41a',
-    float: 'right',
+    float: 'right' as 'right',
   };
 
   const editorOptions = {
