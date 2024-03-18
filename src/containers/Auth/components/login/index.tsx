@@ -11,12 +11,12 @@ import SocialSignupButton from "../Buttons/SocialSignupButton/SocialSignupButton
 const LoginContainer:React.FC<{isSignedUp: boolean; setSignedUp: (value: boolean) => void }> = ({isSignedUp, setSignedUp}) => {
 
     const [form] = Form.useForm();
-    const [authLogin, data] = useLazyAuthLoginQuery();
+    const [authLogin] = useLazyAuthLoginQuery();
     const pathname = usePathname();
     
 
     const handleSocialSignup = (provider: string) => {
-        window.location.href = `http://127.0.0.1:8000/auth/${provider}/login`;
+        window.location.href = `http://localhost:8000/auth/${provider}/login`;
     };
     const handleSignUpClick = () => {
         setSignedUp(false);
@@ -35,13 +35,12 @@ const LoginContainer:React.FC<{isSignedUp: boolean; setSignedUp: (value: boolean
           if (user.is_tutor) {
             window.location.href = `/${locale}/tutor`;
           } else if (user.is_student) {
-            window.location.href = `/${locale}/student` // Redirect to student page if user is a student
+            window.location.href = `/${locale}/student` 
           } else if (user.is_manager) {
-            window.location.href = `/${locale}/tutor` // Redirect to manager page if user is a manager
+            window.location.href = `/${locale}/tutor` 
           }
         }
       } catch (error) {
-        console.error("Login error:", error);
         message.error('Email or password is incorrect');
       }
     };

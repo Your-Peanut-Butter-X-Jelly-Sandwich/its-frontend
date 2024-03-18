@@ -15,10 +15,19 @@ const SignUpContainer:React.FC<{isSignedUp: boolean; setSignedUp: (value: boolea
     };
     const [authSignup] = useLazyAuthSignupQuery();
     const handleSignup = async () => {
-        const { user } = await authSignup({
-        email: "e0y31928y@u.nus.edu",
-        password: "123456ABCDEF$$$",
-        }).unwrap();
+        try {
+          const email = form.getFieldValue('email')
+          const password = form.getFieldValue('password')
+          const result = await authSignup({email, password}).unwrap()
+
+          if (result) {
+            console.log(result)
+            setSignedUp(true);
+          }
+        } catch (error) {
+          console.log(error)
+        }       
+        
     };
     const handleLoginClick = () => {
         setSignedUp(true);
