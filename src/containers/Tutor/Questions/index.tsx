@@ -11,7 +11,7 @@ import { useGetQuestionsQuery, useLazyGetQuestionsQuery, useDeleteQuestionMutati
 
 const { Title, Text } = Typography;
 
-const QuestionsContainer = ({ qn_id }) => {
+const QuestionsContainer:React.FC<PropsType> = ({ qn_id }) => {
   const pathname = usePathname();
   // const { data: questions, error, isLoading } = useGetQuestionsQuery();
   const [questionList, setQuestionList] = useState();
@@ -31,7 +31,7 @@ const QuestionsContainer = ({ qn_id }) => {
   //     message.error('Error fetching questions');
   //   }
   // }, [error]);
-  const handleDeleteQuestion = async (pk) => {
+  const handleDeleteQuestion = async (pk:any) => {
     try {
       await deleteQuestion(pk).unwrap();
       message.success('Question deleted successfully');

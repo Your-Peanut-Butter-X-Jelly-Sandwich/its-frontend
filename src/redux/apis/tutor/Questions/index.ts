@@ -13,7 +13,6 @@ export const questionsApi = ITSApi.injectEndpoints({
         url: `/tutor/question/${questionId}`,
         method: "DELETE",
       }),
-    //   invalidatesTags: [{ type: 'Questions', id: 'LIST' }],
     }),
   }),
 });

@@ -1,54 +1,39 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Input, Button, message } from 'antd'; // Import `message` for feedback
+import { Input, Button, message } from 'antd'; 
 import Link from "next/link";
 import Editor from "@monaco-editor/react";
-import axios from 'axios'; 
+import { useGetSubmissionDetailQuery, useUpdateSubmissionDetailMutation } from "@/redux/apis/tutor/SubmissionDetail";
 
-type PropsType = {
-  qn_id: string;
-  submission_id: string;
-};
-
-const SubmissionDetailContainer: React.FC<PropsType> = ({ qn_id, submission_id }) => {
-  const [code, setCode] = useState('');
+const SubmissionDetailContainer: React.FC<SubmissionDataType> = ({ qn_id, submission_id }) => {
   const [feedback, setFeedback] = useState('');
-
-  const baseUrl = "http://127.0.0.1:8000";
-  const authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEwODIyNDcyLCJpYXQiOjE3MTA3MzYwNzIsImp0aSI6ImU0NTg3MWU3NTZlNzQyZjY4NTA1M2RmZjZlMGUwZjk4IiwidXNlcl9pZCI6MTF9.0N5z7xR4kNUhUOdUKPO2Gy_lI-Yk-LH5RXHxjvxvVgY";
+  const { data: submissionDetail, isFetching } = useGetSubmissionDetailQuery(submission_id);
+  const [updateSubmissionDetail] = useUpdateSubmissionDetailMutation();
   
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`${baseUrl}/tutor/submission/${submission_id}`, {
-          headers: {
-            Authorization: `Bearer ${authToken}`,
-          },
-        });
-        setCode(response.data.program);
-        setFeedback(response.data.tutor_feedback || "");
-      } catch (error) {
-        console.error('Failed to fetch data:', error);
-      }
-    };
+    if (submissionDetail) {
+      setFeedback(submissionDetail.tutor_feedback);
+    }
+  }, [submissionDetail]);
 
-    fetchData();
-  }, [submission_id]);
-
-  const handleFeedbackChange = (e) => {
+  const code = submissionDetail?.program || '';
+  
+  if (isFetching) return <div>Loading...</div>;
+  
+  const handleFeedbackChange = (e:any) => {
     setFeedback(e.target.value);
   };
 
   const handleSubmitFeedback = async () => {
     try {
-      await axios.patch(`${baseUrl}/tutor/submission/${submission_id}`, {
-        tutor_feedback: feedback,
-      }, {
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-        },
-      });
+      const submissionUpdate = {
+        pk: submission_id, // Primary key to identify the submission.
+        tutor_feedback: feedback, // Updated feedback to be sent.
+      };
+      console.log(submissionUpdate);
+      
+      await updateSubmissionDetail(submissionUpdate).unwrap(); // Execute the mutation.
       message.success('Feedback submitted successfully');
     } catch (error) {
       console.error('Failed to submit feedback:', error);
@@ -75,6 +60,7 @@ const SubmissionDetailContainer: React.FC<PropsType> = ({ qn_id, submission_id }
     language: 'python', 
     theme: 'vs-light',
   };
+
 
   return (
     <div style={{ padding: 24, backgroundColor: "#F0F2F5", minHeight: "100vh" }}>
