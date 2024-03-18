@@ -1,5 +1,5 @@
-import { NextPage } from "next";
-import EditQuestionContainer from "@/containers/Tutor/EditQuestion";
+import { NextPage } from 'next';
+import EditQuestionContainer from '@/containers/Tutor/EditQuestion';
 type ParamsType = {
   params: {
     qn_id: string;
@@ -9,7 +9,7 @@ type ParamsType = {
 const EditPage: NextPage<ParamsType> = ({ params }: ParamsType) => {
   return (
     <div>
-      <EditQuestionContainer {...params}/>
+      <EditQuestionContainer {...params} />
     </div>
   );
 };

@@ -1,5 +1,5 @@
-import type { NextPage } from "next";
-import TutorDashboardContainer from "@/containers/Tutor/Dashboard";
+import type { NextPage } from 'next';
+import TutorDashboardContainer from '@/containers/Tutor/Dashboard';
 const TutorDashBoardPage: NextPage = () => {
   return (
     <div>

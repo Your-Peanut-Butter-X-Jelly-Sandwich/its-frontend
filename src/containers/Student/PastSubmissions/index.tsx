@@ -1,35 +1,33 @@
-"use client";
+'use client';
 
-import React from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Button, Typography, Card, Row, Col } from "antd";
-import { useGetPastSubmissionsQuery } from "@/redux/apis/student/PastSubmissions";
+import React from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { Button, Typography, Card, Row, Col } from 'antd';
+import { useGetPastSubmissionsQuery } from '@/redux/apis/student/PastSubmissions';
 
 const { Title, Text } = Typography;
 
 const PAGE = {
-  padding: "20px",
-  backgroundColor: "#f0f2f5",
-  minHeight: "100vh",
+  padding: '20px',
+  backgroundColor: '#f0f2f5',
+  minHeight: '100vh',
 };
 
 const CARD = {
-  backgroundColor: "#ffffff",
-  marginBottom: "20px",
+  backgroundColor: '#ffffff',
+  marginBottom: '20px',
 };
 
 const VIEW_BUTTON = {
-  backgroundColor: "#1890ff",
-  color: "#fff",
-  borderColor: "#1890ff",
+  backgroundColor: '#1890ff',
+  color: '#fff',
+  borderColor: '#1890ff',
 };
 
 type PropsType = { qn_id: string };
 
-const PastSubmissionsContainer: React.FC<PropsType> = ({
-  qn_id,
-}: PropsType) => {
+const PastSubmissionsContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
   const pathname = usePathname();
 
   const { data } = useGetPastSubmissionsQuery({ qn_id: Number(qn_id) });
@@ -37,7 +35,7 @@ const PastSubmissionsContainer: React.FC<PropsType> = ({
 
   return (
     <div style={PAGE}>
-      <Title level={2} style={{ marginBottom: "1.5%" }}>
+      <Title level={2} style={{ marginBottom: '1.5%' }}>
         Past Submissions
       </Title>
       {submissions
@@ -47,13 +45,13 @@ const PastSubmissionsContainer: React.FC<PropsType> = ({
           <Card style={CARD} key={submission.pk}>
             <Row justify="space-between" align="middle">
               <Col>
-                <Text style={{ fontSize: "1.3rem" }}>
+                <Text style={{ fontSize: '1.3rem' }}>
                   Submission Number: {submission.submission_number}
                 </Text>
               </Col>
               <Col>
                 <div>
-                  <Text style={{ fontSize: "1.3rem", marginRight: "15px" }}>
+                  <Text style={{ fontSize: '1.3rem', marginRight: '15px' }}>
                     Score: {submission.score} / {submission.total_score}
                   </Text>
                   <Link href={`${pathname}/${submission.pk}`} passHref>

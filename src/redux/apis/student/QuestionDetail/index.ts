@@ -1,29 +1,22 @@
-import { ITSApi } from "@/redux/createApi";
+import { ITSApi } from '@/redux/createApi';
 
 export const questionDetailApi = ITSApi.injectEndpoints({
   endpoints: (builder) => ({
-    getQuestionDetail: builder.query<
-      IQuestionDetailResponse,
-      IQuestionDetailRequest
-    >({
+    getQuestionDetail: builder.query<IQuestionDetailResponse, IQuestionDetailRequest>({
       query: ({ qn_id }) => ({
         url: `/student/question/${qn_id}`,
-        method: "GET",
+        method: 'GET',
       }),
     }),
 
-    postCodeSubmission: builder.mutation<
-      ICodeSubmissionResponse,
-      ICodeSubmissionRequest
-    >({
+    postCodeSubmission: builder.mutation<ICodeSubmissionResponse, ICodeSubmissionRequest>({
       query: (body) => ({
-        url: "/student/submission",
-        method: "POST",
+        url: '/student/submission',
+        method: 'POST',
         body,
       }),
     }),
   }),
 });
 
-export const { useGetQuestionDetailQuery, usePostCodeSubmissionMutation } =
-  questionDetailApi;
+export const { useGetQuestionDetailQuery, usePostCodeSubmissionMutation } = questionDetailApi;

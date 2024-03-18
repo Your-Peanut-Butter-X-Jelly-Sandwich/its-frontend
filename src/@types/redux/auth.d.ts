@@ -20,7 +20,7 @@ interface IAuthSocialSignUpRequest {
 }
 
 interface IAuthSignUpResponse {
-  user:IUser;
+  user: IUser;
 }
 
 interface IAuthRetrieveUserResponse {

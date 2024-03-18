@@ -1,5 +1,5 @@
-import type { NextPage } from "next";
-import QuestionDetailContainer from "@/containers/Student/QuestionDetail";
+import type { NextPage } from 'next';
+import QuestionDetailContainer from '@/containers/Student/QuestionDetail';
 type ParamsType = {
   params: {
     qn_id: string;

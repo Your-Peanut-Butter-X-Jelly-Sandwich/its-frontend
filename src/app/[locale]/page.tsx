@@ -1,6 +1,6 @@
-import LandingContainer from "@/containers/Landing";
-import { NextIntlClientProvider, useMessages } from "next-intl";
-import { pick } from "lodash";
+import LandingContainer from '@/containers/Landing';
+import { NextIntlClientProvider, useMessages } from 'next-intl';
+import { pick } from 'lodash';
 
 export default function Landing() {
   const messages = useMessages();

@@ -1,5 +1,5 @@
-import { NextPage } from "next";
-import PostSocialAuthContainer from "@/containers/Auth/PostSocialAuth";
+import { NextPage } from 'next';
+import PostSocialAuthContainer from '@/containers/Auth/PostSocialAuth';
 const PostSocialAuthPage: NextPage = () => {
   return (
     <div>

@@ -1,28 +1,28 @@
-"use client";
+'use client';
 
-import React from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Button, Typography, Card, Row, Col } from "antd";
-import { useGetQuestionsQuery } from "@/redux/apis/student/Questions";
+import React from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { Button, Typography, Card, Row, Col } from 'antd';
+import { useGetQuestionsQuery } from '@/redux/apis/student/Questions';
 
 const { Title, Text } = Typography;
 
 const PAGE = {
-  padding: "20px",
-  backgroundColor: "#f0f2f5",
-  minHeight: "100vh",
+  padding: '20px',
+  backgroundColor: '#f0f2f5',
+  minHeight: '100vh',
 };
 
 const CARD = {
-  backgroundColor: "#ffffff",
-  marginBottom: "20px",
+  backgroundColor: '#ffffff',
+  marginBottom: '20px',
 };
 
 const ATTEMPT_BUTTON = {
-  backgroundColor: "#1890ff",
-  color: "#fff",
-  borderColor: "#1890ff",
+  backgroundColor: '#1890ff',
+  color: '#fff',
+  borderColor: '#1890ff',
 };
 
 const QuestionsContainer: React.FC = () => {
@@ -33,16 +33,14 @@ const QuestionsContainer: React.FC = () => {
 
   return (
     <div style={PAGE}>
-      <Title level={2} style={{ marginBottom: "1.5%" }}>
+      <Title level={2} style={{ marginBottom: '1.5%' }}>
         Select the question you want to attempt!
       </Title>
       {questions?.map((question: IQuestion) => (
         <Card style={CARD} key={question.pk}>
           <Row justify="space-between" align="middle">
             <Col>
-              <Text style={{ fontSize: "1.3rem" }}>
-                {question.question_title}
-              </Text>
+              <Text style={{ fontSize: '1.3rem' }}>{question.question_title}</Text>
             </Col>
             <Col>
               <Link href={`${pathname}/${question.pk}`} passHref>
