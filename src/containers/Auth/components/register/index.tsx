@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { authSelector } from "@/redux/slices/auth";
@@ -15,57 +15,36 @@ const SignUpContainer: React.FC<{
   setSignedUp: (value: boolean) => void;
 }> = ({ isSignedUp, setSignedUp }) => {
   const [form] = Form.useForm();
+  const pathname = usePathname();
   const handleSocialSignup = (provider: string) => {
-    window.location.href = `http://127.0.0.1:8000/auth/${provider}/login/`;
+    window.location.href = `http://127.0.0.1:8000/auth/${provider}/login`;
   };
   const [authSignup] = useLazyAuthSignupQuery();
+  const { isAuthenticated, user } = useSelector(authSelector);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      const locale = getLocale(pathname);
+      if (user.is_student) {
+        window.location.href = `/${locale}/student`;
+      } else if (user.is_tutor) {
+        window.location.href = `/${locale}/tutor`;
+      } else if (user.is_manager) {
+        window.location.href = `/${locale}/manager`;
+      }
+    }
+  }, [isAuthenticated, user]);
+
   const handleSignup = async () => {
     try {
       const email = form.getFieldValue("email");
       const password = form.getFieldValue("password");
       const result = await authSignup({ email, password }).unwrap();
-
-const SignUpContainer:React.FC<{isSignedUp: boolean; setSignedUp: (value: boolean) => void }> = ({isSignedUp, setSignedUp}) => {
-    
-    const [form] = Form.useForm();
-    const pathname = usePathname();
-    const handleSocialSignup = (provider: string) => {
-        window.location.href = `http://127.0.0.1:8000/auth/${provider}/login`;
-    };
-    const [authSignup] = useLazyAuthSignupQuery();
-    const {isAuthenticated, user } = useSelector(authSelector)
-
-    useEffect(() => {
-      if(isAuthenticated) {
-        const locale = getLocale(pathname);
-        if (user.is_student) {
-          window.location.href = `/${locale}/student`
-        } else if (user.is_tutor) {
-          window.location.href = `/${locale}/tutor`;
-        } else if (user.is_manager) {
-          window.location.href = `/${locale}/manager` 
-        }
-      }
-    }, [isAuthenticated, user]);
-
-    const handleSignup = async () => {
-        try {
-          const email = form.getFieldValue('email')
-          const password = form.getFieldValue('password')
-          const result = await authSignup({email, password}).unwrap()
-          if (result) {
-            setSignedUp(true);
-          }
-        } catch (error) {
-          message.error('Error signing up')
-        }       
-        
-    };
-    const handleLoginClick = () => {
+      if (result) {
         setSignedUp(true);
       }
     } catch (error) {
-      console.log(error);
+      message.error("Error signing up");
     }
   };
   const handleLoginClick = () => {
