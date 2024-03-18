@@ -28,8 +28,7 @@ const SubmissionsContainer: React.FC<PropsType> = ({ qn_id }) => {
 
   useEffect(() => {
     const baseUrl = "http://127.0.0.1:8000";
-    const authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEwNjc5NTcxLCJpYXQiOjE3MTA1OTMxNzEsImp0aSI6IjJlNGZjYjE5MDJjNzQxNDQ5OTU3YTg4Nzg0MTM4MGNmIiwidXNlcl9pZCI6MTF9.4YliXiwUPmhhAgTsNayaAET_0RXL7FWMK2pE4iiLJdk"; 
-
+    const authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEwODIyNDcyLCJpYXQiOjE3MTA3MzYwNzIsImp0aSI6ImU0NTg3MWU3NTZlNzQyZjY4NTA1M2RmZjZlMGUwZjk4IiwidXNlcl9pZCI6MTF9.0N5z7xR4kNUhUOdUKPO2Gy_lI-Yk-LH5RXHxjvxvVgY";
     fetch(`${baseUrl}/tutor/submission?qn_id=${qn_id}`, {
       headers: {
         "Authorization": `Bearer ${authToken}`, 
@@ -37,8 +36,8 @@ const SubmissionsContainer: React.FC<PropsType> = ({ qn_id }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        setSubmissions(data.submissions);
-      })
+        setSubmissions(data.submissions || []);
+      })      
       .catch((error) => {
         console.error("Error fetching submissions:", error);
       });

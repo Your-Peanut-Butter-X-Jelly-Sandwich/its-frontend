@@ -21,8 +21,7 @@ const QuestionDetailContainer: React.FC<PropsType> = ({ qn_id }) => {
   const pathname = usePathname();
   const [statistics, setStatistics] = useState<QuestionStatistics>({ total_students: 0, passes: 0, total_submissions: 0 });
   const baseUrl = "http://127.0.0.1:8000";
-  const authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEwNjc5NTcxLCJpYXQiOjE3MTA1OTMxNzEsImp0aSI6IjJlNGZjYjE5MDJjNzQxNDQ5OTU3YTg4Nzg0MTM4MGNmIiwidXNlcl9pZCI6MTF9.4YliXiwUPmhhAgTsNayaAET_0RXL7FWMK2pE4iiLJdk";
-  
+  const authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEwNzY1OTc3LCJpYXQiOjE3MTA2Nzk1NzcsImp0aSI6ImUyNzJkYzZhZWI0ZjQ2NGNhMjhkMzQ1NGU3NjQwMTk1IiwidXNlcl9pZCI6MTF9.4_QeJTep_Z1SW4Ndf7TZSJU50it52CQ9_ffDIU8yWPg";
   useEffect(() => {
     fetch(`${baseUrl}/tutor/question/${qn_id}`, {
         headers: {

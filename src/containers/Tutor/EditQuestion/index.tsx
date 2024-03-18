@@ -46,10 +46,8 @@ type PropsType = {
 
 const EditQuestionContainer: React.FC<PropsType> = ({ qn_id }) => {
   const baseUrl = "http://127.0.0.1:8000";
-  let authToken =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEwNjc5NTcxLCJpYXQiOjE3MTA1OTMxNzEsImp0aSI6IjJlNGZjYjE5MDJjNzQxNDQ5OTU3YTg4Nzg0MTM4MGNmIiwidXNlcl9pZCI6MTF9.4YliXiwUPmhhAgTsNayaAET_0RXL7FWMK2pE4iiLJd";
-  authToken =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEwNzYyNDkyLCJpYXQiOjE3MTA2NzYwOTIsImp0aSI6IjZkOTBmZTAxMzNmMzQ1MzFhMThjZTQwNTNlMGYxZDVlIiwidXNlcl9pZCI6Mn0.hZjaoFaenFKQH25OOxaMkGvORlT6F0ZJm0VK-AtkZ6E";
+  const authToken =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEwNzY1OTc3LCJpYXQiOjE3MTA2Nzk1NzcsImp0aSI6ImUyNzJkYzZhZWI0ZjQ2NGNhMjhkMzQ1NGU3NjQwMTk1IiwidXNlcl9pZCI6MTF9.4_QeJTep_Z1SW4Ndf7TZSJU50it52CQ9_ffDIU8yWPg";
   const [questionData, setQuestionData] = useState<QuestionData | null>(null);
   const [statistics, setStatistics] = useState<QuestionStatistics>({
     total_students: 0,
@@ -81,6 +79,7 @@ const EditQuestionContainer: React.FC<PropsType> = ({ qn_id }) => {
         passes: data.passes,
         total_submissions: data.total_submissions,
       });
+      console.log("Question data:", data);
       setQuestionTitle(data.question.question_title);
       setDueDate(data.question.due_date);
       setCodeContent(data.question.ref_program);

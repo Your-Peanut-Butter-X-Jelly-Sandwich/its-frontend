@@ -19,7 +19,9 @@ interface IAuthSocialSignUpRequest {
   provider: string;
 }
 
-interface IAuthSignUpResponse extends IAuthLoginResponse {}
+interface IAuthSignUpResponse {
+  user:IUser;
+}
 
 interface IAuthRetrieveUserResponse {
   user: IUser;
