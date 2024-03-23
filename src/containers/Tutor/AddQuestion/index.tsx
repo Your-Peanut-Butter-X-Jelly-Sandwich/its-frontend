@@ -9,19 +9,20 @@ import { useAddQuestionMutation } from '@/redux/apis/tutor/AddQuestion';
 const AddQuestionContainer = () => {
   const [markdown, setMarkdown] = useState('');
   const [testCases, setTestCases] = useState([{ input: '', expectedOutput: '' }]);
-  const [currentMode, setCurrentMode] = useState('markdown');
   const [language, setLanguage] = useState('python');
   const [codeContent, setCodeContent] = useState('');
   const [questionTitle, setQuestionTitle] = useState('');
   const [dueDate, setDueDate] = useState('');
+  const [currentRightTab, setCurrentRightTab] = useState('editor');
+  const [currentLeftTab, setCurrentLeftTab] = useState('edit'); // New state for managing left tabs
 
   const [addQuestion, { isLoading }] = useAddQuestionMutation();
 
-  const handleEditorChange = (newMarkdown: any) => {
+  const handleEditorChange = (newMarkdown) => {
     setMarkdown(newMarkdown);
   };
 
-  const handleCodeEditorChange = (newCodeContent: any) => {
+  const handleCodeEditorChange = (newCodeContent) => {
     setCodeContent(newCodeContent);
   };
 
@@ -37,27 +38,26 @@ const AddQuestionContainer = () => {
     }
   };
 
-  const updateTestCase = (index: any, field: any, value: any) => {
+  const updateTestCase = (index, field, value) => {
     const updatedTestCases = [...testCases];
-    // @ts-ignore
     updatedTestCases[index][field] = value;
     setTestCases(updatedTestCases);
   };
 
-  const handleLanguageChange = (value: any) => {
+  const handleLanguageChange = (value) => {
     setLanguage(value);
   };
 
-  const handleDueDateChange = (date: any, dateString: any) => {
+  const handleDueDateChange = (date, dateString) => {
     setDueDate(dateString); // Update the due date state
   };
 
   const handleSubmission = async () => {
-    const questionData: QuestionContent = {
+    const questionData = {
       question_title: questionTitle,
       question_statement: markdown,
       ref_program: codeContent,
-      language: language as 'python' | 'c',
+      language: language,
       due_date: dueDate,
       test_cases: testCases.map((testCase, index) => ({
         pk: index,
@@ -65,155 +65,108 @@ const AddQuestionContainer = () => {
         output: testCase.expectedOutput,
       })),
     };
-    console.log();
 
     try {
       const result = await addQuestion(questionData).unwrap();
       message.success('Question added successfully!');
-      console.log('Success:', result);
     } catch (error) {
-      console.error('Error:', error);
       message.error('An error occurred while adding the question.');
     }
   };
 
-  const buttonStyle = {
-    backgroundColor: '#1890ff',
-    color: '#fff',
-    borderColor: '#1890ff',
-    height: '40px',
-  };
-
-  const pageStyle = {
-    padding: '20px',
-    backgroundColor: '#f0f2f5',
-    minHeight: '100vh',
-  };
-
-  const flexContainerStyle = {
-    display: 'flex',
-    justifyContent: 'space-between',
-    marginBottom: '20px',
-  };
-
   return (
-    <div style={pageStyle}>
-      <div style={flexContainerStyle}>
-        <Input
-          placeholder="Question Title"
-          value={questionTitle}
-          onChange={(e) => setQuestionTitle(e.target.value)}
-          style={{ width: '70%' }}
-        />
-        <DatePicker
-          format="YYYY-MM-DD"
-          placeholder="Select Due Date"
-          onChange={handleDueDateChange}
-          style={{ width: '28%' }}
-        />
+    <div className="p-5 bg-gray-100 min-h-screen">
+      <div className="flex justify-between mb-5">
+        <Input placeholder="Question Title" value={questionTitle} onChange={(e) => setQuestionTitle(e.target.value)} className="w-4/10"/>
+        <DatePicker format="YYYY-MM-DD" placeholder="Select Due Date" onChange={handleDueDateChange} className="w-2/10"/>
+        <Select value={language} onChange={handleLanguageChange} className="w-3/10" placeholder="Select Language">
+          <Select.Option value="c">C</Select.Option>
+          <Select.Option value="python">Python</Select.Option>
+          {/* Add more languages as needed */}
+        </Select>
       </div>
-      {currentMode === 'markdown' ? (
-        <div style={{ flexGrow: 1, overflow: 'auto', height: '85vh' }}>
-          <MdEditor value={markdown} onChange={handleEditorChange} height="100%" />
-        </div>
-      ) : (
-        <div style={{ flexGrow: 1, display: 'flex' }}>
-          <div style={{ flex: 1, overflow: 'auto', padding: '10px' }}>
-            {testCases.map((testCase, index) => (
-              <React.Fragment key={index}>
-                {index > 0 && <Divider />}
-                <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-                  <span
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      width: '24px',
-                      height: '24px',
-                      borderRadius: '50%',
-                      backgroundColor: '#1890ff',
-                      color: 'white',
-                      marginRight: '10px',
-                      fontSize: '12px',
-                    }}
-                  >
-                    {index + 1}
-                  </span>
-                  <div style={{ flex: 1 }}>
-                    <Input
-                      placeholder="Input"
-                      value={testCase.input}
-                      onChange={(e) => updateTestCase(index, 'input', e.target.value)}
-                      style={{ marginBottom: '10px' }}
-                    />
-                    <Input
-                      placeholder="Expected Output"
-                      value={testCase.expectedOutput}
-                      onChange={(e) => updateTestCase(index, 'expectedOutput', e.target.value)}
-                    />
-                  </div>
-                </div>
-              </React.Fragment>
-            ))}
-            <Space>
-              <Button style={buttonStyle} onClick={addTestCase}>
-                Add Test Case
-              </Button>
-              <Button style={buttonStyle} onClick={removeLastTestCase}>
-                Remove Last Test Case
-              </Button>
-            </Space>
+      <div className="flex flex-col h-[85vh]">
+        <div className="flex flex-grow">
+          {/* Left side: Markdown Editor and Preview */}
+          <div className="w-1/2 flex flex-col"> {/* Adjusted width to 1/2 */}
+            <div className="flex mb-4">
+              <div className={`cursor-pointer p-2 ${currentLeftTab === 'edit' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-600'}`} onClick={() => setCurrentLeftTab('edit')}>
+                Edit
+              </div>
+              <div className={`cursor-pointer p-2 ${currentLeftTab === 'preview' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-600'}`} onClick={() => setCurrentLeftTab('preview')}>
+                Preview
+              </div>
+            </div>
+            <div className="flex-grow overflow-auto">
+              <MdEditor value={markdown} onChange={handleEditorChange} preview={currentLeftTab} height="100%" />
+            </div>
           </div>
-          <div style={{ flex: 2, padding: '10px' }}>
-            <Select
-              value={language}
-              onChange={handleLanguageChange}
-              style={{ width: '100%', marginBottom: '10px' }}
-            >
-              <Select.Option value="c">C</Select.Option>
-              {/* <Select.Option value="java">Java</Select.Option> */}
-              <Select.Option value="python">Python</Select.Option>
-            </Select>
-            <Editor
-              height="95%"
-              language={language}
-              theme="vs-dark"
-              value={codeContent}
-              onChange={handleCodeEditorChange}
-            />
+          {/* Right side: Code Editor and Test Cases */}
+          <div className="w-1/2 flex flex-col"> {/* Adjusted width to 1/2 */}
+            <div className="flex mb-4">
+              <div className={`cursor-pointer p-2 ${currentRightTab === 'editor' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-600'}`} onClick={() => setCurrentRightTab('editor')}>
+                Code Editor
+              </div>
+              <div className={`cursor-pointer p-2 ${currentRightTab === 'testCases' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-600'}`} onClick={() => setCurrentRightTab('testCases')}>
+                Test Cases
+              </div>
+            </div>
+  
+            {currentRightTab === 'editor' && (
+              <div className="flex-grow overflow-auto p-2.5">
+                <Editor
+                  height="100%"
+                  language={language}
+                  theme="vs-dark"
+                  value={codeContent}
+                  onChange={handleCodeEditorChange}
+                />
+              </div>
+            )}
+  
+            {currentRightTab === 'testCases' && (
+              <div className="flex-grow overflow-auto p-2.5">
+                {testCases.map((testCase, index) => (
+                  <React.Fragment key={index}>
+                    {index > 0 && <Divider />}
+                    <div className="mb-2.5">
+                      <Input
+                        placeholder="Input"
+                        value={testCase.input}
+                        onChange={(e) => updateTestCase(index, 'input', e.target.value)}
+                      />
+                      <Input
+                        placeholder="Expected Output"
+                        value={testCase.expectedOutput}
+                        onChange={(e) => updateTestCase(index, 'expectedOutput', e.target.value)}
+                      />
+                    </div>
+                  </React.Fragment>
+                ))}
+                <Space>
+                  <Button className="bg-blue-600 text-white border border-blue-600 h-10" onClick={addTestCase}>
+                    Add Test Case
+                  </Button>
+                  <Button className="bg-red-600 text-white border border-red-600 h-10" onClick={removeLastTestCase}>
+                    Remove Last Test Case
+                  </Button>
+                </Space>
+              </div>
+            )}
           </div>
         </div>
-      )}
-      <div
-        style={{
-          position: 'absolute',
-          bottom: '20px',
-          left: 0,
-          right: 0,
-          display: 'flex',
-          justifyContent: 'space-between',
-          padding: '10px',
-        }}
-      >
-        <Space>
-          {currentMode === 'markdown' ? (
-            <Button style={buttonStyle} onClick={() => setCurrentMode('testCases')}>
-              Switch to Test Cases
-            </Button>
-          ) : (
-            <Button style={buttonStyle} onClick={() => setCurrentMode('markdown')}>
-              Switch to Question Editor
-            </Button>
-          )}
-        </Space>
-        <Space>
-          <Button type="primary" style={buttonStyle} onClick={handleSubmission}>
-            Submit
-          </Button>
-        </Space>
+      </div>
+  
+      <div className="fixed bottom-5 right-5">
+        <Button className="bg-blue-600 text-white border border-blue-600" onClick={handleSubmission}>
+          Submit
+        </Button>
       </div>
     </div>
   );
+  
+
 };
 
 export default AddQuestionContainer;
+
