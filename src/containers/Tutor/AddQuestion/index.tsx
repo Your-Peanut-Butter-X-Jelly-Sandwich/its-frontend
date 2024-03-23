@@ -77,18 +77,17 @@ const AddQuestionContainer = () => {
   return (
     <div className="p-5 bg-gray-100 min-h-screen">
       <div className="flex justify-between mb-5">
-        <Input placeholder="Question Title" value={questionTitle} onChange={(e) => setQuestionTitle(e.target.value)} className="w-4/10"/>
-        <DatePicker format="YYYY-MM-DD" placeholder="Select Due Date" onChange={handleDueDateChange} className="w-2/10"/>
+        <Input placeholder="Question Title" value={questionTitle} onChange={(e) => setQuestionTitle(e.target.value)} className="w-1/20"/>
+        <DatePicker format="YYYY-MM-DD" placeholder="Select Due Date" onChange={handleDueDateChange} className="w-8/10"/>
         <Select value={language} onChange={handleLanguageChange} className="w-3/10" placeholder="Select Language">
           <Select.Option value="c">C</Select.Option>
           <Select.Option value="python">Python</Select.Option>
-          {/* Add more languages as needed */}
         </Select>
       </div>
-      <div className="flex flex-col h-[85vh]">
+      <div className="flex flex-col h-[87vh]">
         <div className="flex flex-grow">
           {/* Left side: Markdown Editor and Preview */}
-          <div className="w-1/2 flex flex-col"> {/* Adjusted width to 1/2 */}
+          <div className="w-1/2 flex flex-col">
             <div className="flex mb-4">
               <div className={`cursor-pointer p-2 ${currentLeftTab === 'edit' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-600'}`} onClick={() => setCurrentLeftTab('edit')}>
                 Edit
@@ -102,7 +101,7 @@ const AddQuestionContainer = () => {
             </div>
           </div>
           {/* Right side: Code Editor and Test Cases */}
-          <div className="w-1/2 flex flex-col"> {/* Adjusted width to 1/2 */}
+          <div className="w-1/2 flex flex-col pl-1 pr-3"> 
             <div className="flex mb-4">
               <div className={`cursor-pointer p-2 ${currentRightTab === 'editor' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-600'}`} onClick={() => setCurrentRightTab('editor')}>
                 Code Editor
@@ -111,18 +110,17 @@ const AddQuestionContainer = () => {
                 Test Cases
               </div>
             </div>
-  
-            {currentRightTab === 'editor' && (
-              <div className="flex-grow overflow-auto p-2.5">
-                <Editor
-                  height="100%"
-                  language={language}
-                  theme="vs-dark"
-                  value={codeContent}
-                  onChange={handleCodeEditorChange}
-                />
-              </div>
-            )}
+              {currentRightTab === 'editor' && (
+                <div className="flex-grow overflow-auto pl-3 pr-1">
+                  <Editor
+                    height="100%"
+                    language={language}
+                    theme="vs-dark"
+                    value={codeContent}
+                    onChange={handleCodeEditorChange}
+                  />
+                </div>
+              )}
   
             {currentRightTab === 'testCases' && (
               <div className="flex-grow overflow-auto p-2.5">
