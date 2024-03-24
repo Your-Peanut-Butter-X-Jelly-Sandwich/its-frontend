@@ -22,7 +22,7 @@ function LocaleLayout({
       <body className={inter.className}>
         <StoreProvider>
           <AuthGuard>
-            <div className="h-screen">{children}</div>
+            <div className="h-screen bg-gray-100 ">{children}</div>
           </AuthGuard>
         </StoreProvider>
       </body>

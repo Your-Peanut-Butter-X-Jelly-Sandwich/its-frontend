@@ -48,7 +48,19 @@ export const authApi = ITSApi.injectEndpoints({
         }
       },
     }),
-    // TODO: Add authSignup, authLogout, authDeleteAccount, authSetNewPassword, authForgetPassword services
+    authUpdatePersonalInfo: builder.mutation<IAuthUpdateUserResponse, IAuthUpdateUserRequest>({
+      query: (params) => ({
+        url: 'auth/update-info',
+        method: 'PATCH',
+        body: params,
+      }),
+      async onQueryStarted(_record, { dispatch, queryFulfilled }) {
+        const { data } = await queryFulfilled;
+        if (!isEmpty(data)) {
+          dispatch(setAuthUser(data));
+        }
+      },
+    }),
   }),
 });
 
@@ -57,4 +69,5 @@ export const {
   useLazyAuthSignupQuery,
   useLazyAuthLogoutQuery,
   useLazyAuthRetrieveUserQuery,
+  useAuthUpdatePersonalInfoMutation,
 } = authApi;

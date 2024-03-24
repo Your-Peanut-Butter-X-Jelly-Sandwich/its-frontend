@@ -13,8 +13,8 @@ const initialState: IAuthState = {
     organisation: '',
   },
   tokens: {
-    access:'',
-    refresh:''
+    access: '',
+    refresh: '',
   },
 };
 
@@ -33,7 +33,7 @@ const authSlice = createSlice({
       state.isAuthenticated = true;
     },
     setAuthUser: (state, { payload }: PayloadAction<IAuthRetrieveUserResponse>) => {
-      state.user = payload.user;
+      state.user = payload;
       state.isAuthenticated = true;
     },
     setLogout: () => initialState,

@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button, Typography, Card, Row, Col } from 'antd';
-import { useGetPastSubmissionsQuery } from '@/redux/apis/student/PastSubmissions';
+import { useGetPastSubmissionsQuery } from '@/redux/apis/student';
 
 const { Title, Text } = Typography;
 

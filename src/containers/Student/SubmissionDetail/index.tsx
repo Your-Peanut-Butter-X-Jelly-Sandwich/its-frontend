@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Row, Col, Card, Typography } from 'antd';
-import { useGetSubmissionDetailQuery } from '@/redux/apis/student/SubmissionDetail';
+import { useGetSubmissionDetailQuery } from '@/redux/apis/student';
 import { Editor } from '@monaco-editor/react';
 
 const { Paragraph } = Typography;

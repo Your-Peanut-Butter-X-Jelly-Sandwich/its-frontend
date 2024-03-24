@@ -1,46 +1,34 @@
-interface IQuestionDetailResponse {
+interface IStudentQuestionDetailResponse {
   pk: number;
   question_title: string;
   question_statement: string;
   language: string;
   due_date: string;
   pub_date: string;
-  pub_by: {
-    email: string;
-    organisation: string;
-    username: string;
-    is_student: boolean;
-    is_tutor: boolean;
-    is_manager: boolean;
-  };
+  pub_by: IUser;
 }
 
-interface IQuestionDetailRequest {
+interface IStudentQuestionDetailRequest {
   qn_id: number;
 }
 
-interface IQuestion {
+interface IStudentQuestion {
   pk: number;
   question_title: string;
   due_date: string;
   pub_date: string;
-  pub_by: {
-    email: string;
-    organisation: string;
-    username: string;
-    is_student: boolean;
-    is_tutor: boolean;
-    is_manager: boolean;
-  };
+  pub_by: IUser;
+  attempted: boolean;
+  passed: boolean;
 }
 
-interface IQuestionsResponse {
-  questions: IQuestion[];
+interface IStudentQuestionsResponse {
+  questions: IStudentQuestion[];
 }
 
-interface IQuestionsRequest {}
+interface IStudentQuestionsRequest {}
 
-interface ISubmission {
+interface IStudentSubmission {
   pk: number;
   submission_number: number;
   score: number;
@@ -56,15 +44,15 @@ interface ISubmission {
   };
 }
 
-interface IPastSubmissionsResponse {
-  submissions: ISubmission[];
+interface IStudentPastSubmissionsResponse {
+  submissions: IStudentSubmission[];
 }
 
-interface IPastSubmissionsRequest {
+interface IStudentPastSubmissionsRequest {
   qn_id: number;
 }
 
-interface ISubmissionDetailResponse {
+interface IStudentSubmissionDetailResponse {
   id: number;
   qn_id: number;
   language: string;
@@ -81,11 +69,11 @@ interface ISubmissionDetailResponse {
   };
 }
 
-interface ISubmissionDetailRequest {
+interface IStudentSubmissionDetailRequest {
   id: number;
 }
 
-interface ICodeSubmissionResponse {
+interface IStudentCodeSubmissionResponse {
   pk: number;
   qn_id: number;
   submission_number: number;
@@ -102,18 +90,20 @@ interface ICodeSubmissionResponse {
   report: string;
   score: number;
   total_score: number;
-  submitted_by: {
-    email: string;
-    organisation: string;
-    username: string;
-    is_student: boolean;
-    is_tutor: boolean;
-    is_manager: boolean;
-  };
+  submitted_by: IUser;
 }
 
-interface ICodeSubmissionRequest {
+interface IStudentCodeSubmissionRequest {
   qn_id: number;
   language: string;
   program: string;
+}
+
+interface IStudentDashboardStatsResponse {
+  personal_info: IUser;
+  tutors: IUser[];
+  total_question_assigned: number;
+  attempted_questions: number;
+  questions_due_in_a_month: IStudentQuestion[];
+  questions_due_in_a_week: IStudentQuestion[];
 }
