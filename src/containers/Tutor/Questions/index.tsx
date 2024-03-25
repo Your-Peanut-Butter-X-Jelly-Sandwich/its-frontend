@@ -8,6 +8,7 @@ import {
   useLazyGetQuestionsQuery,
   useDeleteQuestionMutation,
 } from '@/redux/apis/tutor/Questions';
+import CustomButton from '../components/Buttons/CustomButton/CostomButton';
 
 const QuestionsContainer: React.FC<PropsType> = ({ qn_id }) => {
   const pathname = usePathname();

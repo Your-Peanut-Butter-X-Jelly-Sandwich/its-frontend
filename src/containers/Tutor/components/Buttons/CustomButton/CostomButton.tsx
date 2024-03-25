@@ -2,7 +2,6 @@ import React from 'react';
 import { Button } from 'antd';
 
 interface CustomButtonProps {
-  type: 'primary' | 'default'; 
   onClick: () => void;
   label: string;
   className: string;

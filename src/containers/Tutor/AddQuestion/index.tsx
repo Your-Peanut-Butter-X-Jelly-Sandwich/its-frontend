@@ -5,6 +5,7 @@ import { Button, message, Space, Input, Select, Divider, DatePicker } from 'antd
 import MdEditor from '@uiw/react-md-editor';
 import Editor from '@monaco-editor/react';
 import { useAddQuestionMutation } from '@/redux/apis/tutor/AddQuestion';
+import CustomButton from '../components/Buttons/CustomButton/CostomButton';
 
 const AddQuestionContainer = () => {
   const [markdown, setMarkdown] = useState('');
@@ -18,11 +19,11 @@ const AddQuestionContainer = () => {
 
   const [addQuestion, { isLoading }] = useAddQuestionMutation();
 
-  const handleEditorChange = (newMarkdown) => {
+  const handleEditorChange = (newMarkdown:any) => {
     setMarkdown(newMarkdown);
   };
 
-  const handleCodeEditorChange = (newCodeContent) => {
+  const handleCodeEditorChange = (newCodeContent:any) => {
     setCodeContent(newCodeContent);
   };
 
@@ -38,7 +39,7 @@ const AddQuestionContainer = () => {
     }
   };
 
-  const updateTestCase = (index, field, value) => {
+  const updateTestCase = (index:any, field:any, value:any) => {
     const updatedTestCases = [...testCases];
     updatedTestCases[index][field] = value;
     setTestCases(updatedTestCases);
@@ -77,9 +78,9 @@ const AddQuestionContainer = () => {
   return (
     <div className="p-5 bg-gray-100 min-h-screen">
       <div className="flex justify-between mb-5">
-        <Input placeholder="Question Title" value={questionTitle} onChange={(e) => setQuestionTitle(e.target.value)} className="w-1/20"/>
-        <DatePicker format="YYYY-MM-DD" placeholder="Select Due Date" onChange={handleDueDateChange} className="w-8/10"/>
-        <Select value={language} onChange={handleLanguageChange} className="w-3/10" placeholder="Select Language">
+        <Input placeholder="Question Title" value={questionTitle} onChange={(e) => setQuestionTitle(e.target.value)} className="basis-7/12 grow-0 shrink-0 mr-4"/>
+        <DatePicker format="YYYY-MM-DD" placeholder="Select Due Date" onChange={handleDueDateChange} className="basis-3/12 grow-0 shrink-0 mr-4"/>
+        <Select value={language} onChange={handleLanguageChange} className="basis-2/12 grow-0 shrink-0" placeholder="Select Language">
           <Select.Option value="c">C</Select.Option>
           <Select.Option value="python">Python</Select.Option>
         </Select>
@@ -142,12 +143,8 @@ const AddQuestionContainer = () => {
                   </React.Fragment>
                 ))}
                 <Space>
-                  <Button className="bg-blue-600 text-white border border-blue-600 h-10" onClick={addTestCase}>
-                    Add Test Case
-                  </Button>
-                  <Button className="bg-red-600 text-white border border-red-600 h-10" onClick={removeLastTestCase}>
-                    Remove Last Test Case
-                  </Button>
+                  <CustomButton className="bg-blue-600 text-white border border-blue-600 h-10" onClick={addTestCase} label='AddTestCase' />
+                  <CustomButton className="bg-red-600 text-white border border-red-600 h-10" onClick={removeLastTestCase} label='Remove Last Test Case' />
                 </Space>
               </div>
             )}
@@ -156,9 +153,7 @@ const AddQuestionContainer = () => {
       </div>
   
       <div className="fixed bottom-5 right-5">
-        <Button className="bg-blue-600 text-white border border-blue-600" onClick={handleSubmission}>
-          Submit
-        </Button>
+        <CustomButton className="bg-blue-600 text-white border border-blue-600" onClick={handleSubmission} label='Submit' />
       </div>
     </div>
   );
