@@ -1,14 +1,14 @@
-interface QuestionStatistics {
+interface ISTutorQuestionStatisticsResponse {
   total_students: number;
   passes: number;
   total_submissions: number;
 }
 
-interface PropsType {
+interface ISTutorQuestionDetailRequest {
   qn_id: number;
 }
 
-interface QuestionData {
+interface ISTutorQuestionDetailResponse {
   question: {
     id: string;
     test_cases: Array<{ pk: number; input: string; output: string }>;
@@ -24,13 +24,13 @@ interface QuestionData {
   total_submissions: number;
 }
 
-interface TestCaseType {
+interface ISTutorTestCaseResponse {
   pk: number;
   input: string;
   output: string;
 }
 
-interface QuestionContent {
+interface ISTutorQuestionContent {
   test_cases: Array<{ pk: number; input: string; output: string }>;
   question_title: string;
   question_statement: string;
@@ -39,7 +39,7 @@ interface QuestionContent {
   due_date: string;
 }
 
-interface SubmissionType {
+interface ISTutorSubmissionResponse {
   pk: number;
   submission_number: number;
   submitted_by: {
@@ -55,7 +55,7 @@ interface SubmissionType {
   submission_date: string;
 }
 
-interface SubmissionDetail {
+interface ISTutorSubmission {
   pk: number;
   qn_id: string;
   submission_number: number;
@@ -69,7 +69,7 @@ interface SubmissionDetail {
   score: number;
 }
 
-interface SubmissionDataType {
+interface ISTutorSubmissionRequest {
   qn_id: number;
   submission_id: number;
 }

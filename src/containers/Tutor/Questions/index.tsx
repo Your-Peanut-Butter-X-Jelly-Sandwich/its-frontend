@@ -10,7 +10,7 @@ import {
 } from '@/redux/apis/tutor/Questions';
 import CustomButton from '../components/Buttons/CustomButton/CostomButton';
 
-const QuestionsContainer: React.FC<PropsType> = ({ qn_id }) => {
+const QuestionsContainer: React.FC<ISTutorQuestionDetailRequest> = ({ qn_id }) => {
   const pathname = usePathname();
   const [questionList, setQuestionList] = useState();
   const [getQuestions] = useLazyGetQuestionsQuery();
