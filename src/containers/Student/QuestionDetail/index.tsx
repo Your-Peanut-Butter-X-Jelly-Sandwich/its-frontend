@@ -6,10 +6,7 @@ import { usePathname } from 'next/navigation';
 import Editor from '@monaco-editor/react';
 import Markdown from 'react-markdown';
 import { Button, Typography } from 'antd';
-import {
-  useGetQuestionDetailQuery,
-  usePostCodeSubmissionMutation,
-} from '@/redux/apis/student/QuestionDetail';
+import { useGetQuestionDetailQuery, usePostCodeSubmissionMutation } from '@/redux/apis/student';
 
 const { Text } = Typography;
 

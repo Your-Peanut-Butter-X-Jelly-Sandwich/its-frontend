@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button, Typography, Card, Row, Col } from 'antd';
-import { useGetQuestionsQuery } from '@/redux/apis/student/Questions';
+import { useGetQuestionsQuery } from '@/redux/apis/student';
 
 const { Title, Text } = Typography;
 
@@ -36,7 +36,7 @@ const QuestionsContainer: React.FC = () => {
       <Title level={2} style={{ marginBottom: '1.5%' }}>
         Select the question you want to attempt!
       </Title>
-      {questions?.map((question: IQuestion) => (
+      {questions?.map((question: IStudentQuestion) => (
         <Card style={CARD} key={question.pk}>
           <Row justify="space-between" align="middle">
             <Col>

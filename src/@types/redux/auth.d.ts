@@ -23,6 +23,11 @@ interface IAuthSignUpResponse {
   user: IUser;
 }
 
-interface IAuthRetrieveUserResponse {
-  user: IUser;
+interface IAuthRetrieveUserResponse extends IUser {}
+
+interface IAuthUpdateUserRequest {
+  organisation?: string;
+  username?: string;
 }
+
+interface IAuthUpdateUserResponse extends IUser {}
