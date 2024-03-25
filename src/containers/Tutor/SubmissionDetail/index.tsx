@@ -9,7 +9,7 @@ import {
   useUpdateSubmissionDetailMutation,
 } from '@/redux/apis/tutor/SubmissionDetail';
 
-const SubmissionDetailContainer: React.FC<SubmissionDataType> = ({ qn_id, submission_id }) => {
+const SubmissionDetailContainer: React.FC<ISTutorSubmissionRequest> = ({ qn_id, submission_id }) => {
   const [feedback, setFeedback] = useState('');
   const {
     data: submissionDetail,

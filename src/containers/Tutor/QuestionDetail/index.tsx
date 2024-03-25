@@ -7,10 +7,10 @@ import { useLazyGetQuestionDetailQuery } from '@/redux/apis/tutor/QuestionDetail
 
 // Assuming PropsType and QuestionData are defined elsewhere in your codebase.
 
-const QuestionDetailContainer: React.FC<PropsType> = ({ qn_id }) => {
+const QuestionDetailContainer: React.FC<ISTutorQuestionDetailRequest> = ({ qn_id }) => {
   const pathname = usePathname();
   const [getQuestionDetail] = useLazyGetQuestionDetailQuery();
-  const [questionDetail, setQuestionDetail] = useState<QuestionData | undefined>(undefined);
+  const [questionDetail, setQuestionDetail] = useState<ISTutorQuestionDetailResponse | undefined>(undefined);
 
   const fetchQuestionDetail = async () => {
     const result = await getQuestionDetail({ qn_id }).unwrap();

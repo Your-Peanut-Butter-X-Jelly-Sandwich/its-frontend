@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useGetSubmissionsQuery } from '@/redux/apis/tutor/Submissions';
 
-const SubmissionsContainer: React.FC<PropsType> = ({ qn_id }) => {
+const SubmissionsContainer: React.FC<ISTutorQuestionDetailRequest> = ({ qn_id }) => {
   const { data: submissions, isLoading, isError } = useGetSubmissionsQuery(qn_id);
 
   if (isLoading) return <div className="text-center py-5">Loading...</div>;

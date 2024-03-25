@@ -11,7 +11,7 @@ import {
   useUpdateQuestionDetailMutation,
 } from '@/redux/apis/tutor/EditQuestion';
 
-const EditQuestionContainer: React.FC<PropsType> = ({ qn_id }) => {
+const EditQuestionContainer: React.FC<ISTutorQuestionDetailRequest> = ({ qn_id }) => {
   const { data: questionData, error, isLoading } = useGetQuestionDetailQuery(qn_id);
   const [updateQuestionDetail, { isLoading: isUpdating, isSuccess }] =
     useUpdateQuestionDetailMutation();
@@ -30,7 +30,7 @@ const EditQuestionContainer: React.FC<PropsType> = ({ qn_id }) => {
 
   const [currentMode, setCurrentMode] = useState('markdown');
   const [markdown, setMarkdown] = useState<string>('');
-  const [testCases, setTestCases] = useState<Omit<TestCaseType, 'pk'>[]>([
+  const [testCases, setTestCases] = useState<Omit<ISTutorTestCaseResponse, 'pk'>[]>([
     { input: '', output: '' },
   ]);
   const [language, setLanguage] = useState<'python' | 'c'>('python');

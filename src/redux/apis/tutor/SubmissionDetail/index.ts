@@ -2,7 +2,7 @@ import { ITSApi } from '@/redux/createApi';
 
 export const submissionApi = ITSApi.injectEndpoints({
   endpoints: (builder) => ({
-    getSubmissionDetail: builder.query<SubmissionDetail, number>({
+    getSubmissionDetail: builder.query<ISTutorSubmission, number>({
       query: (submission_id) => `/tutor/submission/${submission_id}`,
     }),
 
