@@ -1,74 +1,58 @@
 'use client';
+
 import React, { useEffect, useState } from 'react';
-import { Table, Button } from 'antd';
 import Link from 'next/link';
 import { useGetSubmissionsQuery } from '@/redux/apis/tutor/Submissions';
 
 const SubmissionsContainer: React.FC<PropsType> = ({ qn_id }) => {
   const { data: submissions, isLoading, isError } = useGetSubmissionsQuery(qn_id);
-  console.log(submissions);
 
-  const columns = [
-    {
-      title: 'Student Email',
-      dataIndex: ['submitted_by', 'email'],
-      key: 'email',
-    },
-    {
-      title: 'Submission Number',
-      dataIndex: 'submission_number',
-      key: 'submission_number',
-    },
-    {
-      title: 'Score',
-      dataIndex: 'score',
-      key: 'score',
-    },
-    {
-      title: 'Submission Time',
-      dataIndex: 'submission_date',
-      key: 'submission_date',
-      render: (text: any) => new Date(text).toLocaleString(),
-    },
-    {
-      title: 'Action',
-      key: 'action',
-      render: (_: any, record: any) => (
-        <Link href={`/en/tutor/questions/${qn_id}/submissions/${record.pk}`} passHref>
-          <Button
-            style={{ backgroundColor: '#1890ff', color: '#fff', borderColor: '#1890ff' }}
-            type="primary"
-          >
-            View Detail
-          </Button>
-        </Link>
-      ),
-    },
-  ];
-
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error occurred while fetching submissions.</div>;
+  if (isLoading) return <div className="text-center py-5">Loading...</div>;
+  if (isError) return <div className="text-center text-red-500 py-5">Error occurred while fetching submissions.</div>;
 
   return (
-    <div style={{ padding: 24, backgroundColor: '#fff', minHeight: '100vh' }}>
-      <div style={{ marginBottom: '20px' }}>
+    <div className="p-6 bg-white min-h-screen">
+      <div className="mb-5">
         <Link href={`/en/tutor/questions/${qn_id}`} passHref>
-          <Button style={{ backgroundColor: '#1890ff', color: '#fff', borderColor: '#1890ff' }}>
+          <button className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300">
             Back to Question Insight
-          </Button>
+          </button>
         </Link>
       </div>
-      <h1>Submissions for Question {qn_id}</h1>
-      <Table
-        columns={columns}
-        // @ts-ignore
-        dataSource={submissions.submissions.map((submission: any) => ({
-          ...submission,
-          key: submission.pk,
-        }))}
-      />
+      <h1 className="text-xl font-semibold mb-4">Submissions for Question {qn_id}</h1>
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm text-left text-gray-500">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+            <tr>
+              <th scope="col" className="px-6 py-3">Student Email</th>
+              <th scope="col" className="px-6 py-3">Submission Number</th>
+              <th scope="col" className="px-6 py-3">Score</th>
+              <th scope="col" className="px-6 py-3">Submission Time</th>
+              <th scope="col" className="px-6 py-3">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {submissions?.submissions.map((submission) => (
+              <tr className="bg-white border-b hover:bg-gray-50" key={submission.pk}>
+                <td className="px-6 py-4">{submission.submitted_by.email}</td>
+                <td className="px-6 py-4">{submission.submission_number}</td>
+                <td className="px-6 py-4">{submission.score}</td>
+                <td className="px-6 py-4">{new Date(submission.submission_date).toLocaleString()}</td>
+                <td className="px-6 py-4">
+                <Link href={`/en/tutor/questions/${qn_id}/submissions/${submission.pk}`}>
+                  <button className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300">
+                  View Detail
+                  </button>
+                </Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
 
 export default SubmissionsContainer;
+

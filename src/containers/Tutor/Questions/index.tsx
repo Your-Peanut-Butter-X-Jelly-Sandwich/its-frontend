@@ -3,20 +3,15 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useSelector } from 'react-redux';
-import { authSelector } from '@/redux/slices/auth';
-import { Button, Typography, List, Card, Row, Col, message } from 'antd';
 import {
   useGetQuestionsQuery,
   useLazyGetQuestionsQuery,
   useDeleteQuestionMutation,
 } from '@/redux/apis/tutor/Questions';
-
-const { Title, Text } = Typography;
+import CustomButton from '../components/Buttons/CustomButton/CostomButton';
 
 const QuestionsContainer: React.FC<PropsType> = ({ qn_id }) => {
   const pathname = usePathname();
-  // const { data: questions, error, isLoading } = useGetQuestionsQuery();
   const [questionList, setQuestionList] = useState();
   const [getQuestions] = useLazyGetQuestionsQuery();
   const [deleteQuestion] = useDeleteQuestionMutation();
@@ -29,85 +24,46 @@ const QuestionsContainer: React.FC<PropsType> = ({ qn_id }) => {
   useEffect(() => {
     fetchQuestionList();
   }, []);
-  // useEffect(() => {
-  //   if (error) {
-  //     message.error('Error fetching questions');
-  //   }
-  // }, [error]);
+
   const handleDeleteQuestion = async (pk: any) => {
     try {
       await deleteQuestion(pk).unwrap();
-      message.success('Question deleted successfully');
+      alert('Question deleted successfully'); // Temporarily replacing message.success
       fetchQuestionList();
     } catch (err) {
-      message.error('Error deleting question');
+      alert('Error deleting question'); // Temporarily replacing message.error
     }
   };
 
-  const pageStyle = {
-    padding: '20px',
-    backgroundColor: '#f0f2f5',
-    minHeight: '100vh',
-  };
-
-  const cardStyle = {
-    backgroundColor: '#ffffff',
-  };
-
-  const viewReportButtonStyle = {
-    backgroundColor: '#1890ff',
-    color: '#fff',
-    borderColor: '#1890ff',
-  };
-
-  const backButtonStyle = {
-    backgroundColor: '#1890ff',
-    color: '#fff',
-    borderColor: '#1890ff',
-  };
-
-  const deleteButtonStyle = {
-    backgroundColor: '#ff4d4f',
-    color: '#fff',
-    borderColor: '#ff4d4f',
-    marginLeft: '10px',
-  };
-
   return (
-    <div style={pageStyle}>
-      <div style={{ marginBottom: '20px' }}>
-        <Link href={`/en/tutor`} passHref>
-          <Button style={backButtonStyle}>Back to Dashboard</Button>
+    <div className="p-5 bg-gray-100 min-h-screen">
+      <div className="mb-5">
+        <Link href={`/en/tutor`} passHref className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300">
+          Back to Dashboard
         </Link>
       </div>
-      <Title level={4}>Here you can see ALL questions.</Title>
-      <List
-        grid={{ gutter: 16, column: 1 }}
-        dataSource={questionList}
-        renderItem={(item: any) => (
-          <List.Item>
-            <Card style={cardStyle}>
-              <Row justify="space-between" align="middle">
-                <Col span={12}>
-                  <Text strong>{item.question_title}</Text>
-                  <br />
-                  <Text>Published: {item.pub_date}</Text>
-                  <br />
-                  <Text>Due by: {item.due_date}</Text>
-                </Col>
-                <Col>
-                  <Link href={`${pathname}/${item.pk}`} passHref>
-                    <Button style={viewReportButtonStyle}>View Question Insight</Button>
-                  </Link>
-                  <Button style={deleteButtonStyle} onClick={() => handleDeleteQuestion(item.pk)}>
-                    Delete
-                  </Button>
-                </Col>
-              </Row>
-            </Card>
-          </List.Item>
-        )}
-      />
+      <h4 className="text-lg font-semibold mb-4">Here you can see ALL questions.</h4>
+      <div className="space-y-4">
+        {questionList && questionList.map((item: any) => (
+          <div key={item.pk} className="bg-white p-4 shadow rounded">
+            <div className="flex justify-between items-center">
+              <div>
+                <p className="font-semibold">{item.question_title}</p>
+                <p>Published: {item.pub_date}</p>
+                <p>Due by: {item.due_date}</p>
+              </div>
+              <div className="flex space-x-2">
+                <Link href={`${pathname}/${item.pk}`} passHref className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300">
+                  View Question Insight
+                </Link>
+                <button onClick={() => handleDeleteQuestion(item.pk)} className="bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 transition duration-300">
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
