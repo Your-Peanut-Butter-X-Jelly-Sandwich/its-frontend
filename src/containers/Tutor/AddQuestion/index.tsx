@@ -19,11 +19,11 @@ const AddQuestionContainer = () => {
 
   const [addQuestion, { isLoading }] = useAddQuestionMutation();
 
-  const handleEditorChange = (newMarkdown:any) => {
+  const handleEditorChange = (newMarkdown: any) => {
     setMarkdown(newMarkdown);
   };
 
-  const handleCodeEditorChange = (newCodeContent:any) => {
+  const handleCodeEditorChange = (newCodeContent: any) => {
     setCodeContent(newCodeContent);
   };
 
@@ -39,7 +39,7 @@ const AddQuestionContainer = () => {
     }
   };
 
-  const updateTestCase = (index:any, field:any, value:any) => {
+  const updateTestCase = (index: any, field: any, value: any) => {
     const updatedTestCases = [...testCases];
     updatedTestCases[index][field] = value;
     setTestCases(updatedTestCases);
@@ -78,9 +78,24 @@ const AddQuestionContainer = () => {
   return (
     <div className="p-5 bg-gray-100 min-h-screen">
       <div className="flex justify-between mb-5">
-        <Input placeholder="Question Title" value={questionTitle} onChange={(e) => setQuestionTitle(e.target.value)} className="basis-7/12 grow-0 shrink-0 mr-4"/>
-        <DatePicker format="YYYY-MM-DD" placeholder="Select Due Date" onChange={handleDueDateChange} className="basis-3/12 grow-0 shrink-0 mr-4"/>
-        <Select value={language} onChange={handleLanguageChange} className="basis-2/12 grow-0 shrink-0" placeholder="Select Language">
+        <Input
+          placeholder="Question Title"
+          value={questionTitle}
+          onChange={(e) => setQuestionTitle(e.target.value)}
+          className="basis-7/12 grow-0 shrink-0 mr-4"
+        />
+        <DatePicker
+          format="YYYY-MM-DD"
+          placeholder="Select Due Date"
+          onChange={handleDueDateChange}
+          className="basis-3/12 grow-0 shrink-0 mr-4"
+        />
+        <Select
+          value={language}
+          onChange={handleLanguageChange}
+          className="basis-2/12 grow-0 shrink-0"
+          placeholder="Select Language"
+        >
           <Select.Option value="c">C</Select.Option>
           <Select.Option value="python">Python</Select.Option>
         </Select>
@@ -90,39 +105,56 @@ const AddQuestionContainer = () => {
           {/* Left side: Markdown Editor and Preview */}
           <div className="w-1/2 flex flex-col">
             <div className="flex mb-4">
-              <div className={`cursor-pointer p-2 ${currentLeftTab === 'edit' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-600'}`} onClick={() => setCurrentLeftTab('edit')}>
+              <div
+                className={`cursor-pointer p-2 ${currentLeftTab === 'edit' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-600'}`}
+                onClick={() => setCurrentLeftTab('edit')}
+              >
                 Edit
               </div>
-              <div className={`cursor-pointer p-2 ${currentLeftTab === 'preview' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-600'}`} onClick={() => setCurrentLeftTab('preview')}>
+              <div
+                className={`cursor-pointer p-2 ${currentLeftTab === 'preview' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-600'}`}
+                onClick={() => setCurrentLeftTab('preview')}
+              >
                 Preview
               </div>
             </div>
             <div className="flex-grow overflow-auto">
-              <MdEditor value={markdown} onChange={handleEditorChange} preview={currentLeftTab} height="100%" />
+              <MdEditor
+                value={markdown}
+                onChange={handleEditorChange}
+                preview={currentLeftTab}
+                height="100%"
+              />
             </div>
           </div>
           {/* Right side: Code Editor and Test Cases */}
-          <div className="w-1/2 flex flex-col pl-1 pr-3"> 
+          <div className="w-1/2 flex flex-col pl-1 pr-3">
             <div className="flex mb-4">
-              <div className={`cursor-pointer p-2 ${currentRightTab === 'editor' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-600'}`} onClick={() => setCurrentRightTab('editor')}>
+              <div
+                className={`cursor-pointer p-2 ${currentRightTab === 'editor' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-600'}`}
+                onClick={() => setCurrentRightTab('editor')}
+              >
                 Code Editor
               </div>
-              <div className={`cursor-pointer p-2 ${currentRightTab === 'testCases' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-600'}`} onClick={() => setCurrentRightTab('testCases')}>
+              <div
+                className={`cursor-pointer p-2 ${currentRightTab === 'testCases' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-600'}`}
+                onClick={() => setCurrentRightTab('testCases')}
+              >
                 Test Cases
               </div>
             </div>
-              {currentRightTab === 'editor' && (
-                <div className="flex-grow overflow-auto pl-3 pr-1">
-                  <Editor
-                    height="100%"
-                    language={language}
-                    theme="vs-dark"
-                    value={codeContent}
-                    onChange={handleCodeEditorChange}
-                  />
-                </div>
-              )}
-  
+            {currentRightTab === 'editor' && (
+              <div className="flex-grow overflow-auto pl-3 pr-1">
+                <Editor
+                  height="100%"
+                  language={language}
+                  theme="vs-dark"
+                  value={codeContent}
+                  onChange={handleCodeEditorChange}
+                />
+              </div>
+            )}
+
             {currentRightTab === 'testCases' && (
               <div className="flex-grow overflow-auto p-2.5">
                 {testCases.map((testCase, index) => (
@@ -143,23 +175,32 @@ const AddQuestionContainer = () => {
                   </React.Fragment>
                 ))}
                 <Space>
-                  <CustomButton className="bg-blue-600 text-white border border-blue-600 h-10" onClick={addTestCase} label='AddTestCase' />
-                  <CustomButton className="bg-red-600 text-white border border-red-600 h-10" onClick={removeLastTestCase} label='Remove Last Test Case' />
+                  <CustomButton
+                    className="bg-blue-600 text-white border border-blue-600 h-10"
+                    onClick={addTestCase}
+                    label="AddTestCase"
+                  />
+                  <CustomButton
+                    className="bg-red-600 text-white border border-red-600 h-10"
+                    onClick={removeLastTestCase}
+                    label="Remove Last Test Case"
+                  />
                 </Space>
               </div>
             )}
           </div>
         </div>
       </div>
-  
+
       <div className="fixed bottom-5 right-5">
-        <CustomButton className="bg-blue-600 text-white border border-blue-600" onClick={handleSubmission} label='Submit' />
+        <CustomButton
+          className="bg-blue-600 text-white border border-blue-600"
+          onClick={handleSubmission}
+          label="Submit"
+        />
       </div>
     </div>
   );
-  
-
 };
 
 export default AddQuestionContainer;
-

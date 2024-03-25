@@ -38,31 +38,43 @@ const QuestionsContainer: React.FC<ISTutorQuestionDetailRequest> = ({ qn_id }) =
   return (
     <div className="p-5 bg-gray-100 min-h-screen">
       <div className="mb-5">
-        <Link href={`/en/tutor`} passHref className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300">
+        <Link
+          href={`/en/tutor`}
+          passHref
+          className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
+        >
           Back to Dashboard
         </Link>
       </div>
       <h4 className="text-lg font-semibold mb-4">Here you can see ALL questions.</h4>
       <div className="space-y-4">
-        {questionList && questionList.map((item: any) => (
-          <div key={item.pk} className="bg-white p-4 shadow rounded">
-            <div className="flex justify-between items-center">
-              <div>
-                <p className="font-semibold">{item.question_title}</p>
-                <p>Published: {item.pub_date}</p>
-                <p>Due by: {item.due_date}</p>
-              </div>
-              <div className="flex space-x-2">
-                <Link href={`${pathname}/${item.pk}`} passHref className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300">
-                  View Question Insight
-                </Link>
-                <button onClick={() => handleDeleteQuestion(item.pk)} className="bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 transition duration-300">
-                  Delete
-                </button>
+        {questionList &&
+          questionList.map((item: any) => (
+            <div key={item.pk} className="bg-white p-4 shadow rounded">
+              <div className="flex justify-between items-center">
+                <div>
+                  <p className="font-semibold">{item.question_title}</p>
+                  <p>Published: {item.pub_date}</p>
+                  <p>Due by: {item.due_date}</p>
+                </div>
+                <div className="flex space-x-2">
+                  <Link
+                    href={`${pathname}/${item.pk}`}
+                    passHref
+                    className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
+                  >
+                    View Question Insight
+                  </Link>
+                  <button
+                    onClick={() => handleDeleteQuestion(item.pk)}
+                    className="bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 transition duration-300"
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   );

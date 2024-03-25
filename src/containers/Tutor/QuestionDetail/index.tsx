@@ -10,13 +10,15 @@ import { useLazyGetQuestionDetailQuery } from '@/redux/apis/tutor/QuestionDetail
 const QuestionDetailContainer: React.FC<ISTutorQuestionDetailRequest> = ({ qn_id }) => {
   const pathname = usePathname();
   const [getQuestionDetail] = useLazyGetQuestionDetailQuery();
-  const [questionDetail, setQuestionDetail] = useState<ISTutorQuestionDetailResponse | undefined>(undefined);
+  const [questionDetail, setQuestionDetail] = useState<ISTutorQuestionDetailResponse | undefined>(
+    undefined
+  );
 
   const fetchQuestionDetail = async () => {
     const result = await getQuestionDetail({ qn_id }).unwrap();
     setQuestionDetail(result);
   };
-  
+
   useEffect(() => {
     fetchQuestionDetail();
   }, []);
@@ -25,12 +27,17 @@ const QuestionDetailContainer: React.FC<ISTutorQuestionDetailRequest> = ({ qn_id
     <div className="p-6 bg-gray-100 min-h-screen">
       <div className="mb-5">
         <Link href={`/en/tutor/questions`} passHref>
-          <button className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300 mb-5">Back to Question List</button>
+          <button className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300 mb-5">
+            Back to Question List
+          </button>
         </Link>
       </div>
       {/* Displaying both question ID and title */}
       <div className="text-2xl mb-6">
-        You are viewing <strong>QUESTION: {qn_id} - {questionDetail?.question.question_title}</strong>
+        You are viewing{' '}
+        <strong>
+          QUESTION: {qn_id} - {questionDetail?.question.question_title}
+        </strong>
       </div>
       <div className="flex flex-wrap justify-center gap-4">
         <div className="w-full sm:w-full md:w-1/2 lg:w-1/3 p-6 bg-white text-center rounded shadow">
@@ -48,8 +55,18 @@ const QuestionDetailContainer: React.FC<ISTutorQuestionDetailRequest> = ({ qn_id
       </div>
       <div className="mt-6 text-center">
         <div className="inline-flex gap-2 justify-center">
-          <a href={`${pathname}/edit`} className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300">Edit Question</a>
-          <a href={`${pathname}/submissions`} className="bg-gray-300 text-black py-2 px-4 rounded hover:bg-gray-400 transition duration-300">View Student Submissions</a>
+          <a
+            href={`${pathname}/edit`}
+            className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
+          >
+            Edit Question
+          </a>
+          <a
+            href={`${pathname}/submissions`}
+            className="bg-gray-300 text-black py-2 px-4 rounded hover:bg-gray-400 transition duration-300"
+          >
+            View Student Submissions
+          </a>
         </div>
       </div>
     </div>
