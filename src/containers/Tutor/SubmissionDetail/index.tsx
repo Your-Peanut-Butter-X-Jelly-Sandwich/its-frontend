@@ -8,6 +8,8 @@ import {
   useGetSubmissionDetailQuery,
   useUpdateSubmissionDetailMutation,
 } from '@/redux/apis/tutor/SubmissionDetail';
+import CustomButton from '../components/Buttons/CustomButton/CustomButton';
+import NavButton from '../components/Buttons/NavButton/NavButton';
 
 const SubmissionDetailContainer: React.FC<ISTutorSubmissionRequest> = ({
   qn_id,
@@ -54,19 +56,6 @@ const SubmissionDetailContainer: React.FC<ISTutorSubmissionRequest> = ({
     }
   };
 
-  const backButtonStyle = {
-    backgroundColor: '#1890ff',
-    color: '#fff',
-    borderColor: '#1890ff',
-  };
-
-  const submitButtonStyle = {
-    backgroundColor: '#52c41a',
-    color: '#fff',
-    borderColor: '#52c41a',
-    float: 'right' as 'right',
-  };
-
   const editorOptions = {
     selectOnLineNumbers: true,
     readOnly: true,
@@ -76,12 +65,21 @@ const SubmissionDetailContainer: React.FC<ISTutorSubmissionRequest> = ({
 
   return (
     <div style={{ padding: 24, backgroundColor: '#F0F2F5', minHeight: '100vh' }}>
-      <Link href={`/en/tutor/questions/${qn_id}/submissions`} passHref>
-        <Button style={backButtonStyle}>Back to Submissions</Button>
-      </Link>
-      <Button style={submitButtonStyle} onClick={handleSubmitFeedback}>
-        Submit Feedback
-      </Button>
+<div className="flex justify-between items-stretch w-full">
+  <NavButton
+    href={`/en/tutor/questions/${qn_id}/submissions`}
+    buttonText="Back to Submissions"
+    className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
+  />
+  <CustomButton
+    onClick={handleSubmitFeedback}
+    label="Submit Feedback"
+    className="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition duration-300"
+  />
+</div>
+
+
+
       <h1>Submissions for Question {qn_id}</h1>
       <div className="flex flex-col h-screen">
         <div className="flex flex-1 gap-5 p-3 overflow-hidden">
