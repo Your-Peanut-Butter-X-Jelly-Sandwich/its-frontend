@@ -2,10 +2,12 @@
 
 import React, { useState } from 'react';
 import { Button, message, Space, Input, Select, Divider, DatePicker } from 'antd';
-import MdEditor from '@uiw/react-md-editor';
-import Editor from '@monaco-editor/react';
 import { useAddQuestionMutation } from '@/redux/apis/tutor/AddQuestion';
-import CustomButton from '../components/Buttons/CustomButton/CostomButton';
+import CustomButton from '../components/Buttons/CustomButton/CustomButton';
+import SubHeader from '../components/SubHeaders/SubHeader';
+import MdEditorTabs from '../components/Editors/MdEditor/MdEditor';
+import CodeEditor from '../components/Editors/CodeEditor/CodeEditor';
+import TestCases from '../components/Editors/TestCaseEditor/TestCaseEditor';
 
 const AddQuestionContainer = () => {
   const [markdown, setMarkdown] = useState('');
@@ -77,56 +79,23 @@ const AddQuestionContainer = () => {
 
   return (
     <div className="p-5 bg-gray-100 min-h-screen">
-      <div className="flex justify-between mb-5">
-        <Input
-          placeholder="Question Title"
-          value={questionTitle}
-          onChange={(e) => setQuestionTitle(e.target.value)}
-          className="basis-7/12 grow-0 shrink-0 mr-4"
-        />
-        <DatePicker
-          format="YYYY-MM-DD"
-          placeholder="Select Due Date"
-          onChange={handleDueDateChange}
-          className="basis-3/12 grow-0 shrink-0 mr-4"
-        />
-        <Select
-          value={language}
-          onChange={handleLanguageChange}
-          className="basis-2/12 grow-0 shrink-0"
-          placeholder="Select Language"
-        >
-          <Select.Option value="c">C</Select.Option>
-          <Select.Option value="python">Python</Select.Option>
-        </Select>
-      </div>
+      <SubHeader
+        questionTitle={questionTitle}
+        setQuestionTitle={setQuestionTitle}
+        handleDueDateChange={handleDueDateChange}
+        handleLanguageChange={handleLanguageChange}
+        language={language}
+        dueDate={dueDate}
+      />
       <div className="flex flex-col h-[87vh]">
         <div className="flex flex-grow">
           {/* Left side: Markdown Editor and Preview */}
-          <div className="w-1/2 flex flex-col">
-            <div className="flex mb-4">
-              <div
-                className={`cursor-pointer p-2 ${currentLeftTab === 'edit' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-600'}`}
-                onClick={() => setCurrentLeftTab('edit')}
-              >
-                Edit
-              </div>
-              <div
-                className={`cursor-pointer p-2 ${currentLeftTab === 'preview' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-600'}`}
-                onClick={() => setCurrentLeftTab('preview')}
-              >
-                Preview
-              </div>
-            </div>
-            <div className="flex-grow overflow-auto">
-              <MdEditor
-                value={markdown}
-                onChange={handleEditorChange}
-                preview={currentLeftTab}
-                height="100%"
-              />
-            </div>
-          </div>
+          <MdEditorTabs
+            currentLeftTab={currentLeftTab}
+            setCurrentLeftTab={setCurrentLeftTab}
+            markdown={markdown}
+            handleEditorChange={handleEditorChange}
+          />
           {/* Right side: Code Editor and Test Cases */}
           <div className="w-1/2 flex flex-col pl-1 pr-3">
             <div className="flex mb-4">
@@ -144,49 +113,20 @@ const AddQuestionContainer = () => {
               </div>
             </div>
             {currentRightTab === 'editor' && (
-              <div className="flex-grow overflow-auto pl-3 pr-1">
-                <Editor
-                  height="100%"
-                  language={language}
-                  theme="vs-dark"
-                  value={codeContent}
-                  onChange={handleCodeEditorChange}
-                />
-              </div>
+              <CodeEditor
+                language={language}
+                codeContent={codeContent}
+                handleCodeEditorChange={handleCodeEditorChange}
+              />
             )}
 
             {currentRightTab === 'testCases' && (
-              <div className="flex-grow overflow-auto p-2.5">
-                {testCases.map((testCase, index) => (
-                  <React.Fragment key={index}>
-                    {index > 0 && <Divider />}
-                    <div className="mb-2.5">
-                      <Input
-                        placeholder="Input"
-                        value={testCase.input}
-                        onChange={(e) => updateTestCase(index, 'input', e.target.value)}
-                      />
-                      <Input
-                        placeholder="Expected Output"
-                        value={testCase.expectedOutput}
-                        onChange={(e) => updateTestCase(index, 'expectedOutput', e.target.value)}
-                      />
-                    </div>
-                  </React.Fragment>
-                ))}
-                <Space>
-                  <CustomButton
-                    className="bg-blue-600 text-white border border-blue-600 h-10"
-                    onClick={addTestCase}
-                    label="AddTestCase"
-                  />
-                  <CustomButton
-                    className="bg-red-600 text-white border border-red-600 h-10"
-                    onClick={removeLastTestCase}
-                    label="Remove Last Test Case"
-                  />
-                </Space>
-              </div>
+              <TestCases
+                testCases={testCases}
+                updateTestCase={updateTestCase}
+                addTestCase={addTestCase}
+                removeLastTestCase={removeLastTestCase}
+              />
             )}
           </div>
         </div>

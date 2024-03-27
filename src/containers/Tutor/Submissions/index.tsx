@@ -1,8 +1,9 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
 import { useGetSubmissionsQuery } from '@/redux/apis/tutor/Submissions';
+import SubmissionList from '../components/Lists/SubmissionList/SubmissionList';
+import NavButton from '../components/Buttons/NavButton/NavButton';
 
 const SubmissionsContainer: React.FC<ISTutorQuestionDetailRequest> = ({ qn_id }) => {
   const { data: submissions, isLoading, isError } = useGetSubmissionsQuery(qn_id);
@@ -18,55 +19,14 @@ const SubmissionsContainer: React.FC<ISTutorQuestionDetailRequest> = ({ qn_id })
   return (
     <div className="p-6 bg-white min-h-screen">
       <div className="mb-5">
-        <Link href={`/en/tutor/questions/${qn_id}`} passHref>
-          <button className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300">
-            Back to Question Insight
-          </button>
-        </Link>
+        <NavButton 
+          href='/en/tutor/questions/${qn_id}' 
+          buttonText="Back to Question List" 
+          className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
+        />
       </div>
-      <h1 className="text-xl font-semibold mb-4">Submissions for Question {qn_id}</h1>
-      <div className="overflow-x-auto">
-        <table className="w-full text-sm text-left text-gray-500">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50">
-            <tr>
-              <th scope="col" className="px-6 py-3">
-                Student Email
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Submission Number
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Score
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Submission Time
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Action
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {submissions?.submissions.map((submission) => (
-              <tr className="bg-white border-b hover:bg-gray-50" key={submission.pk}>
-                <td className="px-6 py-4">{submission.submitted_by.email}</td>
-                <td className="px-6 py-4">{submission.submission_number}</td>
-                <td className="px-6 py-4">{submission.score}</td>
-                <td className="px-6 py-4">
-                  {new Date(submission.submission_date).toLocaleString()}
-                </td>
-                <td className="px-6 py-4">
-                  <Link href={`/en/tutor/questions/${qn_id}/submissions/${submission.pk}`}>
-                    <button className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300">
-                      View Detail
-                    </button>
-                  </Link>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <h1 className="text-xl font-semibold mb-4">Submissions for Question {qn_id} </h1>
+        <SubmissionList submissions={submissions} qn_id={qn_id} />
     </div>
   );
 };
