@@ -93,9 +93,10 @@ const SignUpContainer: React.FC<{
                 label="Github Signup"
               />
             </Item>
-            <Item>
+            <Item
+            >
               Already have an account?{' '}
-              <a onClick={() => handleLoginClick()} style={{ textDecoration: 'underline' }}>
+              <a id='login-link' onClick={() => handleLoginClick()} style={{ textDecoration: 'underline' }}>
                 Login
               </a>
             </Item>
