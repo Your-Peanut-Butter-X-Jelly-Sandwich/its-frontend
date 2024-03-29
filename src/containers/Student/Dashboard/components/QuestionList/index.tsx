@@ -37,12 +37,24 @@ const QuestionList: React.FC<QuestionListType> = ({ questions, time }: QuestionL
               <List.Item key={index} className="cursor-pointer hover:bg-gray-100">
                 <List.Item.Meta
                   title={
-                    <div className="flex flex-row">
+                    <div className="flex flex-row ">
                       <div className="text-base cursor-pointer font-semibold px-2">
                         {item.title}
                       </div>
-                      {item.attempted ? <Tag color="#f50">Attempted</Tag> : <></>}
-                      {item.passed ? <Tag color="#87d068">Passed</Tag> : <></>}
+                      {item.attempted ? (
+                        <Tag className="self-start" color="#f50">
+                          Attempted
+                        </Tag>
+                      ) : (
+                        <></>
+                      )}
+                      {item.passed ? (
+                        <Tag className="self-start" color="#87d068">
+                          Passed
+                        </Tag>
+                      ) : (
+                        <></>
+                      )}
                     </div>
                   }
                   description={
