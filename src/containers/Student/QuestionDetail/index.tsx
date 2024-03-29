@@ -73,6 +73,7 @@ const QuestionDetailContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
         />
         <div className="w-full flex justify-center items-center">
           <Button
+            id='submit-button'
             type="primary"
             className="ml-2 mt-5 bg-blue-500"
             onClick={handleSubmit}

@@ -9,5 +9,10 @@ describe('student spec', () => {
 
   it('passes', () => {
     cy.contains('stu01@student.com');
+    cy.visit('http://localhost:3000/en/student/questions');
+    cy.get('button[id=1]').click();
+    cy.get('div[class=view-line]').type('print("Hello World")');
+    cy.get('button[id=submit-button]').click();
+    cy.get('button').contains('View').click();
   });
 });
