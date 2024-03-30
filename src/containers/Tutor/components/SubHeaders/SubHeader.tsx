@@ -20,7 +20,7 @@ const SubHeader = ({
         />
         <DatePicker
           // value = {dueDate}
-          value = {dayjs(dueDate, 'YYYY-MM-DD')}
+          value={dueDate ? dayjs(dueDate, 'YYYY-MM-DD') : null}
           format="YYYY-MM-DD"
           placeholder="Select Due Date"
           onChange={handleDueDateChange}
