@@ -15,7 +15,7 @@ const AddQuestionContainer = () => {
   const [language, setLanguage] = useState('python');
   const [codeContent, setCodeContent] = useState('');
   const [questionTitle, setQuestionTitle] = useState('');
-  const [dueDate, setDueDate] = useState('');
+  const [dueDate, setDueDate] = useState<string>('');
   const [currentRightTab, setCurrentRightTab] = useState('editor');
   const [currentLeftTab, setCurrentLeftTab] = useState('edit'); // New state for managing left tabs
 

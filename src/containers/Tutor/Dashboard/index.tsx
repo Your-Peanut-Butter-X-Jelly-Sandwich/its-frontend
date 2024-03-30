@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
 import { Layout, Menu, Button, List, Avatar, Badge } from 'antd';
 import { MessageOutlined, PlayCircleOutlined } from '@ant-design/icons';
 import { usePathname } from 'next/navigation';
