@@ -5,7 +5,7 @@ import { useGetSubmissionsQuery } from '@/redux/apis/tutor/Submissions';
 import SubmissionList from '../components/Lists/SubmissionList/SubmissionList';
 import NavButton from '../components/Buttons/NavButton/NavButton';
 
-const SubmissionsContainer: React.FC<ISTutorQuestionDetailRequest> = ({ qn_id }) => {
+const SubmissionsContainer: React.FC<ITutorQuestionDetailRequest> = ({ qn_id }) => {
   const { data: submissions, isLoading, isError } = useGetSubmissionsQuery(qn_id);
 
   if (isLoading) return <div className="text-center py-5">Loading...</div>;

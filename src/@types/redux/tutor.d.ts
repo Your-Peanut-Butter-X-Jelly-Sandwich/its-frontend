@@ -1,14 +1,14 @@
-interface ISTutorQuestionStatisticsResponse {
+interface ITutorQuestionStatisticsResponse {
   total_students: number;
   passes: number;
   total_submissions: number;
 }
 
-interface ISTutorQuestionDetailRequest {
+interface ITutorQuestionDetailRequest {
   qn_id: number;
 }
 
-interface ISTutorQuestionDetailResponse {
+interface ITutorQuestionDetailResponse {
   question: {
     id: string;
     test_cases: Array<{ pk: number; input: string; output: string }>;
@@ -24,13 +24,13 @@ interface ISTutorQuestionDetailResponse {
   total_submissions: number;
 }
 
-interface ISTutorTestCaseResponse {
+interface ITutorTestCaseResponse {
   pk: number;
   input: string;
   output: string;
 }
 
-interface ISTutorQuestionContent {
+interface ITutorQuestionContent {
   test_cases: Array<{ pk: number; input: string; output: string }>;
   question_title: string;
   question_statement: string;
@@ -39,7 +39,7 @@ interface ISTutorQuestionContent {
   due_date: string;
 }
 
-interface ISTutorSubmissionResponse {
+interface ITutorSubmissionResponse {
   pk: number;
   submission_number: number;
   submitted_by: {
@@ -55,7 +55,7 @@ interface ISTutorSubmissionResponse {
   submission_date: string;
 }
 
-interface ISTutorSubmission {
+interface ITutorSubmission {
   pk: number;
   qn_id: string;
   submission_number: number;
@@ -69,7 +69,7 @@ interface ISTutorSubmission {
   score: number;
 }
 
-interface ISTutorSubmissionRequest {
+interface ITutorSubmissionRequest {
   qn_id: number;
   submission_id: number;
 }

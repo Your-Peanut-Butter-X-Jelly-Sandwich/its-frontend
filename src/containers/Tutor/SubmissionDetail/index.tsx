@@ -11,7 +11,7 @@ import {
 import CustomButton from '../components/Buttons/CustomButton/CustomButton';
 import NavButton from '../components/Buttons/NavButton/NavButton';
 
-const SubmissionDetailContainer: React.FC<ISTutorSubmissionRequest> = ({
+const SubmissionDetailContainer: React.FC<ITutorSubmissionRequest> = ({
   qn_id,
   submission_id,
 }) => {

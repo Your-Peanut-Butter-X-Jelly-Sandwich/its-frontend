@@ -2,11 +2,11 @@ import { ITSApi } from '@/redux/createApi';
 
 export const questionApi = ITSApi.injectEndpoints({
   endpoints: (builder) => ({
-    getQuestionDetail: builder.query<ISTutorQuestionDetailResponse, number>({
+    getQuestionDetail: builder.query<ITutorQuestionDetailResponse, number>({
       query: (qn_id) => `/tutor/question/${qn_id}`,
     }),
 
-    updateQuestionDetail: builder.mutation<void, ISTutorQuestionDetailResponse>({
+    updateQuestionDetail: builder.mutation<void, ITutorQuestionDetailResponse>({
       query: ({ question }) => ({
         url: `/tutor/question/${question.id}`,
         method: 'PATCH',

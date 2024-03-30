@@ -7,10 +7,10 @@ import NavButton from '../components/Buttons/NavButton/NavButton';
 import CustomButton from '../components/Buttons/CustomButton/CustomButton';
 import QuestionStats from '../components/Stats/QuestionStats/QuestionStats';
 
-const QuestionDetailContainer: React.FC<ISTutorQuestionDetailRequest> = ({ qn_id }) => {
+const QuestionDetailContainer: React.FC<ITutorQuestionDetailRequest> = ({ qn_id }) => {
   const pathname = usePathname();
   const [getQuestionDetail] = useLazyGetQuestionDetailQuery();
-  const [questionDetail, setQuestionDetail] = useState<ISTutorQuestionDetailResponse | undefined>(
+  const [questionDetail, setQuestionDetail] = useState<ITutorQuestionDetailResponse | undefined>(
     undefined
   );
 
