@@ -10,7 +10,7 @@ import {
 import NavButton from '../components/Buttons/NavButton/NavButton';
 import QuestionList from '../components/Lists/QuestionList/QuestionList';
 
-const QuestionsContainer: React.FC<ISTutorQuestionDetailRequest> = ({ qn_id }) => {
+const QuestionsContainer: React.FC<ITutorQuestionDetailRequest> = ({ qn_id }) => {
   const pathname = usePathname();
   const [questionList, setQuestionList] = useState();
   const [getQuestions] = useLazyGetQuestionsQuery();

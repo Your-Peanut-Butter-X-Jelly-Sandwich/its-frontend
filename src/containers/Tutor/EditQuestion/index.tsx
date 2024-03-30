@@ -15,7 +15,7 @@ import CodeEditor from '../components/Editors/CodeEditor/CodeEditor';
 import TestCases from '../components/Editors/TestCaseEditor/TestCaseEditor';
 import CustomButton from '../components/Buttons/CustomButton/CustomButton';
 
-const EditQuestionContainer: React.FC<ISTutorQuestionDetailRequest> = ({ qn_id }) => {
+const EditQuestionContainer: React.FC<ITutorQuestionDetailRequest> = ({ qn_id }) => {
   const { data: questionData, error, isLoading } = useGetQuestionDetailQuery(qn_id);
   const [updateQuestionDetail, { isLoading: isUpdating, isSuccess }] =
     useUpdateQuestionDetailMutation();
@@ -34,7 +34,7 @@ const EditQuestionContainer: React.FC<ISTutorQuestionDetailRequest> = ({ qn_id }
 
   const [currentMode, setCurrentMode] = useState('markdown');
   const [markdown, setMarkdown] = useState<string>('');
-  const [testCases, setTestCases] = useState<Omit<ISTutorTestCaseResponse, 'pk'>[]>([
+  const [testCases, setTestCases] = useState<Omit<ITutorTestCaseResponse, 'pk'>[]>([
     { input: '', output: '' },
   ]);
   const [language, setLanguage] = useState<'python' | 'c'>('python');
