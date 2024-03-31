@@ -1,3 +1,5 @@
+import { Chainable } from 'cypress';
+
 /// <reference types="cypress" />
 // ***********************************************
 // This example commands.ts shows you how to
@@ -35,3 +37,19 @@
 //     }
 //   }
 // }
+
+declare global {
+    namespace Cypress {
+        interface Chainable {
+            tutorLogin(username: string, password: string): Chainable<void>;
+        }
+    }
+}
+
+Cypress.Commands.add('tutorLogin', { prevSubject: false }, (username: string, password: string) => {
+    cy.visit('http://localhost:3000/en/auth');
+    cy.get('a[id=login-link]').click();
+    cy.get('input[id=email]').type(username);
+    cy.get('input[id=password]').type(password);
+    cy.get('button[id=login-button]').click();
+});
