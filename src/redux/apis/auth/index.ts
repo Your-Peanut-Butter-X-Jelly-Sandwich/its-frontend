@@ -1,5 +1,5 @@
 import { ITSApi } from '@/redux/createApi';
-import { setAuthSuccess, setAuthTokens, setAuthUser } from '@/redux/slices/auth';
+import { setAuthSuccess, setAuthTokens, setAuthUser, setLogout } from '@/redux/slices/auth';
 import { isEmpty } from 'lodash';
 
 export const authApi = ITSApi.injectEndpoints({
@@ -32,7 +32,7 @@ export const authApi = ITSApi.injectEndpoints({
       async onQueryStarted(_record, { dispatch, queryFulfilled }) {
         const res = await queryFulfilled;
         if (!isEmpty(res)) {
-          dispatch(setAuthTokens({ access: '', refresh: '' }));
+          dispatch(setLogout());
         }
       },
     }),

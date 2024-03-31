@@ -9,8 +9,18 @@ import {
   LogoutOutlined,
 } from '@ant-design/icons';
 import Link from 'next/link';
+import { useLazyAuthLogoutQuery } from '@/redux/apis/auth';
+import { usePathname } from 'next/navigation';
+import getLocale from '@/common/utils/extractLocale';
 
 const HeaderTutor: React.FC = () => {
+
+  const [ authLogout ] = useLazyAuthLogoutQuery()
+  const pathname = usePathname();
+  
+  const handleLogout = () => {
+
+  }
   return (
     <Menu mode="horizontal" theme="dark">
       <Menu.Item key="dashboard" icon={<DesktopOutlined />}>
@@ -28,10 +38,8 @@ const HeaderTutor: React.FC = () => {
           <Menu.Item key="dashboard">Check Questions</Menu.Item>
         </Link>
       </Menu.Item>
-      <Menu.Item key="logout" icon={<LogoutOutlined />} style={{ marginLeft: 'auto' }}>
-        <Link href="/" passHref>
-          <Menu.Item key="dashboard">Log Out</Menu.Item>
-        </Link>
+      <Menu.Item key="logout" icon={<LogoutOutlined />} style={{ marginLeft: 'auto' }} onClick={handleLogout}>
+        <Menu.Item key="dashboard">Log Out</Menu.Item>
       </Menu.Item>
     </Menu>
   );
