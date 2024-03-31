@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { Typography } from "antd";
 import StudentList from "./components/studentlist";
-
+import { useGetStudentsQuery } from "@/redux/apis/manager";
 const { Title } = Typography;
 
 const ManagerContainer: React.FC = () => {
+
+  const {data} = useGetStudentsQuery();
+  console.log(data?.users);
   const [students, setStudents] = useState([
     { key: "1", username: "panav", email: "panavdua@gmail.com" },
     { key: "2", username: "test", email: "test@gmail.com" },
