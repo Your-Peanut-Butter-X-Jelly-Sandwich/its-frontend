@@ -1,9 +1,9 @@
-"use client";
-import React from "react";
-import Link from "next/link";
+'use client';
+
+import React from 'react';
 import { Layout, Menu, Button, List, Avatar, Badge } from 'antd';
 import { MessageOutlined, PlayCircleOutlined } from '@ant-design/icons';
-import { usePathname } from "next/navigation";
+import { usePathname } from 'next/navigation';
 
 const { Header, Content, Sider } = Layout;
 
@@ -30,10 +30,18 @@ const TutorDashboardContainer: React.FC = () => {
           <List
             itemLayout="horizontal"
             dataSource={dummyNotifications}
-            renderItem={item => (
+            renderItem={(item) => (
               <List.Item>
                 <List.Item.Meta
-                  avatar={<Avatar icon={<Badge dot><MessageOutlined /></Badge>} />}
+                  avatar={
+                    <Avatar
+                      icon={
+                        <Badge dot>
+                          <MessageOutlined />
+                        </Badge>
+                      }
+                    />
+                  }
                   title={item.title}
                   description={item.description}
                 />

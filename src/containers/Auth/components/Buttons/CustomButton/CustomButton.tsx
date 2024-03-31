@@ -2,13 +2,15 @@ import React from 'react';
 import { Button } from 'antd';
 
 interface CustomButtonProps {
-  type: 'primary' | 'default'; // Add more types as needed
+  type: 'primary' | 'default';
   onClick: () => void;
   label: string;
+  className?: string;
+  id?: string;
 }
 
-const CustomButton: React.FC<CustomButtonProps> = ({ type, onClick, label }) => (
-  <Button type={type} onClick={onClick} style={{ backgroundColor: '#40a9ff', width: '100%' }}>
+const CustomButton: React.FC<CustomButtonProps> = ({ onClick, label, className, id }) => (
+  <Button className={className} onClick={onClick} id={id}>
     {label}
   </Button>
 );

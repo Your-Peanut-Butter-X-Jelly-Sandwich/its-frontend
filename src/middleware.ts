@@ -1,4 +1,4 @@
-import createMiddleware from "next-intl/middleware";
+import createMiddleware from 'next-intl/middleware';
 // import type { NextRequest } from "next/server";
 // import { NextResponse } from "next/server";
 // import { useAppSelector } from "./redux";
@@ -12,13 +12,13 @@ import createMiddleware from "next-intl/middleware";
 // }
 export default createMiddleware({
   // A list of all locales that are supported
-  locales: ["en", "es", "cz", "de"],
+  locales: ['en', 'es', 'cz', 'de'],
 
   // Used when no locale matches
-  defaultLocale: "en",
+  defaultLocale: 'en',
 });
 
 export const config = {
   // Match only internationalized pathnames
-  matcher: ["/", "/(es|en|cz|de)/:path*"],
+  matcher: ['/', '/(es|en|cz|de)/:path*'],
 };

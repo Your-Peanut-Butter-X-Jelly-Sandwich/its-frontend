@@ -1,5 +1,5 @@
-import { NextPage } from "next";
-import QuestionDetailContainer from "@/containers/Tutor/QuestionDetail";
+import { NextPage } from 'next';
+import QuestionDetailContainer from '@/containers/Tutor/QuestionDetail';
 
 type ParamsType = {
   params: {
@@ -9,6 +9,7 @@ type ParamsType = {
 const QuestionPage: NextPage<ParamsType> = ({ params }: ParamsType) => {
   return (
     <div>
+      {/* @ts-ignore */}
       <QuestionDetailContainer {...params} />
     </div>
   );

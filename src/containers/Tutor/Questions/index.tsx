@@ -1,147 +1,66 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useSelector } from 'react-redux';
-import { authSelector } from '@/redux/slices/auth'; 
-import { Button, Typography, List, Card, Row, Col, message } from "antd";
-const { Title, Text } = Typography;
+import React, { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
+import {
+  useGetQuestionsQuery,
+  useLazyGetQuestionsQuery,
+  useDeleteQuestionMutation,
+} from '@/redux/apis/tutor/Questions';
+import NavButton from '../components/Buttons/NavButton/NavButton';
+import QuestionList from '../components/Lists/QuestionList/QuestionList';
 
-type QuestionType = {
-  pk: number;
-  question_title: string;
-  pub_date: string;
-  due_date: string;
-};
-
-type PropsType = { qn_id: string };
-
-const QuestionsContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
+const QuestionsContainer: React.FC<ITutorQuestionDetailRequest> = ({ qn_id }) => {
   const pathname = usePathname();
-  const [questions, setQuestions] = useState<QuestionType[]>([]);
+  const [questionList, setQuestionList] = useState();
+  const [getQuestions] = useLazyGetQuestionsQuery();
+  const [deleteQuestion] = useDeleteQuestionMutation();
 
-  const auth = useSelector(authSelector);
-  console.log('Auth:', auth);
-
-  const accessToken = auth.tokens.access;
-  console.log('Access Token:', accessToken);
+  const fetchQuestionList = async () => {
+    const result = await getQuestions().unwrap();
+    setQuestionList(result.questions);
+  };
 
   useEffect(() => {
-    fetchQuestions();
+    fetchQuestionList();
   }, []);
 
-  const baseUrl = "http://127.0.0.1:8000";
-  const authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEwNjc5NTcxLCJpYXQiOjE3MTA1OTMxNzEsImp0aSI6IjJlNGZjYjE5MDJjNzQxNDQ5OTU3YTg4Nzg0MTM4MGNmIiwidXNlcl9pZCI6MTF9.4YliXiwUPmhhAgTsNayaAET_0RXL7FWMK2pE4iiLJdk";
-  // const authToken = accessToken;
-  const fetchQuestions = () => {
-    fetch(`${baseUrl}/tutor/question`, {
-      headers: {
-        "Authorization": `Bearer ${authToken}`, 
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setQuestions(data.questions);
-      })
-      .catch((error) => {
-        console.error("Error fetching questions:", error);
-      });
+  const handleDeleteQuestion = async (pk: any) => {
+    try {
+      await deleteQuestion(pk).unwrap();
+      alert('Question deleted successfully'); // Temporarily replacing message.success
+      fetchQuestionList();
+    } catch (err) {
+      alert('Error deleting question'); // Temporarily replacing message.error
+    }
   };
 
-  const handleDeleteQuestion = (pk: number) => {
-    fetch(`${baseUrl}/tutor/question/${pk}`, {
-      method: 'DELETE',
-      headers: {
-        "Authorization": `Bearer ${authToken}`,
-      },
-    })
-      .then(response => {
-        if (response.ok) {
-          setQuestions(prevQuestions => prevQuestions.filter(question => question.pk !== pk));
-          message.success('Question deleted successfully');
-        } else {
-          message.error('Error deleting question');
-        }
-      })
-      .catch((error) => {
-        console.error("Error deleting question:", error);
-        message.error('Error deleting question');
-      });
-  };
-
-  const pageStyle = {
-    padding: '20px',
-    backgroundColor: '#f0f2f5', 
-    minHeight: '100vh',
-  };
-
-  const cardStyle = {
-    backgroundColor: '#ffffff', 
-  };
-
-  const viewReportButtonStyle = {
-    backgroundColor: '#1890ff', 
-    color: '#fff', 
-    borderColor: '#1890ff', 
-  };
-
-
-  const backButtonStyle = {
-    backgroundColor: '#1890ff', 
-    color: '#fff', 
-    borderColor: '#1890ff', 
-  };
-
-  const deleteButtonStyle = {
-    backgroundColor: '#ff4d4f', 
-    color: '#fff', 
-    borderColor: '#ff4d4f',
-    marginLeft: '10px', 
-  };
-  
   return (
-    <div style={pageStyle}>
-      <div style={{ marginBottom: '20px' }}>
-        <Link href={`/en/tutor`} passHref>
-          <Button style={backButtonStyle}>Back to Dashboard</Button>
+    <div className="p-5 bg-gray-100 min-h-screen">
+      {/* <div className="mb-5">
+        <Link
+          href={`/en/tutor`}
+          passHref
+          className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
+        >
+          Back to Dashboard
         </Link>
-      </div>
-      <Title level={4}>
-        Here you can see ALL questions.
-      </Title>
-      <List
-        grid={{ gutter: 16, column: 1 }}
-        dataSource={questions}
-        renderItem={(item) => (
-          <List.Item>
-            <Card style={cardStyle}>
-              <Row justify="space-between" align="middle">
-                <Col span={12}>
-                  <Text strong>{item.question_title}</Text>
-                  <br />
-                  <Text>Published: {item.pub_date}</Text>
-                  <br />
-                  <Text>Due by: {item.due_date}</Text>
-                </Col>
-                <Col>
-                  <Link href={`${pathname}/${item.pk}`} passHref>
-                    <Button style={viewReportButtonStyle}>View Question Insight</Button>
-                  </Link>
-                  <Button 
-                    style={deleteButtonStyle} 
-                    onClick={() => handleDeleteQuestion(item.pk)}
-                  >
-                    Delete
-                  </Button>
-                </Col>
-              </Row>
-            </Card>
-          </List.Item>
-        )}
+      </div> */}
+
+      <NavButton
+        buttonText="Back to Dashboard"
+        href="/en/tutor/"
+        className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
       />
+
+      <h4 className="text-lg font-semibold mb-4">Here you can see ALL questions.</h4>
+        <QuestionList
+          questionList={questionList}
+          pathname={pathname}
+          handleDeleteQuestion={handleDeleteQuestion}
+        />
     </div>
   );
-}
+};
 
-export default QuestionsContainer
+export default QuestionsContainer;

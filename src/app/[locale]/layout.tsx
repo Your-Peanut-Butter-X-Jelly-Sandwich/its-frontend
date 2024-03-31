@@ -1,13 +1,13 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import StoreProvider from "./StoreProvider";
-import AuthGuard from "@/common/HOCs/AuthGuard";
-const inter = Inter({ subsets: ["latin"] });
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+import StoreProvider from './StoreProvider';
+import AuthGuard from '@/common/HOCs/AuthGuard';
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "ITS",
-  description: "ITS System",
+  title: 'ITS',
+  description: 'ITS System',
 };
 
 function LocaleLayout({
@@ -22,7 +22,7 @@ function LocaleLayout({
       <body className={inter.className}>
         <StoreProvider>
           <AuthGuard>
-            <div className="bg-teal-800 h-screen">{children}</div>
+            <div className="h-screen bg-gray-100 ">{children}</div>
           </AuthGuard>
         </StoreProvider>
       </body>

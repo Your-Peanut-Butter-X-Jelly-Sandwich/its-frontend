@@ -7,7 +7,7 @@
   - student: student related pages
   - tutor: tutor related pages
   - auth: authentication related pages
-  - *Note*: keep pages tsx simple by placing the bulk tsx content inside the containers folder.
+  - _Note_: keep pages tsx simple by placing the bulk tsx content inside the containers folder.
 - common: custom hooks, utils and HOCs
 - components: UI components to be used globally, such as buttons, inputs, modals, drawers, headers, footers, etc.
 - configs: configurations, such as environmental variables
@@ -15,7 +15,7 @@
 - redux: redux related logic.
   - apis: services to request backend.
   - reducers and slices: manages in-app states.
-  
+
 ## Libraries
 
 - Development Language: [Typescript](https://www.typescriptlang.org/docs/handbook/intro.html)
