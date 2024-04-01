@@ -11,10 +11,7 @@ import {
 import CustomButton from '../components/Buttons/CustomButton/CustomButton';
 import NavButton from '../components/Buttons/NavButton/NavButton';
 
-const SubmissionDetailContainer: React.FC<ITutorSubmissionRequest> = ({
-  qn_id,
-  submission_id,
-}) => {
+const SubmissionDetailContainer: React.FC<ITutorSubmissionRequest> = ({ qn_id, submission_id }) => {
   const [feedback, setFeedback] = useState('');
   const {
     data: submissionDetail,
@@ -65,20 +62,18 @@ const SubmissionDetailContainer: React.FC<ITutorSubmissionRequest> = ({
 
   return (
     <div style={{ padding: 24, backgroundColor: '#F0F2F5', minHeight: '100vh' }}>
-<div className="flex justify-between items-stretch w-full">
-  <NavButton
-    href={`/en/tutor/questions/${qn_id}/submissions`}
-    buttonText="Back to Submissions"
-    className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
-  />
-  <CustomButton
-    onClick={handleSubmitFeedback}
-    label="Submit Feedback"
-    className="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition duration-300"
-  />
-</div>
-
-
+      <div className="flex justify-between items-stretch w-full">
+        <NavButton
+          href={`/en/tutor/questions/${qn_id}/submissions`}
+          buttonText="Back to Submissions"
+          className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
+        />
+        <CustomButton
+          onClick={handleSubmitFeedback}
+          label="Submit Feedback"
+          className="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition duration-300"
+        />
+      </div>
 
       <h1>Submissions for Question {qn_id}</h1>
       <div className="flex flex-col h-screen">
