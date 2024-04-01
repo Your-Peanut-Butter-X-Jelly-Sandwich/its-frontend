@@ -26,7 +26,7 @@ const TestCases = ({ testCases, updateTestCase, addTestCase, removeLastTestCase 
         <CustomButton
           className="bg-blue-600 text-white border border-blue-600 h-10"
           onClick={addTestCase}
-          label="AddTestCase"
+          label="Add Test Case"
         />
         <CustomButton
           className="bg-red-600 text-white border border-red-600 h-10"

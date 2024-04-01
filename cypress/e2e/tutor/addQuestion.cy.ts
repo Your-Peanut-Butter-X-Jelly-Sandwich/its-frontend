@@ -29,7 +29,7 @@ describe('tutor add question', () => {
       cy.contains('div', 'Test Cases').click();
       cy.get('input[placeholder="Input"]').eq(0).type('[1,1,2]');
       cy.get('input[placeholder="Expected Output"]').eq(0).type('2');
-      cy.get('button').contains('AddTestCase').click();
+      cy.get('button').contains('Add Test Case').click();
       cy.get('input[placeholder="Input"]').eq(1).type('[0,0,1,1,1,2,2,3,3,4]');
       cy.get('input[placeholder="Expected Output"]').eq(1).type('5');
 

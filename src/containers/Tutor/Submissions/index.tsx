@@ -20,7 +20,7 @@ const SubmissionsContainer: React.FC<ITutorQuestionDetailRequest> = ({ qn_id }) 
     <div className="p-6 bg-white min-h-screen">
       <div className="mb-5">
         <NavButton 
-          href='/en/tutor/questions/${qn_id}' 
+          href={`/en/tutor/questions/${qn_id}`}
           buttonText="Back to Question List" 
           className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
         />
