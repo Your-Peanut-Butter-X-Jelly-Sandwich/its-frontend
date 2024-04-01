@@ -20,21 +20,22 @@ describe('tutor add question', () => {
         Consider the number of unique elements of nums to be k, to get accepted, you need to do the following things:\
         Change the array nums such that the first k elements of nums contain the unique elements in the order they were present in nums initially.\
         The remaining elements of nums are not important as well as the size of nums.\
-        Return k.'
-    );
-    cy.contains('div', 'Preview').click();
+        Return k.')
+      cy.contains('div', 'Preview').click();
 
-    cy.contains('div', 'Code Editor').click();
-    cy.get('.view-lines').click();
-    cy.get('.view-lines').type('def removeDuplicates(self, nums):\n');
+      cy.contains('div', 'Code Editor').click();
+      cy.get('.view-lines').click();
+      cy.get('.view-lines').type('def removeDuplicates(self, nums):\n');
 
-    cy.contains('div', 'Test Cases').click();
-    cy.get('input[placeholder="Input"]').eq(0).type('[1,1,2]');
-    cy.get('input[placeholder="Expected Output"]').eq(0).type('2');
-    cy.get('button').contains('AddTestCase').click();
-    cy.get('input[placeholder="Input"]').eq(1).type('[0,0,1,1,1,2,2,3,3,4]');
-    cy.get('input[placeholder="Expected Output"]').eq(1).type('5');
+      cy.contains('div', 'Test Cases').click();
+      cy.get('input[placeholder="Input"]').eq(0).type('[1,1,2]');
+      cy.get('input[placeholder="Expected Output"]').eq(0).type('2');
+      cy.get('button').contains('Add Test Case').click();
+      cy.get('input[placeholder="Input"]').eq(1).type('[0,0,1,1,1,2,2,3,3,4]');
+      cy.get('input[placeholder="Expected Output"]').eq(1).type('5');
 
-    cy.contains('button', 'Submit').click();
+      cy.contains('button', 'Submit').click();
+
+    });
   });
 });
