@@ -26,7 +26,7 @@ const SubmissionsContainer: React.FC<ITutorQuestionDetailRequest> = ({ qn_id }) 
         />
       </div>
       <h1 className="text-xl font-semibold mb-4">Submissions for Question {qn_id} </h1>
-        <SubmissionList submissions={submissions} qn_id={qn_id} />
+      <SubmissionList submissions={submissions} qn_id={qn_id} />
     </div>
   );
 };

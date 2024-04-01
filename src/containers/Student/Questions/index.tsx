@@ -11,7 +11,7 @@ const { Title, Text } = Typography;
 const PAGE = {
   padding: '20px',
   backgroundColor: '#f0f2f5',
-  minHeight: '100vh',
+  height: '100%',
 };
 
 const CARD = {
@@ -44,7 +44,9 @@ const QuestionsContainer: React.FC = () => {
             </Col>
             <Col>
               <Link href={`${pathname}/${question.pk}`} passHref>
-                <Button style={ATTEMPT_BUTTON} id={`${question.pk}`}>Attempt</Button>
+                <Button style={ATTEMPT_BUTTON} id={`${question.pk}`}>
+                  Attempt
+                </Button>
               </Link>
             </Col>
           </Row>

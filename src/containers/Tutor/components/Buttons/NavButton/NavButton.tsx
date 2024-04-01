@@ -8,17 +8,14 @@ interface NavButtonProps {
   className: string;
 }
 
-const NavButton : React.FC<NavButtonProps> = ({ className, href, buttonText }) => {
+const NavButton: React.FC<NavButtonProps> = ({ className, href, buttonText }) => {
   return (
     <div className="mb-5">
       <Link href={href} passHref>
-        <button className={className}>
-          {buttonText}
-        </button>
+        <button className={className}>{buttonText}</button>
       </Link>
     </div>
   );
 };
 
 export default NavButton;
-

@@ -39,17 +39,17 @@ import { Chainable } from 'cypress';
 // }
 
 declare global {
-    namespace Cypress {
-        interface Chainable {
-            tutorLogin(username: string, password: string): Chainable<void>;
-        }
+  namespace Cypress {
+    interface Chainable {
+      tutorLogin(username: string, password: string): Chainable<void>;
     }
+  }
 }
 
 Cypress.Commands.add('tutorLogin', { prevSubject: false }, (username: string, password: string) => {
-    cy.visit('http://localhost:3000/en/auth');
-    cy.get('a[id=login-link]').click();
-    cy.get('input[id=email]').type(username);
-    cy.get('input[id=password]').type(password);
-    cy.get('button[id=login-button]').click();
+  cy.visit('http://localhost:3000/en/auth');
+  cy.get('a[id=login-link]').click();
+  cy.get('input[id=email]').type(username);
+  cy.get('input[id=password]').type(password);
+  cy.get('button[id=login-button]').click();
 });

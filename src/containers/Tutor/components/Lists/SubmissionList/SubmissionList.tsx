@@ -30,9 +30,7 @@ const SubmissionsList = ({ submissions, qn_id }) => {
               <td className="px-6 py-4">{submission.submitted_by.email}</td>
               <td className="px-6 py-4">{submission.submission_number}</td>
               <td className="px-6 py-4">{submission.score}</td>
-              <td className="px-6 py-4">
-                {new Date(submission.submission_date).toLocaleString()}
-              </td>
+              <td className="px-6 py-4">{new Date(submission.submission_date).toLocaleString()}</td>
               <td className="px-6 py-4">
                 <Link href={`/en/tutor/questions/${qn_id}/submissions/${submission.pk}`}>
                   <button className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300">

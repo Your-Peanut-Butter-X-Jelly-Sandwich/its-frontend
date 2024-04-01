@@ -59,23 +59,23 @@ const QuestionDetailContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
       </div>
       {/* Code Editor */}
       <div className="w-[50%] bg-gray-400">
-        <div className="flex justify-between">
+        <div className="h-[4%] flex justify-between">
           <Button type="link">
             <Link href={`${pathname}/past-submissions`}>Submissions</Link>
           </Button>
           <Text className="mr-4 mt-1">{data?.language}</Text>
         </div>
         <Editor
-          height="90vh"
+          height="90%"
           defaultLanguage={data?.language}
           value={code}
           onChange={(newValue, e) => setCode(newValue)}
         />
-        <div className="w-full flex justify-center items-center">
+        <div className="h-[6%] w-full flex justify-center items-center">
           <Button
-            id='submit-button'
+            id="submit-button"
             type="primary"
-            className="ml-2 mt-5 bg-blue-500"
+            className="bg-blue-500"
             onClick={handleSubmit}
             disabled={isLoading}
           >
