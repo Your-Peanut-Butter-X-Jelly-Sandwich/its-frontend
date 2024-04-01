@@ -69,7 +69,7 @@ const LoginContainer: React.FC<{ isSignedUp: boolean; setSignedUp: (value: boole
               <Input.Password />
             </Item>
             <Item>
-              <CustomButton type="primary" onClick={handleLogin} label="Login" id="login-button"/>
+              <CustomButton type="primary" onClick={handleLogin} label="Login" id="login-button" />
             </Item>
             <Item>
               <SocialSignupButton
