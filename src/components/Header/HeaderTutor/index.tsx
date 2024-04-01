@@ -1,7 +1,8 @@
 'use client';
 
 import React from 'react';
-import { Menu } from 'antd';
+import { useSelector } from 'react-redux';
+import { Menu, message } from 'antd';
 import {
   DesktopOutlined,
   QuestionCircleOutlined,
@@ -12,14 +13,24 @@ import Link from 'next/link';
 import { useLazyAuthLogoutQuery } from '@/redux/apis/auth';
 import { usePathname } from 'next/navigation';
 import getLocale from '@/common/utils/extractLocale';
+import { authSelector } from '@/redux/slices/auth';
 
 const HeaderTutor: React.FC = () => {
 
   const [ authLogout ] = useLazyAuthLogoutQuery()
   const pathname = usePathname();
-  
-  const handleLogout = () => {
+  const { tokens } = useSelector(authSelector);
 
+  const handleLogout = async () => {
+    try {  
+      const result = await authLogout({tokens}).unwrap();
+      const locale = getLocale(pathname);
+      if (result) {
+        window.location.href = `/${locale}`;
+      }
+    } catch (error) {
+      message.error('Error logging up');
+    }
   }
   return (
     <Menu mode="horizontal" theme="dark">

@@ -24,10 +24,11 @@ export const authApi = ITSApi.injectEndpoints({
         }
       },
     }),
-    authLogout: builder.query<void, void>({
-      query: () => ({
+    authLogout: builder.query<IAuthLogoutResponse, IAuthLogoutRequest>({
+      query: (params) => ({
         url: 'auth/logout',
-        method: 'GET',
+        method: 'POST',
+        body: params,
       }),
       async onQueryStarted(_record, { dispatch, queryFulfilled }) {
         const res = await queryFulfilled;
