@@ -31,3 +31,11 @@ interface IAuthUpdateUserRequest {
 }
 
 interface IAuthUpdateUserResponse extends IUser {}
+
+interface IAuthLogoutRequest {
+  tokens: IUserTokens;
+}
+
+interface IAuthLogoutResponse {
+  message: string;
+}
