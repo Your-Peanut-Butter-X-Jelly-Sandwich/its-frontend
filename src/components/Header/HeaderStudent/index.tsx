@@ -11,15 +11,20 @@ const items = [
 ];
 
 const HeaderStudent: React.FC = () => {
+  const [current, setCurrent] = React.useState<string>(
+    String(window.location.pathname).split('/')[3] == 'questions' ? '2' : '1'
+  );
+
   return (
     <Header style={{ display: 'flex', alignItems: 'center' }}>
       <Menu
         theme="dark"
         mode="horizontal"
-        defaultSelectedKeys={['1']}
         items={items}
         style={{ flex: 1, minWidth: 0 }}
         className="h-full"
+        selectedKeys={[current]}
+        onClick={(e) => setCurrent(e.key.toString())}
       />
     </Header>
   );

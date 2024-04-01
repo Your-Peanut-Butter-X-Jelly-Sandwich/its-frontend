@@ -44,12 +44,16 @@ const QuestionDetailContainer: React.FC<ITutorQuestionDetailRequest> = ({ qn_id 
         <div className="inline-flex gap-2 justify-center">
           <CustomButton
             className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
-            onClick={() => { window.location.href = `${pathname}/edit`; }}
+            onClick={() => {
+              window.location.href = `${pathname}/edit`;
+            }}
             label="Edit Question"
           />
           <CustomButton
             className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700 transition duration-300"
-            onClick={() => { window.location.href = `${pathname}/submissions`; }}
+            onClick={() => {
+              window.location.href = `${pathname}/submissions`;
+            }}
             label="View Student Submissions"
           />
         </div>

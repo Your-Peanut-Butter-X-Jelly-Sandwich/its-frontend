@@ -54,11 +54,11 @@ const QuestionsContainer: React.FC<ITutorQuestionDetailRequest> = ({ qn_id }) =>
       />
 
       <h4 className="text-lg font-semibold mb-4">Here you can see ALL questions.</h4>
-        <QuestionList
-          questionList={questionList}
-          pathname={pathname}
-          handleDeleteQuestion={handleDeleteQuestion}
-        />
+      <QuestionList
+        questionList={questionList}
+        pathname={pathname}
+        handleDeleteQuestion={handleDeleteQuestion}
+      />
     </div>
   );
 };
