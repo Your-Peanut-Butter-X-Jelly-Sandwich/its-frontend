@@ -1,21 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Typography } from "antd";
 import StudentList from "./components/studentlist";
-import { useGetStudentsQuery } from "@/redux/apis/manager";
+import { useLazyGetStudentsQuery } from "@/redux/apis/manager";
 const { Title } = Typography;
 
 const ManagerContainer: React.FC = () => {
 
-  const {data} = useGetStudentsQuery();
-  console.log(data?.users);
-  const [students, setStudents] = useState([
-    { key: "1", username: "panav", email: "panavdua@gmail.com" },
-    { key: "2", username: "test", email: "test@gmail.com" },
-  ]);
+  const [getStudents] = useLazyGetStudentsQuery();
+  // console.log(data?.users);
+  const [students, setStudents] = useState<IStudent[]>([]);
+
+  const getStudentData = async () => {
+    const res: {"users": IStudent[]} = await getStudents().unwrap();
+    console.log(res);
+    setStudents(res.users);
+    console.log(res.users);
+  }
+  useEffect(() => {
+    getStudentData();
+  }, []);
 
   const handleCheckboxChange = (studentUsername: string, checked: boolean) => {
     console.log("Checkbox clicked for", studentUsername, "Checked:", checked);
-    // Add your logic here to handle checkbox changes
+    
   };
 
   return (

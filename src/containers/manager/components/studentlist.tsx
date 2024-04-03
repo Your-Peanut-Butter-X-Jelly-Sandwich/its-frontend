@@ -3,14 +3,14 @@ import { Typography, Table, Checkbox } from 'antd';
 
 const { Title } = Typography;
 
-interface Student {
-    key: React.Key;
-    username: string;
-    email: string;
-}
+// interface Student {
+//     key: React.Key;
+//     username: string;
+//     email: string;
+// }
 
 interface StudentListProps {
-    students: Student[];
+    students: IStudent[];
     onCheckboxChange: (username: string, checked: boolean) => void;
 }
 
@@ -30,7 +30,7 @@ const StudentList: React.FC<StudentListProps> = ({ students, onCheckboxChange })
             title: 'Mark as Tutor',
             dataIndex: 'convert',
             key: 'convert',
-            render: (text: string, record: Student) => (
+            render: (text: string, record: IStudent) => (
                 <Checkbox onChange={(e) => onCheckboxChange(record.username, e.target.checked)} />
             ),
         },

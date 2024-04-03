@@ -13,4 +13,4 @@ export const managerApi = ITSApi.injectEndpoints({
     }),
   });
   
-  export const { useGetStudentsQuery } = managerApi;
+  export const { useLazyGetStudentsQuery } = managerApi;
