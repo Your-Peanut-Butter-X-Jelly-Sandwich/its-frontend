@@ -11,3 +11,12 @@ interface IStudentListResponse {
     user: IStudent[];
 }
 interface IStudentListRequest {}
+
+interface IPromoteStudentRequest{
+    student_ids: number[];
+}
+interface IPromoteStudentResponse {
+    data: {
+        [key: string]: string;
+    };
+}

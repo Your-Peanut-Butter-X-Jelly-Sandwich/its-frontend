@@ -10,7 +10,14 @@ export const managerApi = ITSApi.injectEndpoints({
             method: 'GET',
         }),
       }),
+      promoteStudents: builder.mutation<void, IPromoteStudentRequest>({
+        query: (student_ids) => ({
+            url: '/students/promote',
+            method: 'POST',
+            body: student_ids,
+        }),
+      }),
     }),
   });
   
-  export const { useLazyGetStudentsQuery } = managerApi;
+  export const { useLazyGetStudentsQuery, usePromoteStudentsMutation } = managerApi;
