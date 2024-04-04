@@ -7,7 +7,6 @@ import Editor from '@monaco-editor/react';
 import Markdown from 'react-markdown';
 import { Button, Typography } from 'antd';
 import { useGetQuestionDetailQuery, usePostCodeSubmissionMutation } from '@/redux/apis/student';
-
 const { Text } = Typography;
 
 type PropsType = {
@@ -18,7 +17,9 @@ const QuestionDetailContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
   const pathname = usePathname();
 
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
-  const [code, setCode] = React.useState<string | undefined>('');
+  const [editor, setEditor] = React.useState<any>();
+  const [monaco, setMonaco] = React.useState<any>();
+  const [code, setCode] = React.useState<string | undefined>('# Write your code here\n');
   const { data } = useGetQuestionDetailQuery({ qn_id: Number(qn_id) });
   const [postCodeSubmission] = usePostCodeSubmissionMutation();
 
@@ -49,6 +50,22 @@ const QuestionDetailContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
     }
   };
 
+  React.useEffect(() => {
+    if (editor && monaco) {
+      const markers = [
+        {
+          startLineNumber: 1,
+          startColumn: 1,
+          endLineNumber: 1,
+          endColumn: editor.getModel().getLineLength(1) + 1,
+          message: 'This is a possible error',
+          severity: monaco.MarkerSeverity.Error,
+        },
+      ];
+      monaco.editor.setModelMarkers(editor.getModel(), 'owner', markers);
+    }
+  }, [editor, monaco]);
+
   return (
     <div className="flex bg-gray-100 h-full">
       <div className="w-[50%] p-10">
@@ -70,6 +87,10 @@ const QuestionDetailContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
           defaultLanguage={data?.language}
           value={code}
           onChange={(newValue, e) => setCode(newValue)}
+          onMount={(editor, monaco) => {
+            setEditor(editor);
+            setMonaco(monaco);
+          }}
         />
         <div className="h-[6%] w-full flex justify-center items-center">
           <Button
