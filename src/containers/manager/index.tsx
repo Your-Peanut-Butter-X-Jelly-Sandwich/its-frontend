@@ -7,14 +7,13 @@ const { Title } = Typography;
 const ManagerContainer: React.FC = () => {
 
   const [getStudents] = useLazyGetStudentsQuery();
-  // console.log(data?.users);
   const [students, setStudents] = useState<IStudent[]>([]);
 
   const getStudentData = async () => {
-    const res: {"users": IStudent[]} = await getStudents().unwrap();
+    const res: {"user": IStudent[]} = await getStudents().unwrap();
     console.log(res);
-    setStudents(res.users);
-    console.log(res.users);
+    setStudents(res.user);
+    console.log(res.user);
   }
   useEffect(() => {
     getStudentData();

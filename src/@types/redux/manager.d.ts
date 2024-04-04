@@ -8,6 +8,6 @@ interface IStudent {
     is_manager: boolean;
 }
 interface IStudentListResponse {
-    users: IStudent[];
+    user: IStudent[];
 }
 interface IStudentListRequest {}
