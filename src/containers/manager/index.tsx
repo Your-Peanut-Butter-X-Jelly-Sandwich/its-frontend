@@ -40,6 +40,7 @@ const ManagerContainer: React.FC = () => {
       };
       await promoteStudents(request).unwrap();
       message.success('Promoted students successfully')
+      window.location.reload();
     } catch(err) {
       message.error('An error occurred while promoting the students');
     }

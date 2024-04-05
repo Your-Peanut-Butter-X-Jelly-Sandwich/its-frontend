@@ -31,7 +31,7 @@ const StudentList: React.FC<StudentListProps> = ({ students, onCheckboxChange, h
             <Title level={2} >
                 Student List
             </Title>
-            <Button style={{marginBottom: '2%'}} onClick={handlePromoteToTutor}>Mark as Tutor</Button>
+            <Button style={{marginBottom: '2%'}} onClick={handlePromoteToTutor}>Promote To Tutor</Button>
             <Table
                 columns={columns}
                 dataSource={students}
