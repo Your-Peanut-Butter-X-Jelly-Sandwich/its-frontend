@@ -73,3 +73,22 @@ interface ITutorSubmissionRequest {
   qn_id: number;
   submission_id: number;
 }
+
+interface ITutorGetQuestionResponse {
+  pk: number;
+  question_title: string;
+  pub_date: string;
+  due_date: string;
+}
+
+interface ITutorQuestionsResponse {
+  questions: ITutorGetQuestionResponse[];
+}
+
+
+interface ITutorDashboardStatsResponse {
+  personal_info: IUser;
+  students: IUser[];
+  questions_due_in_a_month: ITutorGetQuestionResponse[];
+  questions_due_in_a_week: ITutorGetQuestionResponse[];
+}

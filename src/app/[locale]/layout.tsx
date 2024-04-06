@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import StoreProvider from './StoreProvider';
 import AuthGuard from '@/common/HOCs/AuthGuard';
+import IdentityGuard from '@/common/HOCs/IdentityGuard';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -22,7 +23,9 @@ function LocaleLayout({
       <body className={inter.className}>
         <StoreProvider>
           <AuthGuard>
-            <div className="h-screen bg-gray-100 ">{children}</div>
+            <IdentityGuard>
+              <div className="h-screen bg-gray-100 ">{children}</div>
+            </IdentityGuard>
           </AuthGuard>
         </StoreProvider>
       </body>
