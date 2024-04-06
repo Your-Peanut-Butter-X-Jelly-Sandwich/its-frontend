@@ -2,7 +2,7 @@ import { ITSApi } from '@/redux/createApi';
 
 export const questionsApi = ITSApi.injectEndpoints({
   endpoints: (builder) => ({
-    getQuestions: builder.query<any, void>({
+    getQuestions: builder.query<ITutorQuestionsResponse, void>({
       query: () => ({
         url: '/tutor/question',
         method: 'GET',

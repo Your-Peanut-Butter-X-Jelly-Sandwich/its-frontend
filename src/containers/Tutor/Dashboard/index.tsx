@@ -1,56 +1,30 @@
 'use client';
 
 import React from 'react';
-import { Layout, Menu, Button, List, Avatar, Badge } from 'antd';
-import { MessageOutlined, PlayCircleOutlined } from '@ant-design/icons';
-import { usePathname } from 'next/navigation';
-
-const { Header, Content, Sider } = Layout;
-
-const dummyNotifications = [
-  { title: 'New assignment available', description: 'Assignment #3 is now available.' },
-  { title: 'Meeting reminder', description: 'Project meeting tomorrow at 10 AM.' },
-  { title: 'System update', description: 'System maintenance scheduled for this weekend.' },
-];
+import PersonalInfo from '../components/PersonalInfo';
+import QuestionList from '../components/QuestionList';
+import { useGetDashboardStatsQuery } from '@/redux/apis/tutor';
 
 const TutorDashboardContainer: React.FC = () => {
-  const pathname = usePathname();
-
+  const { data } = useGetDashboardStatsQuery();
   return (
-    <Layout style={{ minHeight: '100vh' }}>
-      <Layout style={{ padding: '0px' }}>
-        <Content
-          style={{
-            padding: 24,
-            margin: 0,
-            minHeight: 280,
-            backgroundColor: 'white',
-          }}
-        >
-          <List
-            itemLayout="horizontal"
-            dataSource={dummyNotifications}
-            renderItem={(item) => (
-              <List.Item>
-                <List.Item.Meta
-                  avatar={
-                    <Avatar
-                      icon={
-                        <Badge dot>
-                          <MessageOutlined />
-                        </Badge>
-                      }
-                    />
-                  }
-                  title={item.title}
-                  description={item.description}
-                />
-              </List.Item>
-            )}
-          />
-        </Content>
-      </Layout>
-    </Layout>
+    <div className="h-full py-6 px-12 max-h-full">
+      <div className="flex flex-row gap-10 h-full max-h-full">
+        <div className="basis-1/4">
+          <PersonalInfo students={data?.students || []} />
+        </div>
+        <div className="flex flex-col basis-3/4 max-h-full">
+          <div className="flex flex-row gap-5 flex-1 overflow-hidden">
+            <div className="basis-1/2 flex flex-col">
+              <QuestionList questions={data?.questions_due_in_a_week || []} time="week" />
+            </div>
+            <div className="basis-1/2 flex flex-col">
+              <QuestionList questions={data?.questions_due_in_a_month || []} time="month" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
