@@ -1,7 +1,7 @@
 import React from 'react';
 import MdEditor from '@uiw/react-md-editor';
 
-const MdEditorTabs = ({ currentLeftTab, setCurrentLeftTab, markdown, handleEditorChange }) => {
+const MdEditorTabs:React.FC<ITutorMdEditorProps> = ({ currentLeftTab, setCurrentLeftTab, markdown, handleEditorChange }) => {
   return (
     <div className="w-1/2 flex flex-col">
       <div className="flex mb-4">
@@ -21,7 +21,8 @@ const MdEditorTabs = ({ currentLeftTab, setCurrentLeftTab, markdown, handleEdito
       <div className="flex-grow overflow-auto">
         <MdEditor
           value={markdown}
-          onChange={handleEditorChange}
+          onChange={(newValue, e) => handleEditorChange(newValue || '')}
+          // onChange={handleEditorChange}
           preview={currentLeftTab}
           height="100%"
         />

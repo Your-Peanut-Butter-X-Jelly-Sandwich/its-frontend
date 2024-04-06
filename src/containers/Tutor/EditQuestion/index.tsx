@@ -33,7 +33,7 @@ const EditQuestionContainer: React.FC<ITutorQuestionDetailRequest> = ({ qn_id })
   const [currentMode, setCurrentMode] = useState('markdown');
   const [markdown, setMarkdown] = useState<string>('');
   const [testCases, setTestCases] = useState<Omit<ITutorTestCaseResponse, 'pk'>[]>([
-    { input: '', output: '' },
+    { input: '', expectedOutput: '' },
   ]);
   const [language, setLanguage] = useState<'python' | 'c'>('python');
   const [codeContent, setCodeContent] = useState<string>('');
@@ -50,7 +50,7 @@ const EditQuestionContainer: React.FC<ITutorQuestionDetailRequest> = ({ qn_id })
   };
 
   const addTestCase = () => {
-    setTestCases([...testCases, { input: '', output: '' }]);
+    setTestCases([...testCases, { input: '', expectedOutput: '' }]);
   };
 
   const removeLastTestCase = () => {
@@ -92,7 +92,7 @@ const EditQuestionContainer: React.FC<ITutorQuestionDetailRequest> = ({ qn_id })
         due_date: dueDate,
         test_cases: testCases.map((tc) => ({
           input: tc.input,
-          output: tc.output,
+          output: tc.expectedOutput,
         })),
         total_students: questionData.total_students,
         passes: questionData.passes,
@@ -104,6 +104,10 @@ const EditQuestionContainer: React.FC<ITutorQuestionDetailRequest> = ({ qn_id })
       // @ts-ignore
       await updateQuestionDetail(submissionData).unwrap();
       message.success('Question edited successfully!');
+      // wait for 3 senconds
+      setTimeout(() => {
+        window.location.href = '/en/tutor/questions/';
+      }, 3000);
     } catch (err) {
       console.error('Error during submission:', err);
       message.error('An error occurred while editing the question.');

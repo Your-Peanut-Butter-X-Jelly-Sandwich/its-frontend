@@ -27,7 +27,12 @@ interface ITutorQuestionDetailResponse {
 interface ITutorTestCaseResponse {
   pk: number;
   input: string;
-  output: string;
+  expectedOutput: string;
+}
+
+interface ITutorTestCase {
+  input: string;
+  expectedOutput: string;
 }
 
 interface ITutorQuestionContent {
@@ -92,3 +97,24 @@ interface ITutorDashboardStatsResponse {
   questions_due_in_a_month: ITutorGetQuestionResponse[];
   questions_due_in_a_week: ITutorGetQuestionResponse[];
 }
+
+interface ITutorCodeEditorProps {
+  language: string;
+  codeContent: string;
+  handleCodeEditorChange: (value: string) => void;
+}
+
+interface ITutorMdEditorProps {
+  currentLeftTab: 'preview' | 'edit';
+  setCurrentLeftTab: (value: string) => void;
+  markdown: string;
+  handleEditorChange: (value: string) => void;
+}
+
+interface ITutorTestCaseProps {
+  testCases: ITutorTestCaseResponse[];
+  updateTestCase: (index: number, field: string, value: string) => void;
+  addTestCase: () => void;
+  removeLastTestCase: () => void;
+}
+

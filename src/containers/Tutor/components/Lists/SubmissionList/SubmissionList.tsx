@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 
+//@ts-ignore
 const SubmissionsList = ({ submissions, qn_id }) => {
   return (
     <div className="overflow-x-auto">

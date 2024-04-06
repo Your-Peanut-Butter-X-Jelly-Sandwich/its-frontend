@@ -11,7 +11,8 @@ import TestCases from '../components/Editors/TestCaseEditor/TestCaseEditor';
 
 const AddQuestionContainer = () => {
   const [markdown, setMarkdown] = useState('');
-  const [testCases, setTestCases] = useState([{ input: '', expectedOutput: '' }]);
+  //const [testCases, setTestCases] = useState<ITutorTestCase>([{input: '', expectedOutput: '' }]);
+  const [testCases, setTestCases] = useState<ITutorTestCase[]>([{ input: '', expectedOutput: '' }]);
   const [language, setLanguage] = useState('python');
   const [codeContent, setCodeContent] = useState('');
   const [questionTitle, setQuestionTitle] = useState('');
@@ -43,15 +44,16 @@ const AddQuestionContainer = () => {
 
   const updateTestCase = (index: any, field: any, value: any) => {
     const updatedTestCases = [...testCases];
+    // @ts-ignore
     updatedTestCases[index][field] = value;
     setTestCases(updatedTestCases);
   };
 
-  const handleLanguageChange = (value) => {
+  const handleLanguageChange = (value:string) => {
     setLanguage(value);
   };
 
-  const handleDueDateChange = (date, dateString) => {
+  const handleDueDateChange = (date:string, dateString:string) => {
     setDueDate(dateString); // Update the due date state
   };
 
@@ -60,7 +62,7 @@ const AddQuestionContainer = () => {
       question_title: questionTitle,
       question_statement: markdown,
       ref_program: codeContent,
-      language: language,
+      language: language as 'python' | 'c',
       due_date: dueDate,
       test_cases: testCases.map((testCase, index) => ({
         pk: index,
@@ -68,10 +70,14 @@ const AddQuestionContainer = () => {
         output: testCase.expectedOutput,
       })),
     };
-
+  
     try {
       const result = await addQuestion(questionData).unwrap();
       message.success('Question added successfully!');
+      // wait for 3 senconds
+      setTimeout(() => {
+        window.location.href = '/en/tutor/questions/';
+      }, 3000);
     } catch (error) {
       message.error('An error occurred while adding the question.');
     }
@@ -91,6 +97,7 @@ const AddQuestionContainer = () => {
         <div className="flex flex-grow">
           {/* Left side: Markdown Editor and Preview */}
           <MdEditorTabs
+            // @ts-ignore
             currentLeftTab={currentLeftTab}
             setCurrentLeftTab={setCurrentLeftTab}
             markdown={markdown}
@@ -122,6 +129,7 @@ const AddQuestionContainer = () => {
 
             {currentRightTab === 'testCases' && (
               <TestCases
+                // @ts-ignore
                 testCases={testCases}
                 updateTestCase={updateTestCase}
                 addTestCase={addTestCase}
