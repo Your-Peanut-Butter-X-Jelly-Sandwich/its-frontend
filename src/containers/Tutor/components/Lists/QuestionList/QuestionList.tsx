@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
 import CustomButton from '../../Buttons/CustomButton/CustomButton';
 import NavButton from '../../Buttons/NavButton/NavButton';
 
@@ -7,7 +6,7 @@ const QuestionList = ({ questionList, pathname, handleDeleteQuestion }) => {
   return (
     <div className="space-y-4">
       {questionList &&
-        questionList.map((item) => (
+        questionList.map((item:ITutorGetQuestionResponse) => (
           <div key={item.pk} className="bg-white p-4 shadow rounded">
             <div className="flex justify-between items-center">
               <div>
