@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Typography } from "antd";
-import StudentList from "./components/studentlist";
+import List from "../components/list";
 import { useLazyGetStudentsQuery, usePromoteStudentsMutation } from "@/redux/apis/manager";
 import {message} from 'antd';
 
-const ManagerContainer: React.FC = () => {
+const StudentList: React.FC = () => {
 
   const [getStudents] = useLazyGetStudentsQuery();
   const [promoteStudents] = usePromoteStudentsMutation();
@@ -50,9 +50,9 @@ const ManagerContainer: React.FC = () => {
   return (
     <div style={{ padding: "20px", backgroundColor: "#f0f2f5", minHeight: "100vh" }}>
 
-      <StudentList students={students} onCheckboxChange={handleCheckboxChange} handlePromoteToTutor={handlePromoteToTutor}/>
+      <List students={students} onCheckboxChange={handleCheckboxChange} handlePromoteToTutor={handlePromoteToTutor}/>
     </div>
   );
 };
 
-export default ManagerContainer;
+export default StudentList;

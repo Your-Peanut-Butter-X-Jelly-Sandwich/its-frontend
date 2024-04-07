@@ -4,9 +4,9 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Menu, message } from 'antd';
 import {
-  DesktopOutlined,
-  QuestionCircleOutlined,
-  CheckSquareOutlined,
+  UserAddOutlined,
+  UserDeleteOutlined,
+  UserSwitchOutlined,
   LogoutOutlined,
 } from '@ant-design/icons';
 import Link from 'next/link';
@@ -35,13 +35,23 @@ const HeaderManager: React.FC = () => {
 
   return (
     <Menu mode="horizontal" theme="dark">
-      <div style={{ width: '80%', textAlign: 'center', lineHeight: 'inherit' }}>
-        ITS Manager Page
-      </div>
+      <Menu.Item key="student-list" icon={<UserAddOutlined />}>
+        <Link href="/en/manager/" passHref>
+          <Menu.Item key="dashboard">Student List</Menu.Item>
+        </Link>
+      </Menu.Item>
+      <Menu.Item key="tutor-list" icon={<UserDeleteOutlined />}>
+        <Link href="/en/manager/tutor-list/" passHref>
+          <Menu.Item key="dashboard">Tutor List</Menu.Item>
+        </Link>
+      </Menu.Item>
+      <Menu.Item key="assign-students" icon={<UserSwitchOutlined />}>
+        <Link href="/en/manager/assign-students/" passHref>
+          <Menu.Item key="dashboard">Assign Students</Menu.Item>
+        </Link>
+      </Menu.Item>
       <Menu.Item key="logout" icon={<LogoutOutlined />} style={{ marginLeft: 'auto' }} onClick={handleLogout}>
-        
-          <Menu.Item key="dashboard">Log Out</Menu.Item>
-        
+        <Menu.Item key="dashboard">Log Out</Menu.Item>
       </Menu.Item>
     </Menu>
   );
