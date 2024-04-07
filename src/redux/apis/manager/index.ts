@@ -30,7 +30,15 @@ export const managerApi = ITSApi.injectEndpoints({
             body: params,
         }),
       }),
+      demoteTutors: builder.mutation<void, IDemoteTutorRequest>({
+        query: (tutor_ids) => ({
+            url: '/tutors/demote',
+            method: 'POST',
+            body: tutor_ids,
+        }),
+      }),
     }),
   });
   
-  export const { useLazyGetStudentsQuery, useLazyGetTutorsQuery, usePromoteStudentsMutation, useAssignStudentsMutation } = managerApi;
+  export const { useLazyGetStudentsQuery, useLazyGetTutorsQuery, usePromoteStudentsMutation, 
+    useAssignStudentsMutation, useDemoteTutorsMutation } = managerApi;
