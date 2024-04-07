@@ -1,12 +1,12 @@
 "use client";
 import React from "react";
-import ManagerContainer from "@/containers/manager/StudentList";
+import TutorList from "@/containers/manager/TutorList";
 import { NextPage } from "next";
 
 const TutorListPage: NextPage = () => {
     return ( 
         <div>
-            <ManagerContainer />
+            <TutorList />
         </div>
      );
 }

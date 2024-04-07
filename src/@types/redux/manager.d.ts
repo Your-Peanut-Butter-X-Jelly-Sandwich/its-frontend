@@ -7,9 +7,11 @@ interface IStudent {
     is_tutor: boolean;
     is_manager: boolean;
 }
+interface ITutor extends IStudent {}
 interface IStudentListResponse {
     user: IStudent[];
 }
+interface ITutorListResponse extends IStudentListResponse {}
 interface IStudentListRequest {}
 
 interface IPromoteStudentRequest{
@@ -19,4 +21,11 @@ interface IPromoteStudentResponse {
     data: {
         [key: string]: string;
     };
+}
+interface IAssignStudentRequest {
+    tutor_id: number;
+    student_ids: number[];
+}
+interface IAssignStudentResponse {
+    message: string[];
 }
