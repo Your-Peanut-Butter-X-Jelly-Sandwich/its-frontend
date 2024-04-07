@@ -29,7 +29,7 @@ const HeaderTutor: React.FC = () => {
         window.location.href = `/${locale}`;
       }
     } catch (error) {
-      message.error('Error logging up');
+      message.error('Error logging out');
     }
   }
   return (

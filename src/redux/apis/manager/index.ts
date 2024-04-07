@@ -10,6 +10,12 @@ export const managerApi = ITSApi.injectEndpoints({
             method: 'GET',
         }),
       }),
+      getTutors: builder.query<ITutorListResponse, void>({
+        query: () => ({
+            url: '/tutors',
+            method: 'GET',
+        }),
+      }),
       promoteStudents: builder.mutation<void, IPromoteStudentRequest>({
         query: (student_ids) => ({
             url: '/students/promote',
@@ -17,7 +23,14 @@ export const managerApi = ITSApi.injectEndpoints({
             body: student_ids,
         }),
       }),
+      assignStudents: builder.mutation<IAssignStudentResponse, IAssignStudentRequest>({
+        query: (params) => ({
+            url: '/teaches',
+            method: 'POST',
+            body: params,
+        }),
+      }),
     }),
   });
   
-  export const { useLazyGetStudentsQuery, usePromoteStudentsMutation } = managerApi;
+  export const { useLazyGetStudentsQuery, useLazyGetTutorsQuery, usePromoteStudentsMutation, useAssignStudentsMutation } = managerApi;
