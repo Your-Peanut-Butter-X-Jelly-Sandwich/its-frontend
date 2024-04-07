@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Typography } from "antd";
 import List from "../components/list";
-import { useLazyGetTutorsQuery, usePromoteStudentsMutation } from "@/redux/apis/manager";
+import { useLazyGetTutorsQuery, usePromoteStudentsMutation, useDemoteTutorsMutation } from "@/redux/apis/manager";
 import {message} from 'antd';
-import { buffer } from "stream/consumers";
 
 const TutorList: React.FC = () => {
 
   const [getTutors] = useLazyGetTutorsQuery();
   const [promoteStudents] = usePromoteStudentsMutation();
+  const [demoteTutors] = useDemoteTutorsMutation();
   const [tutors, setTutors] = useState<IStudent[]>([]);
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
 
@@ -34,21 +33,17 @@ const TutorList: React.FC = () => {
     console.log(selectedIds);
   };
 
-  const handlePromoteToTutor = async () => {
-    try {
-      const request: IPromoteStudentRequest = {
-        student_ids: selectedIds
-      };
-      await promoteStudents(request).unwrap();
-      message.success('Promoted students successfully')
-      window.location.reload();
-    } catch(err) {
-      message.error('An error occurred while promoting the students');
-    }
-  }
-
   const handleDemoteToStudent = async () => {
-    
+    try {
+        const request: IDemoteTutorRequest = {
+          tutor_ids: selectedIds
+        };
+        await demoteTutors(request).unwrap();
+        message.success('Demoted tutors successfully')
+        window.location.reload();
+      } catch(err) {
+        message.error('An error occurred while demoting the tutors');
+      }
   }
   const buffer = () => {
 

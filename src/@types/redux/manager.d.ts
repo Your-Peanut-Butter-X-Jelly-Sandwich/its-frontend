@@ -17,10 +17,8 @@ interface IStudentListRequest {}
 interface IPromoteStudentRequest{
     student_ids: number[];
 }
-interface IPromoteStudentResponse {
-    data: {
-        [key: string]: string;
-    };
+interface IDemoteTutorRequest {
+    tutor_ids: number[];
 }
 interface IAssignStudentRequest {
     tutor_id: number;
