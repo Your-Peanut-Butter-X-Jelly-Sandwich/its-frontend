@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import { message } from 'antd';
 import { usePathname } from 'next/navigation';
 import {
   useGetQuestionsQuery,
@@ -28,10 +29,10 @@ const QuestionsContainer: React.FC<ITutorQuestionDetailRequest> = ({ qn_id }) =>
   const handleDeleteQuestion = async (pk: any) => {
     try {
       await deleteQuestion(pk).unwrap();
-      alert('Question deleted successfully'); // Temporarily replacing message.success
+      message.success('Question deleted successfully'); // Temporarily replacing message.success
       fetchQuestionList();
     } catch (err) {
-      alert('Error deleting question'); // Temporarily replacing message.error
+      message.success('Error deleting question'); // Temporarily replacing message.error
     }
   };
 

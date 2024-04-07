@@ -1,7 +1,7 @@
 import React from 'react';
 import Editor from '@monaco-editor/react';
 
-const CodeEditor = ({ language, codeContent, handleCodeEditorChange }) => {
+const CodeEditor: React.FC<ITutorCodeEditorProps> = ({ language, codeContent, handleCodeEditorChange }) => {
   return (
     <div className="flex-grow overflow-auto pl-3 pr-1">
       <Editor
@@ -9,7 +9,7 @@ const CodeEditor = ({ language, codeContent, handleCodeEditorChange }) => {
         language={language}
         theme="vs-dark"
         value={codeContent}
-        onChange={handleCodeEditorChange}
+        onChange={(newValue, e) => handleCodeEditorChange(newValue || '')}
       />
     </div>
   );
