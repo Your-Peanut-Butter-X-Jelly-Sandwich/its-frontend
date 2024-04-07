@@ -16,7 +16,6 @@ const StudentList: React.FC = () => {
 
   const getStudentData = async () => {
     const res: {"user": IStudent[]} = await getStudents().unwrap();
-    console.log(res);
     setStudents(res.user);
   }
 
@@ -33,7 +32,6 @@ const StudentList: React.FC = () => {
         return prevIds.filter(id => id !== studentId);
       }
     });
-    console.log(selectedIds);
   };
 
   const handlePromoteToTutor = async () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Table, Checkbox, Button, Modal, Input } from 'antd';
+import { Typography, Table, Checkbox, Button } from 'antd';
 
 const { Title } = Typography;
 
@@ -9,10 +9,10 @@ interface ListProps {
     handleButtonClick: () => void;
     listTitle: string;
     buttonName: string;
-    assignClick: () => void;
+    assignStudentClick?: () => void;
 }
 
-const List: React.FC<ListProps> = ({ users, onCheckboxChange, handleButtonClick, listTitle, buttonName, assignClick}) => {
+const List: React.FC<ListProps> = ({ users, onCheckboxChange, handleButtonClick, listTitle, buttonName, assignStudentClick}) => {
     const columns = [
         {
             title: '',
@@ -42,7 +42,8 @@ const List: React.FC<ListProps> = ({ users, onCheckboxChange, handleButtonClick,
                 {listTitle}
             </Title>
             <Button style={{marginBottom: '2%'}} onClick={handleButtonClick}>{buttonName}</Button>
-            <Button style={{marginBottom: '2%', marginLeft: '2%'}} onClick={assignClick}> Assign to Tutor </Button>
+            {assignStudentClick && <Button style={{marginBottom: '2%', marginLeft: '2%'}} 
+            onClick={assignStudentClick}> Assign to Tutor </Button>}
             <Table
                 columns={columns}
                 dataSource={users}
@@ -50,14 +51,6 @@ const List: React.FC<ListProps> = ({ users, onCheckboxChange, handleButtonClick,
                 scroll={{ x: 'max-content' }}
                 style={{ backgroundColor: '#ffffff' }}
             />
-
-            <Modal
-            title="Assign Students to Tutor"
-            
-        >
-            <p>Enter the tutor ID:</p>
-            <Input  />
-        </Modal>
         </div>
     );
 

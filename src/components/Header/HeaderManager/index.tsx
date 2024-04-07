@@ -45,11 +45,6 @@ const HeaderManager: React.FC = () => {
           <Menu.Item key="dashboard">Tutor List</Menu.Item>
         </Link>
       </Menu.Item>
-      <Menu.Item key="assign-students" icon={<UserSwitchOutlined />}>
-        <Link href="/en/manager/assign-students/" passHref>
-          <Menu.Item key="dashboard">Assign Students</Menu.Item>
-        </Link>
-      </Menu.Item>
       <Menu.Item key="logout" icon={<LogoutOutlined />} style={{ marginLeft: 'auto' }} onClick={handleLogout}>
         <Menu.Item key="dashboard">Log Out</Menu.Item>
       </Menu.Item>

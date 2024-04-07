@@ -12,7 +12,7 @@ export const managerApi = ITSApi.injectEndpoints({
       }),
       getTutors: builder.query<ITutorListResponse, void>({
         query: () => ({
-            url: '/tutor',
+            url: '/tutors',
             method: 'GET',
         }),
       }),

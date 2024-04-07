@@ -45,6 +45,9 @@ const TutorList: React.FC = () => {
     } catch(err) {
       message.error('An error occurred while promoting the students');
     }
+  }
+
+  const handleDemoteToStudent = async () => {
     
   }
   const buffer = () => {
@@ -54,7 +57,7 @@ const TutorList: React.FC = () => {
   return (
     <div style={{ padding: "20px", backgroundColor: "#f0f2f5", minHeight: "100vh" }}>
 
-      <List users={tutors} onCheckboxChange={handleCheckboxChange} handleButtonClick={handlePromoteToTutor}
+      <List users={tutors} onCheckboxChange={handleCheckboxChange} handleButtonClick={handleDemoteToStudent}
       listTitle="Tutor List" buttonName="Demote to Student" assignStudentClick={buffer}/>
     </div>
   );
