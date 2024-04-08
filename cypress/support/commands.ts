@@ -1,4 +1,4 @@
-import { Chainable } from 'cypress';
+import Chainable from 'cypress';
 
 /// <reference types="cypress" />
 // ***********************************************
