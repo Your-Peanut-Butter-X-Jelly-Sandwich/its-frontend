@@ -25,7 +25,7 @@ const SubHeader: React.FC<SubHeaderProps> = (
         placeholder="Question Title"
         value={questionTitle}
         onChange={(e) => setQuestionTitle(e.target.value)}
-        className="basis-7/12 grow-0 shrink-0 mr-4"
+        className="basis-1/2 grow-0 shrink-0 mr-4"
       />
       <DatePicker
         // value = {dueDate}
