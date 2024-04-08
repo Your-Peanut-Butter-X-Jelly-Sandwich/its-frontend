@@ -1,8 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
+import getLocale from '@/common/utils/extractLocale';
+import { usePathname } from 'next/navigation';
 
 //@ts-ignore
 const SubmissionsList = ({ submissions, qn_id }) => {
+  const pathname = usePathname();
+  const locale = getLocale(pathname);
   return (
     <div className="overflow-x-auto">
       <table className="w-full text-sm text-left text-gray-500">
@@ -33,7 +37,7 @@ const SubmissionsList = ({ submissions, qn_id }) => {
               <td className="px-6 py-4">{submission.score}</td>
               <td className="px-6 py-4">{new Date(submission.submission_date).toLocaleString()}</td>
               <td className="px-6 py-4">
-                <Link href={`/en/tutor/questions/${qn_id}/submissions/${submission.pk}`}>
+                <Link href={`/${locale}/tutor/questions/${qn_id}/submissions/${submission.pk}`}>
                   <button className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300">
                     View Detail
                   </button>

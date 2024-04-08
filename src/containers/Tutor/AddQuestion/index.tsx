@@ -8,6 +8,9 @@ import SubHeader from '../components/SubHeaders/SubHeader';
 import MdEditorTabs from '../components/Editors/MdEditor/MdEditor';
 import CodeEditor from '../components/Editors/CodeEditor/CodeEditor';
 import TestCases from '../components/Editors/TestCaseEditor/TestCaseEditor';
+import getLocale from '@/common/utils/extractLocale';
+import { usePathname } from 'next/navigation';
+
 
 const AddQuestionContainer = () => {
   const [markdown, setMarkdown] = useState('');
@@ -19,6 +22,7 @@ const AddQuestionContainer = () => {
   const [dueDate, setDueDate] = useState<string>('');
   const [currentRightTab, setCurrentRightTab] = useState('editor');
   const [currentLeftTab, setCurrentLeftTab] = useState('edit'); // New state for managing left tabs
+  const pathname = usePathname();
 
   const [addQuestion, { isLoading }] = useAddQuestionMutation();
 
@@ -74,11 +78,12 @@ const AddQuestionContainer = () => {
     };
 
     try {
+      const locale = getLocale(pathname);
       await addQuestion(questionData).unwrap();
       message.success('Question added successfully!');
       // wait for 1.5 senconds before redirecting
       setTimeout(() => {
-        window.location.href = '/en/tutor/questions/';
+        window.location.href = `/${locale}/tutor/questions/`;
       }, 1500);
     } catch (error) {
       message.error('An error occurred while adding the question.');

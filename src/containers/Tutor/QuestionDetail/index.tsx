@@ -6,9 +6,11 @@ import { useLazyGetQuestionDetailQuery } from '@/redux/apis/tutor/QuestionDetail
 import NavButton from '../components/Buttons/NavButton/NavButton';
 import CustomButton from '../components/Buttons/CustomButton/CustomButton';
 import QuestionStats from '../components/Stats/QuestionStats/QuestionStats';
+import getLocale from '@/common/utils/extractLocale';
 
 const QuestionDetailContainer: React.FC<ITutorQuestionDetailRequest> = ({ qn_id }) => {
   const pathname = usePathname();
+  const locale = getLocale(pathname);
   const [getQuestionDetail] = useLazyGetQuestionDetailQuery();
   const [questionDetail, setQuestionDetail] = useState<ITutorQuestionDetailResponse | undefined>(
     undefined
@@ -28,7 +30,7 @@ const QuestionDetailContainer: React.FC<ITutorQuestionDetailRequest> = ({ qn_id 
     <div className="p-6 bg-gray-100 min-h-screen">
       <NavButton
         className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300 mb-5"
-        href="/en/tutor/questions"
+        href={`/${locale}/tutor/questions`}
         buttonText="Back to Question List"
       />
       {/* Displaying both question ID and title */}

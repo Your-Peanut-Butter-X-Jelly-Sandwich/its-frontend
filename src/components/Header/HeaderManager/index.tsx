@@ -19,6 +19,7 @@ const HeaderManager: React.FC = () => {
   const [authLogout] = useLazyAuthLogoutQuery();
   const pathname = usePathname();
   const { tokens } = useSelector(authSelector);
+  const locale = getLocale(pathname);
 
   const handleLogout = async () => {
     try {
@@ -35,12 +36,12 @@ const HeaderManager: React.FC = () => {
   return (
     <Menu mode="horizontal" theme="dark">
       <Menu.Item key="student-list" icon={<UserAddOutlined />}>
-        <Link href="/en/manager/" passHref>
+        <Link href={`/${locale}/manager/`} passHref>
           <Menu.Item key="dashboard">Student List</Menu.Item>
         </Link>
       </Menu.Item>
       <Menu.Item key="tutor-list" icon={<UserDeleteOutlined />}>
-        <Link href="/en/manager/tutor-list/" passHref>
+        <Link href={`/${locale}/manager/tutor-list/`} passHref>
           <Menu.Item key="dashboard">Tutor List</Menu.Item>
         </Link>
       </Menu.Item>

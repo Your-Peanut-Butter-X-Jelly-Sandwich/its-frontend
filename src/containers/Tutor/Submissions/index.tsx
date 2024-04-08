@@ -4,9 +4,13 @@ import React, { useEffect, useState } from 'react';
 import { useGetSubmissionsQuery } from '@/redux/apis/tutor/Submissions';
 import SubmissionList from '../components/Lists/SubmissionList/SubmissionList';
 import NavButton from '../components/Buttons/NavButton/NavButton';
+import getLocale from '@/common/utils/extractLocale';
+import { usePathname } from 'next/navigation';
 
 const SubmissionsContainer: React.FC<ITutorQuestionDetailRequest> = ({ qn_id }) => {
   const { data: submissions, isLoading, isError } = useGetSubmissionsQuery(qn_id);
+  const pathname = usePathname();
+  const locale = getLocale(pathname);
 
   if (isLoading) return <div className="text-center py-5">Loading...</div>;
   if (isError)
@@ -20,7 +24,7 @@ const SubmissionsContainer: React.FC<ITutorQuestionDetailRequest> = ({ qn_id }) 
     <div className="p-6 bg-white min-h-screen">
       <div className="mb-5">
         <NavButton
-          href={`/en/tutor/questions/${qn_id}`}
+          href={`/${locale}/tutor/questions/${qn_id}`}
           buttonText="Back to Question List"
           className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
         />

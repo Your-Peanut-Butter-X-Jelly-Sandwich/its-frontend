@@ -19,6 +19,7 @@ const HeaderTutor: React.FC = () => {
   const [authLogout] = useLazyAuthLogoutQuery();
   const pathname = usePathname();
   const { tokens } = useSelector(authSelector);
+  const locale = getLocale(pathname);
 
   const handleLogout = async () => {
     try {
@@ -34,17 +35,17 @@ const HeaderTutor: React.FC = () => {
   return (
     <Menu mode="horizontal" theme="dark">
       <Menu.Item key="dashboard" icon={<DesktopOutlined />}>
-        <Link href="/en/tutor/" passHref>
+        <Link href={`/${locale}/tutor/`} passHref>
           <Menu.Item key="dashboard">Dashboard</Menu.Item>
         </Link>
       </Menu.Item>
       <Menu.Item key="add-question" icon={<QuestionCircleOutlined />}>
-        <Link href="/en/tutor/add-question/" passHref>
+        <Link href={`/${locale}/tutor/add-question/`} passHref>
           <Menu.Item key="dashboard">Add Question</Menu.Item>
         </Link>
       </Menu.Item>
       <Menu.Item key="check-questions" icon={<CheckSquareOutlined />}>
-        <Link href="/en/tutor/questions/" passHref>
+        <Link href={`/${locale}/tutor/questions/`} passHref>
           <Menu.Item key="dashboard">Check Questions</Menu.Item>
         </Link>
       </Menu.Item>

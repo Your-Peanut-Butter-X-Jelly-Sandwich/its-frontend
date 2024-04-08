@@ -12,11 +12,15 @@ import MdEditorTabs from '../components/Editors/MdEditor/MdEditor';
 import CodeEditor from '../components/Editors/CodeEditor/CodeEditor';
 import TestCases from '../components/Editors/TestCaseEditor/TestCaseEditor';
 import CustomButton from '../components/Buttons/CustomButton/CustomButton';
+import getLocale from '@/common/utils/extractLocale';
+import { usePathname } from 'next/navigation';
 
 const EditQuestionContainer: React.FC<ITutorQuestionDetailRequest> = ({ qn_id }) => {
   const { data: questionData, error, isLoading } = useGetQuestionDetailQuery(qn_id);
   const [updateQuestionDetail, { isLoading: isUpdating, isSuccess }] =
     useUpdateQuestionDetailMutation();
+  const pathname = usePathname();
+  const locale = getLocale(pathname);
 
   useEffect(() => {
     if (questionData) {
@@ -106,7 +110,7 @@ const EditQuestionContainer: React.FC<ITutorQuestionDetailRequest> = ({ qn_id })
       message.success('Question edited successfully!');
       // wait for 3 senconds
       setTimeout(() => {
-        window.location.href = '/en/tutor/questions/';
+        window.location.href = `/${locale}/tutor/questions/`;
       }, 1500);
     } catch (err) {
       console.error('Error during submission:', err);

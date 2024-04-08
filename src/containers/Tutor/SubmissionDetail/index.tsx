@@ -10,6 +10,8 @@ import {
 } from '@/redux/apis/tutor/SubmissionDetail';
 import CustomButton from '../components/Buttons/CustomButton/CustomButton';
 import NavButton from '../components/Buttons/NavButton/NavButton';
+import getLocale from '@/common/utils/extractLocale';
+import { usePathname } from 'next/navigation';
 
 const SubmissionDetailContainer: React.FC<ITutorSubmissionRequest> = ({ qn_id, submission_id }) => {
   const [feedback, setFeedback] = useState('');
@@ -19,6 +21,8 @@ const SubmissionDetailContainer: React.FC<ITutorSubmissionRequest> = ({ qn_id, s
     refetch,
   } = useGetSubmissionDetailQuery(submission_id);
   const [updateSubmissionDetail] = useUpdateSubmissionDetailMutation();
+  const pathname = usePathname();
+  const locale = getLocale(pathname);
 
   useEffect(() => {
     if (submissionDetail) {
@@ -48,7 +52,7 @@ const SubmissionDetailContainer: React.FC<ITutorSubmissionRequest> = ({ qn_id, s
       await refetch();
       message.success('Feedback submitted successfully');
       setTimeout(() => {
-        window.location.href = `/en/tutor/questions/${qn_id}/submissions`;
+        window.location.href = `/${locale}/tutor/questions/${qn_id}/submissions`;
       }, 1500);
     } catch (error) {
       console.error('Failed to submit feedback:', error);
@@ -67,7 +71,7 @@ const SubmissionDetailContainer: React.FC<ITutorSubmissionRequest> = ({ qn_id, s
     <div style={{ padding: 24, backgroundColor: '#F0F2F5', minHeight: '100vh' }}>
       <div className="flex justify-between items-stretch w-full">
         <NavButton
-          href={`/en/tutor/questions/${qn_id}/submissions`}
+          href={`/${locale}/tutor/questions/${qn_id}/submissions`}
           buttonText="Back to Submissions"
           className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
         />

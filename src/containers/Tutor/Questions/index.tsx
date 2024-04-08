@@ -10,9 +10,11 @@ import {
 } from '@/redux/apis/tutor/Questions';
 import NavButton from '../components/Buttons/NavButton/NavButton';
 import QuestionList from '../components/Lists/QuestionList/QuestionList';
+import getLocale from '@/common/utils/extractLocale';
 
 const QuestionsContainer: React.FC<ITutorQuestionDetailRequest> = ({ qn_id }) => {
   const pathname = usePathname();
+  const locale = getLocale(pathname);
   const [questionList, setQuestionList] = useState();
   const [getQuestions] = useLazyGetQuestionsQuery();
   const [deleteQuestion] = useDeleteQuestionMutation();
@@ -39,19 +41,9 @@ const QuestionsContainer: React.FC<ITutorQuestionDetailRequest> = ({ qn_id }) =>
 
   return (
     <div className="p-5 bg-gray-100 min-h-screen">
-      {/* <div className="mb-5">
-        <Link
-          href={`/en/tutor`}
-          passHref
-          className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
-        >
-          Back to Dashboard
-        </Link>
-      </div> */}
-
       <NavButton
         buttonText="Back to Dashboard"
-        href="/en/tutor/"
+        href={`/${locale}/tutor/`}
         className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
       />
 
