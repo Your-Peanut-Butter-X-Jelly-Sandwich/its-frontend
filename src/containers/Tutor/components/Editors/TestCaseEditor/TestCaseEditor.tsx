@@ -21,7 +21,7 @@ const TestCases: React.FC<ITutorTestCaseProps> = ({
             />
             <Input
               placeholder="Expected Output"
-              value={testCase.expectedOutput}
+              value={testCase.output}
               onChange={(e) => updateTestCase(index, 'expectedOutput', e.target.value)}
             />
           </div>

@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Editor from '@monaco-editor/react';
 import Markdown from 'react-markdown';
@@ -52,16 +51,13 @@ const QuestionDetailContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
     <div className="flex bg-gray-100 h-full">
       <div className="w-[50%] p-10">
         {/* Problem Statement */}
-        <div className="h-[80vh] overflow-auto">
+        <div className="h-full overflow-auto">
           <Markdown>{problemStatement}</Markdown>
         </div>
       </div>
       {/* Code Editor */}
       <div className="w-[50%] bg-gray-400">
-        <div className="h-[4%] flex justify-between">
-          <Button type="link">
-            <Link href={`${pathname}/past-submissions`}>Submissions</Link>
-          </Button>
+        <div className="h-[4%] flex justify-end">
           <Text className="mr-4 mt-1">{data?.language}</Text>
         </div>
         <Editor

@@ -1,8 +1,15 @@
 import React from 'react';
 import dayjs from 'dayjs';
 import { Button, message, Space, Input, Select, Divider, DatePicker } from 'antd';
-
-const SubHeader = ({
+type SubHeaderProps = {
+  questionTitle: string;
+  setQuestionTitle: (title: string) => void;
+  handleDueDateChange: (date: any, dateString: string) => void;
+  handleLanguageChange: (value: string) => void;
+  language: string;
+  dueDate: string;
+};
+const SubHeader: React.FC<SubHeaderProps> = ({
   questionTitle,
   setQuestionTitle,
   handleDueDateChange,
@@ -16,13 +23,14 @@ const SubHeader = ({
         placeholder="Question Title"
         value={questionTitle}
         onChange={(e) => setQuestionTitle(e.target.value)}
-        className="basis-7/12 grow-0 shrink-0 mr-4"
+        className="basis-1/2 grow-0 shrink-0 mr-4"
       />
       <DatePicker
         // value = {dueDate}
         value={dueDate ? dayjs(dueDate, 'YYYY-MM-DD') : null}
         format="YYYY-MM-DD"
         placeholder="Select Due Date"
+        // @ts-ignore
         onChange={handleDueDateChange}
         className="basis-3/12 grow-0 shrink-0 mr-4"
       />

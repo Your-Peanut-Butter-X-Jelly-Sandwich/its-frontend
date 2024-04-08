@@ -33,7 +33,7 @@ const EditQuestionContainer: React.FC<ITutorQuestionDetailRequest> = ({ qn_id })
   const [currentMode, setCurrentMode] = useState('markdown');
   const [markdown, setMarkdown] = useState<string>('');
   const [testCases, setTestCases] = useState<Omit<ITutorTestCaseResponse, 'pk'>[]>([
-    { input: '', expectedOutput: '' },
+    { input: '', output: '' },
   ]);
   const [language, setLanguage] = useState<'python' | 'c'>('python');
   const [codeContent, setCodeContent] = useState<string>('');
@@ -50,7 +50,7 @@ const EditQuestionContainer: React.FC<ITutorQuestionDetailRequest> = ({ qn_id })
   };
 
   const addTestCase = () => {
-    setTestCases([...testCases, { input: '', expectedOutput: '' }]);
+    setTestCases([...testCases, { input: '', output: '' }]);
   };
 
   const removeLastTestCase = () => {
@@ -92,7 +92,7 @@ const EditQuestionContainer: React.FC<ITutorQuestionDetailRequest> = ({ qn_id })
         due_date: dueDate,
         test_cases: testCases.map((tc) => ({
           input: tc.input,
-          output: tc.expectedOutput,
+          expectedOutput: tc.output,
         })),
         total_students: questionData.total_students,
         passes: questionData.passes,
@@ -107,7 +107,7 @@ const EditQuestionContainer: React.FC<ITutorQuestionDetailRequest> = ({ qn_id })
       // wait for 3 senconds
       setTimeout(() => {
         window.location.href = '/en/tutor/questions/';
-      }, 3000);
+      }, 1500);
     } catch (err) {
       console.error('Error during submission:', err);
       message.error('An error occurred while editing the question.');
@@ -128,6 +128,7 @@ const EditQuestionContainer: React.FC<ITutorQuestionDetailRequest> = ({ qn_id })
         <div className="flex flex-grow">
           {/* Left side: Markdown Editor and Preview */}
           <MdEditorTabs
+            // @ts-ignore
             currentLeftTab={currentLeftTab}
             setCurrentLeftTab={setCurrentLeftTab}
             markdown={markdown}
@@ -159,6 +160,7 @@ const EditQuestionContainer: React.FC<ITutorQuestionDetailRequest> = ({ qn_id })
 
             {currentRightTab === 'testCases' && (
               <TestCases
+                // @ts-ignore
                 testCases={testCases}
                 updateTestCase={updateTestCase}
                 addTestCase={addTestCase}

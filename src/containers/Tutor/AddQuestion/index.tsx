@@ -12,7 +12,7 @@ import TestCases from '../components/Editors/TestCaseEditor/TestCaseEditor';
 const AddQuestionContainer = () => {
   const [markdown, setMarkdown] = useState('');
   //const [testCases, setTestCases] = useState<ITutorTestCase>([{input: '', expectedOutput: '' }]);
-  const [testCases, setTestCases] = useState<ITutorTestCase[]>([{ input: '', expectedOutput: '' }]);
+  const [testCases, setTestCases] = useState<ITutorTestCase[]>([{ input: '', output: '' }]);
   const [language, setLanguage] = useState('python');
   const [codeContent, setCodeContent] = useState('');
   const [questionTitle, setQuestionTitle] = useState('');
@@ -31,7 +31,7 @@ const AddQuestionContainer = () => {
   };
 
   const addTestCase = () => {
-    setTestCases([...testCases, { input: '', expectedOutput: '' }]);
+    setTestCases([...testCases, { input: '', output: '' }]);
   };
 
   const removeLastTestCase = () => {
@@ -67,7 +67,7 @@ const AddQuestionContainer = () => {
       test_cases: testCases.map((testCase, index) => ({
         pk: index,
         input: testCase.input,
-        output: testCase.expectedOutput,
+        expectedOutput: testCase.output,
       })),
     };
 
@@ -77,7 +77,7 @@ const AddQuestionContainer = () => {
       // wait for 3 senconds
       setTimeout(() => {
         window.location.href = '/en/tutor/questions/';
-      }, 3000);
+      }, 1500);
     } catch (error) {
       message.error('An error occurred while adding the question.');
     }

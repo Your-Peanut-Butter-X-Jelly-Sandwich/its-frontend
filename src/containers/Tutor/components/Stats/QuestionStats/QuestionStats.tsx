@@ -1,5 +1,6 @@
 import React from 'react';
 
+// @ts-ignore
 const QuestionStats = ({ questionDetail }) => {
   return (
     <div className="flex flex-wrap justify-center gap-4">

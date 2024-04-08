@@ -26,7 +26,7 @@ const SubmissionsList = ({ submissions, qn_id }) => {
           </tr>
         </thead>
         <tbody>
-          {submissions?.submissions.map((submission) => (
+          {submissions?.submissions.map((submission: ITutorSubmissionResponse) => (
             <tr className="bg-white border-b hover:bg-gray-50" key={submission.pk}>
               <td className="px-6 py-4">{submission.submitted_by.email}</td>
               <td className="px-6 py-4">{submission.submission_number}</td>

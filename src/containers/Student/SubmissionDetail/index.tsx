@@ -10,11 +10,11 @@ const { Paragraph } = Typography;
 const PAGE = {
   padding: '20px',
   backgroundColor: '#f0f2f5',
-  minHeight: '100vh',
+  height: '100%',
 };
 
 const CARD = {
-  minHeight: '95vh',
+  height: '100%',
   border: '1px solid #d9d9d9',
 };
 

@@ -81,7 +81,7 @@ const PersonalInfo: React.FC<PersonalInfoType> = ({ students }: PersonalInfoType
           <div className="flex flex-col gap-3">
             {students.map((student) => {
               return (
-                <div className="flex gap-2">
+                <div key={student.email} className="flex gap-2">
                   <ButtonMailto mailto={student.email} label={student.email} />
                   <div className="font-medium">
                     {student.username || student.email.split('@')[0] || 'unknown'}
