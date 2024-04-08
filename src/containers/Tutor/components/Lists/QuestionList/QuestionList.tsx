@@ -2,6 +2,7 @@ import React from 'react';
 import CustomButton from '../../Buttons/CustomButton/CustomButton';
 import NavButton from '../../Buttons/NavButton/NavButton';
 
+// @ts-ignore
 const QuestionList = ({ questionList, pathname, handleDeleteQuestion }) => {
   return (
     <div className="space-y-4">

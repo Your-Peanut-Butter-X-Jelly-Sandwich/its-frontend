@@ -1,15 +1,24 @@
 import React from 'react';
 import dayjs from 'dayjs';
 import { Button, message, Space, Input, Select, Divider, DatePicker } from 'antd';
-
-const SubHeader = ({
-  questionTitle,
-  setQuestionTitle,
-  handleDueDateChange,
-  handleLanguageChange,
-  language,
-  dueDate,
-}) => {
+type SubHeaderProps = {
+  questionTitle: string,
+  setQuestionTitle: (title: string) => void,
+  handleDueDateChange: (date: any, dateString: string) => void,
+  handleLanguageChange: (value: string) => void,
+  language: string,
+  dueDate: string,
+}
+const SubHeader: React.FC<SubHeaderProps> = (
+  {
+    questionTitle,
+    setQuestionTitle,
+    handleDueDateChange,
+    handleLanguageChange,
+    language,
+    dueDate
+  }
+) => {
   return (
     <div className="flex justify-between mb-5">
       <Input
@@ -23,6 +32,7 @@ const SubHeader = ({
         value={dueDate ? dayjs(dueDate, 'YYYY-MM-DD') : null}
         format="YYYY-MM-DD"
         placeholder="Select Due Date"
+        // @ts-ignore
         onChange={handleDueDateChange}
         className="basis-3/12 grow-0 shrink-0 mr-4"
       />
