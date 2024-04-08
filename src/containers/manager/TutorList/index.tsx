@@ -6,7 +6,6 @@ import {message} from 'antd';
 const TutorList: React.FC = () => {
 
   const [getTutors] = useLazyGetTutorsQuery();
-  const [promoteStudents] = usePromoteStudentsMutation();
   const [demoteTutors] = useDemoteTutorsMutation();
   const [tutors, setTutors] = useState<IStudent[]>([]);
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
@@ -39,21 +38,20 @@ const TutorList: React.FC = () => {
           tutor_ids: selectedIds
         };
         await demoteTutors(request).unwrap();
-        message.success('Demoted tutors successfully')
-        window.location.reload();
+        message.success('Demoted tutor(s) successfully')
+        setTimeout(() => {
+            window.location.reload();
+          }, 2000);
       } catch(err) {
-        message.error('An error occurred while demoting the tutors');
+        message.error('An error occurred while demoting the tutor(s)');
       }
-  }
-  const buffer = () => {
-
   }
 
   return (
     <div style={{ padding: "20px", backgroundColor: "#f0f2f5", minHeight: "100vh" }}>
 
       <List users={tutors} onCheckboxChange={handleCheckboxChange} handleButtonClick={handleDemoteToStudent}
-      listTitle="Tutor List" buttonName="Demote to Student" assignStudentClick={buffer}/>
+      listTitle="Tutor List" buttonName="Demote to Student"/>
     </div>
   );
 };

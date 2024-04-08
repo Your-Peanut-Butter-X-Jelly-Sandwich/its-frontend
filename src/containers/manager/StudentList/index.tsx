@@ -40,10 +40,12 @@ const StudentList: React.FC = () => {
         student_ids: selectedIds
       };
       await promoteStudents(request).unwrap();
-      message.success('Promoted students successfully');
-      window.location.reload();
+      message.success('Promoted student(s) successfully');
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     } catch(err) {
-      message.error('An error occurred while promoting the students');
+      message.error('An error occurred while promoting the student(s)');
     }
     
   }
@@ -61,16 +63,19 @@ const StudentList: React.FC = () => {
           student_ids: selectedIds
         }
         const response = await assignStudents(request).unwrap();
+        console.log(response);
         if (response.message) {
-          message.success('Assigned students successfully');
-          window.location.reload();
+          message.success('Assigned student(s) successfully');
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
         }
         else {
           message.error('Invalid Tutor ID')
         }
         
       } catch (err) {
-        message.error('An error occurred while assigning the students');
+        message.error('An error occurred while assigning the student(s)');
       }
     } else {
       message.error("Please enter a valid numerical value for the tutor ID.");

@@ -37,16 +37,16 @@ const HeaderManager: React.FC = () => {
     <Menu mode="horizontal" theme="dark">
       <Menu.Item key="student-list" icon={<UserAddOutlined />}>
         <Link href="/en/manager/" passHref>
-          <Menu.Item key="dashboard">Student List</Menu.Item>
+          <Menu.Item key="dashboard-student">Student List</Menu.Item>
         </Link>
       </Menu.Item>
       <Menu.Item key="tutor-list" icon={<UserDeleteOutlined />}>
-        <Link href="/en/manager/tutor-list/" passHref>
-          <Menu.Item key="dashboard">Tutor List</Menu.Item>
+        <Link href="/en/manager/tut-list" passHref>
+          <Menu.Item key="dashboard-tutor">Tutor List</Menu.Item>
         </Link>
       </Menu.Item>
       <Menu.Item key="logout" icon={<LogoutOutlined />} style={{ marginLeft: 'auto' }} onClick={handleLogout}>
-        <Menu.Item key="dashboard">Log Out</Menu.Item>
+        <Menu.Item key="dashboard-logout">Log Out</Menu.Item>
       </Menu.Item>
     </Menu>
   );
