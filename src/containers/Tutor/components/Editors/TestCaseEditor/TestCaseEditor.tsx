@@ -1,7 +1,7 @@
 import React from 'react';
-import { Button, message, Space, Input, Select, Divider, DatePicker } from 'antd';
+import { Space, Input, Divider } from 'antd';
 import CustomButton from '../../Buttons/CustomButton/CustomButton';
-
+import { useState } from 'react';
 const TestCases: React.FC<ITutorTestCaseProps> = ({
   testCases,
   updateTestCase,
@@ -13,16 +13,16 @@ const TestCases: React.FC<ITutorTestCaseProps> = ({
       {testCases.map((testCase: ITutorTestCaseResponse, index: number) => (
         <React.Fragment key={index}>
           {index > 0 && <Divider />}
-          <div className="mb-2.5">
+          <div className="mb-2.5 flex flex-col gap-2">
             <Input
               placeholder="Input"
-              value={testCase.input}
+              defaultValue={testCase.input}
               onChange={(e) => updateTestCase(index, 'input', e.target.value)}
             />
             <Input
               placeholder="Expected Output"
-              value={testCase.output}
-              onChange={(e) => updateTestCase(index, 'expectedOutput', e.target.value)}
+              defaultValue={testCase.output}
+              onChange={(e) => updateTestCase(index, 'output', e.target.value)}
             />
           </div>
         </React.Fragment>

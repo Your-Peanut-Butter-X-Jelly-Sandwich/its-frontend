@@ -35,8 +35,8 @@ interface ITutorTestCase {
   output: string;
 }
 
-interface ITutorQuestionContent {
-  test_cases: Array<{ pk: number; input: string; expectedOutput: string }>;
+interface ITutorCreateNewQuestionRequest {
+  test_cases: ITutorTestCase[];
   question_title: string;
   question_statement: string;
   ref_program: string;

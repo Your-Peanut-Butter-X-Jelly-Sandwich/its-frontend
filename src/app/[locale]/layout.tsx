@@ -24,7 +24,7 @@ function LocaleLayout({
         <StoreProvider>
           <AuthGuard>
             <IdentityGuard>
-              <div className="h-screen bg-gray-100 ">{children}</div>
+              <div className="h-screen max-h-screen bg-gray-100 ">{children}</div>
             </IdentityGuard>
           </AuthGuard>
         </StoreProvider>

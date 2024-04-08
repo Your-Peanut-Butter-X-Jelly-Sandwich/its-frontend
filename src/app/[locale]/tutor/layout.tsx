@@ -11,9 +11,9 @@ export default function TutorLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
+    <div className="max-h-full h-full flex flex-col">
       <HeaderTutor />
       {children}
-    </>
+    </div>
   );
 }

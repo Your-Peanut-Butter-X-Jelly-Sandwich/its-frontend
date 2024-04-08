@@ -43,6 +43,7 @@ const AddQuestionContainer = () => {
   };
 
   const updateTestCase = (index: any, field: any, value: any) => {
+    console.log(field);
     const updatedTestCases = [...testCases];
     // @ts-ignore
     updatedTestCases[index][field] = value;
@@ -58,7 +59,8 @@ const AddQuestionContainer = () => {
   };
 
   const handleSubmission = async () => {
-    const questionData = {
+    console.log(testCases);
+    const questionData: ITutorCreateNewQuestionRequest = {
       question_title: questionTitle,
       question_statement: markdown,
       ref_program: codeContent,
@@ -67,14 +69,14 @@ const AddQuestionContainer = () => {
       test_cases: testCases.map((testCase, index) => ({
         pk: index,
         input: testCase.input,
-        expectedOutput: testCase.output,
+        output: testCase.output,
       })),
     };
 
     try {
-      const result = await addQuestion(questionData).unwrap();
+      await addQuestion(questionData).unwrap();
       message.success('Question added successfully!');
-      // wait for 3 senconds
+      // wait for 1.5 senconds before redirecting
       setTimeout(() => {
         window.location.href = '/en/tutor/questions/';
       }, 1500);
@@ -84,7 +86,7 @@ const AddQuestionContainer = () => {
   };
 
   return (
-    <div className="p-5 bg-gray-100 min-h-screen">
+    <div className="flex flex-col p-5 min-h-0 h-full gap-5">
       <SubHeader
         questionTitle={questionTitle}
         setQuestionTitle={setQuestionTitle}
@@ -93,8 +95,8 @@ const AddQuestionContainer = () => {
         language={language}
         dueDate={dueDate}
       />
-      <div className="flex flex-col h-[87vh]">
-        <div className="flex flex-grow">
+      <div className="flex flex-col min-h-0 grow shrink overflow-scroll">
+        <div className="flex grow shrink">
           {/* Left side: Markdown Editor and Preview */}
           <MdEditorTabs
             // @ts-ignore
@@ -140,9 +142,9 @@ const AddQuestionContainer = () => {
         </div>
       </div>
 
-      <div className="fixed bottom-5 right-5">
+      <div className="flex justify-center items-center">
         <CustomButton
-          className="bg-blue-600 text-white border border-blue-600"
+          className="bg-blue-500-500 text-white shadow-md w-52 font-semibold"
           onClick={handleSubmission}
           label="Submit"
         />

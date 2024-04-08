@@ -1,6 +1,6 @@
 import React from 'react';
 import dayjs from 'dayjs';
-import { Button, message, Space, Input, Select, Divider, DatePicker } from 'antd';
+import { Input, Select, DatePicker } from 'antd';
 type SubHeaderProps = {
   questionTitle: string;
   setQuestionTitle: (title: string) => void;
@@ -18,7 +18,7 @@ const SubHeader: React.FC<SubHeaderProps> = ({
   dueDate,
 }) => {
   return (
-    <div className="flex justify-between mb-5">
+    <div className="flex justify-between">
       <Input
         placeholder="Question Title"
         value={questionTitle}
