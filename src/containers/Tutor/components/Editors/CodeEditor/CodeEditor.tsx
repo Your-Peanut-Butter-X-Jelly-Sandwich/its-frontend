@@ -7,7 +7,7 @@ const CodeEditor: React.FC<ITutorCodeEditorProps> = ({ language, codeContent, ha
       <Editor
         height="100%"
         language={language}
-        theme="vs-dark"
+        theme="light"
         value={codeContent}
         onChange={(newValue, e) => handleCodeEditorChange(newValue || '')}
       />
