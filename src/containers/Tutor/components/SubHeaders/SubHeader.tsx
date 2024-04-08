@@ -2,23 +2,21 @@ import React from 'react';
 import dayjs from 'dayjs';
 import { Button, message, Space, Input, Select, Divider, DatePicker } from 'antd';
 type SubHeaderProps = {
-  questionTitle: string,
-  setQuestionTitle: (title: string) => void,
-  handleDueDateChange: (date: any, dateString: string) => void,
-  handleLanguageChange: (value: string) => void,
-  language: string,
-  dueDate: string,
-}
-const SubHeader: React.FC<SubHeaderProps> = (
-  {
-    questionTitle,
-    setQuestionTitle,
-    handleDueDateChange,
-    handleLanguageChange,
-    language,
-    dueDate
-  }
-) => {
+  questionTitle: string;
+  setQuestionTitle: (title: string) => void;
+  handleDueDateChange: (date: any, dateString: string) => void;
+  handleLanguageChange: (value: string) => void;
+  language: string;
+  dueDate: string;
+};
+const SubHeader: React.FC<SubHeaderProps> = ({
+  questionTitle,
+  setQuestionTitle,
+  handleDueDateChange,
+  handleLanguageChange,
+  language,
+  dueDate,
+}) => {
   return (
     <div className="flex justify-between mb-5">
       <Input

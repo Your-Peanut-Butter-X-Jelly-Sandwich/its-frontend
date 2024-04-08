@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import QuestionsContainer from '@/containers/Student/Questions';
 const QuestionsPage: NextPage = () => {
   return (
-    <div>
+    <div className="h-full">
       <QuestionsContainer />
     </div>
   );

@@ -7,7 +7,7 @@ type ParamsType = {
 };
 const PastSubmissionsPage: NextPage<ParamsType> = ({ params }: ParamsType) => {
   return (
-    <div>
+    <div className="h-full">
       <PastSubmissionsContainer qn_id={params.qn_id} />
     </div>
   );

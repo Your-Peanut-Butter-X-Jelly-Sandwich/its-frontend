@@ -1,7 +1,7 @@
 import React from 'react';
 
 // @ts-ignore
-const QuestionStats = ({ questionDetail}) => {
+const QuestionStats = ({ questionDetail }) => {
   return (
     <div className="flex flex-wrap justify-center gap-4">
       <div className="w-full sm:w-full md:w-1/2 lg:w-1/3 p-6 bg-white text-center rounded shadow">

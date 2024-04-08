@@ -128,7 +128,7 @@ const EditQuestionContainer: React.FC<ITutorQuestionDetailRequest> = ({ qn_id })
         <div className="flex flex-grow">
           {/* Left side: Markdown Editor and Preview */}
           <MdEditorTabs
-          // @ts-ignore
+            // @ts-ignore
             currentLeftTab={currentLeftTab}
             setCurrentLeftTab={setCurrentLeftTab}
             markdown={markdown}
@@ -160,7 +160,7 @@ const EditQuestionContainer: React.FC<ITutorQuestionDetailRequest> = ({ qn_id })
 
             {currentRightTab === 'testCases' && (
               <TestCases
-              // @ts-ignore
+                // @ts-ignore
                 testCases={testCases}
                 updateTestCase={updateTestCase}
                 addTestCase={addTestCase}
