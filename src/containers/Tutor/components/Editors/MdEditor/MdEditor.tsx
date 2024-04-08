@@ -18,7 +18,7 @@ const MdEditorTabs:React.FC<ITutorMdEditorProps> = ({ currentLeftTab, setCurrent
           Preview
         </div>
       </div>
-      <div className="flex-grow overflow-auto">
+      <div className="flex-grow overflow-auto" data-color-mode="light">
         <MdEditor
           value={markdown}
           onChange={(newValue, e) => handleEditorChange(newValue || '')}
