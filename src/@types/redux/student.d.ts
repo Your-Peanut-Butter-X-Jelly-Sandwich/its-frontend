@@ -64,9 +64,7 @@ interface IStudentSubmissionDetailResponse {
   score: number;
   total_score: number;
   tutor_feedback: string;
-  its_feedback_hint_student: {
-    message: string;
-  };
+  its_feedback_hint_student: string;
 }
 
 interface IStudentSubmissionDetailRequest {

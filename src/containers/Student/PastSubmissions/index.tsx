@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Button, Typography, Card, Row, Col } from 'antd';
+import { Button, Typography, Card, Row, Col, Spin } from 'antd';
 import { useGetPastSubmissionsQuery } from '@/redux/apis/student';
 
 const { Title, Text } = Typography;
@@ -29,9 +29,18 @@ type PropsType = { qn_id: string };
 
 const PastSubmissionsContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
   const pathname = usePathname();
-
   const { data } = useGetPastSubmissionsQuery({ qn_id: Number(qn_id) });
   const submissions = data?.submissions;
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      window.location.reload();
+    }, 5000);
+
+    if(submissions?.slice().sort((a, b) => b.pk - a.pk)[0].score !== null) {
+      clearInterval(interval);
+    }
+  }, [submissions]);
 
   return (
     <div style={PAGE}>
@@ -40,23 +49,30 @@ const PastSubmissionsContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => 
       </Title>
       {submissions
         ?.slice()
-        .reverse()
-        .map((submission: ISubmission) => (
+        .sort((a, b) => b.pk - a.pk)
+        .map((submission: IStudentSubmission) => (
           <Card style={CARD} key={submission.pk}>
             <Row justify="space-between" align="middle">
               <Col>
                 <Text style={{ fontSize: '1.3rem' }}>
-                  Submission Number: {submission.submission_number}
+                  Submission Number:{' '}
+                  {submission.submission_number ? submission.submission_number : <Spin />}
                 </Text>
               </Col>
               <Col>
                 <div>
-                  <Text style={{ fontSize: '1.3rem', marginRight: '15px' }}>
-                    Score: {submission.score} / {submission.total_score}
-                  </Text>
-                  <Link href={`${pathname}/${submission.pk}`} passHref>
-                    <Button style={VIEW_BUTTON}>View</Button>
-                  </Link>
+                  {submission.score !== null? (
+                    <div>
+                      <Text style={{ fontSize: '1.3rem', marginRight: '15px' }}>
+                        Score: {submission.score} / {submission.total_score}
+                      </Text>
+                      <Link href={`${pathname}/${submission.pk}`} passHref>
+                        <Button style={VIEW_BUTTON}>View</Button>
+                      </Link>
+                    </div>
+                  ) : (
+                    <Spin />
+                  )}
                 </div>
               </Col>
             </Row>
