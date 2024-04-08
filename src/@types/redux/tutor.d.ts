@@ -11,7 +11,7 @@ interface ITutorQuestionDetailRequest {
 interface ITutorQuestionDetailResponse {
   question: {
     id: string;
-    test_cases: Array<{ pk: number; input: string; output: string }>;
+    test_cases: Array<ITutorTestCaseResponse>;
     question_title: string;
     question_statement: string;
     ref_program: string;
@@ -27,16 +27,16 @@ interface ITutorQuestionDetailResponse {
 interface ITutorTestCaseResponse {
   pk: number;
   input: string;
-  expectedOutput: string;
+  output: string;
 }
 
 interface ITutorTestCase {
   input: string;
-  expectedOutput: string;
+  output: string;
 }
 
 interface ITutorQuestionContent {
-  test_cases: Array<{ pk: number; input: string; output: string }>;
+  test_cases: Array<{ pk: number; input: string; expectedOutput: string }>;
   question_title: string;
   question_statement: string;
   ref_program: string;
