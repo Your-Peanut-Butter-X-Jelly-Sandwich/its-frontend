@@ -5,7 +5,7 @@ import { NextPage } from 'next';
 
 const AuthPage: NextPage = () => {
   return (
-    <div>
+    <div className="h-screen">
       <AuthContainer />
     </div>
   );

@@ -9,8 +9,8 @@ interface CustomButtonProps {
   id?: string;
 }
 
-const CustomButton: React.FC<CustomButtonProps> = ({ onClick, label, className, id }) => (
-  <Button className={className} onClick={onClick} id={id}>
+const CustomButton: React.FC<CustomButtonProps> = ({ onClick, label, id }) => (
+  <Button className="w-full" onClick={onClick} id={id}>
     {label}
   </Button>
 );

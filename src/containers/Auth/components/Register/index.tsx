@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { authSelector } from '@/redux/slices/auth';
-import { Row, Col, Form, Input, message, Card } from 'antd';
+import { Divider, Form, Input, message, Card } from 'antd';
 import { usePathname } from 'next/navigation';
 import getLocale from '@/common/utils/extractLocale';
 const { Item } = Form;
@@ -52,61 +52,60 @@ const SignUpContainer: React.FC<{
   };
 
   return (
-    <Row justify="center" align="middle" style={{ minHeight: '100vh' }}>
-      <Col xs={24} sm={12} md={10} lg={8}>
-        <Card title="Sign Up" style={{ width: '100%', maxWidth: 400, borderRadius: 8 }}>
-          <Form form={form} layout="vertical">
-            <Item
-              label="Email"
-              name="email"
-              rules={[
-                { required: true, message: 'Please input your email!' },
-                {
-                  type: 'email',
-                  message: 'Please enter a valid email address!',
-                },
-              ]}
-            >
-              <Input />
-            </Item>
-            <Item
-              label="Password"
-              name="password"
-              rules={[{ required: true, message: 'Please input your password!' }]}
-            >
-              <Input.Password />
-            </Item>
-            <Item>
-              <CustomButton type="primary" onClick={handleSignup} label="Sign Up" />
-            </Item>
-            <Item>
-              <SocialSignupButton
-                type="primary"
-                onClick={() => handleSocialSignup('google')}
-                label="Google Signup"
-              />
-            </Item>
-            <Item>
-              <SocialSignupButton
-                type="primary"
-                onClick={() => handleSocialSignup('github')}
-                label="Github Signup"
-              />
-            </Item>
-            <Item>
-              Already have an account?{' '}
-              <a
-                id="login-link"
-                onClick={() => handleLoginClick()}
-                style={{ textDecoration: 'underline' }}
-              >
-                Login
-              </a>
-            </Item>
-          </Form>
-        </Card>
-      </Col>
-    </Row>
+    <Card title="Sign Up" style={{ width: '100%', maxWidth: 400, borderRadius: 8 }}>
+      <Form form={form} layout="vertical">
+        <Item
+          label="Email"
+          name="email"
+          rules={[
+            { required: true, message: 'Please input your email!' },
+            {
+              type: 'email',
+              message: 'Please enter a valid email address!',
+            },
+          ]}
+        >
+          <Input />
+        </Item>
+        <Item
+          label="Password"
+          name="password"
+          rules={[{ required: true, message: 'Please input your password!' }]}
+        >
+          <Input.Password />
+        </Item>
+        <Divider className="my-10">
+          <span className="text-gray-300">•</span>
+        </Divider>
+        <Item>
+          <CustomButton type="primary" onClick={handleSignup} label="Sign Up" />
+        </Item>
+        <Item>
+          <SocialSignupButton
+            type="primary"
+            onClick={() => handleSocialSignup('google')}
+            label="Google Signup"
+          />
+        </Item>
+        <Item>
+          <SocialSignupButton
+            type="primary"
+            onClick={() => handleSocialSignup('github')}
+            label="Github Signup"
+          />
+        </Item>
+        <Item>
+          Already have an account?{' '}
+          <a
+            id="login-link"
+            onClick={() => handleLoginClick()}
+            style={{ textDecoration: 'underline' }}
+          >
+            Login
+          </a>
+        </Item>
+      </Form>
+    </Card>
   );
 };
 
