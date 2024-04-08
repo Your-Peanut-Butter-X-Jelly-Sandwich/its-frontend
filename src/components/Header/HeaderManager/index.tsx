@@ -16,14 +16,13 @@ import getLocale from '@/common/utils/extractLocale';
 import { authSelector } from '@/redux/slices/auth';
 
 const HeaderManager: React.FC = () => {
-
-  const [ authLogout ] = useLazyAuthLogoutQuery()
+  const [authLogout] = useLazyAuthLogoutQuery();
   const pathname = usePathname();
   const { tokens } = useSelector(authSelector);
 
   const handleLogout = async () => {
-    try {  
-      const result = await authLogout({tokens}).unwrap();
+    try {
+      const result = await authLogout({ tokens }).unwrap();
       const locale = getLocale(pathname);
       if (result) {
         window.location.href = `/${locale}`;
@@ -31,7 +30,7 @@ const HeaderManager: React.FC = () => {
     } catch (error) {
       message.error('Error logging out');
     }
-  }
+  };
 
   return (
     <Menu mode="horizontal" theme="dark">
@@ -45,7 +44,12 @@ const HeaderManager: React.FC = () => {
           <Menu.Item key="dashboard">Tutor List</Menu.Item>
         </Link>
       </Menu.Item>
-      <Menu.Item key="logout" icon={<LogoutOutlined />} style={{ marginLeft: 'auto' }} onClick={handleLogout}>
+      <Menu.Item
+        key="logout"
+        icon={<LogoutOutlined />}
+        style={{ marginLeft: 'auto' }}
+        onClick={handleLogout}
+      >
         <Menu.Item key="dashboard">Log Out</Menu.Item>
       </Menu.Item>
     </Menu>
@@ -53,6 +57,3 @@ const HeaderManager: React.FC = () => {
 };
 
 export default HeaderManager;
-
-
-

@@ -11,6 +11,4 @@ export const tutorApi = ITSApi.injectEndpoints({
   }),
 });
 
-export const {
-  useGetDashboardStatsQuery,
-} = tutorApi;
+export const { useGetDashboardStatsQuery } = tutorApi;

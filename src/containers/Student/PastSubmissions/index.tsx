@@ -37,7 +37,7 @@ const PastSubmissionsContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => 
       window.location.reload();
     }, 5000);
 
-    if(submissions?.slice().sort((a, b) => b.pk - a.pk)[0].score !== null) {
+    if (submissions?.slice().sort((a, b) => b.pk - a.pk)[0].score !== null) {
       clearInterval(interval);
     }
   }, [submissions]);
@@ -61,7 +61,7 @@ const PastSubmissionsContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => 
               </Col>
               <Col>
                 <div>
-                  {submission.score !== null? (
+                  {submission.score !== null ? (
                     <div>
                       <Text style={{ fontSize: '1.3rem', marginRight: '15px' }}>
                         Score: {submission.score} / {submission.total_score}

@@ -49,11 +49,11 @@ const AddQuestionContainer = () => {
     setTestCases(updatedTestCases);
   };
 
-  const handleLanguageChange = (value:string) => {
+  const handleLanguageChange = (value: string) => {
     setLanguage(value);
   };
 
-  const handleDueDateChange = (date:string, dateString:string) => {
+  const handleDueDateChange = (date: string, dateString: string) => {
     setDueDate(dateString); // Update the due date state
   };
 
@@ -70,7 +70,7 @@ const AddQuestionContainer = () => {
         output: testCase.expectedOutput,
       })),
     };
-  
+
     try {
       const result = await addQuestion(questionData).unwrap();
       message.success('Question added successfully!');

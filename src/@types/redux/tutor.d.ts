@@ -90,7 +90,6 @@ interface ITutorQuestionsResponse {
   questions: ITutorGetQuestionResponse[];
 }
 
-
 interface ITutorDashboardStatsResponse {
   personal_info: IUser;
   students: IUser[];
@@ -117,4 +116,3 @@ interface ITutorTestCaseProps {
   addTestCase: () => void;
   removeLastTestCase: () => void;
 }
-

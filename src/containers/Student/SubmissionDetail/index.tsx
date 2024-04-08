@@ -30,7 +30,7 @@ const SubmissionDetailContainer: React.FC<SubmissionDetailProps> = ({ submission
   const { data } = useGetSubmissionDetailQuery({
     id: Number(submission_id),
   });
-  
+
   React.useEffect(() => {
     if (data) {
       sethints(JSON.parse(data.its_feedback_hint_student));
@@ -69,12 +69,15 @@ const SubmissionDetailContainer: React.FC<SubmissionDetailProps> = ({ submission
               }}
             />
             <div>
-              <h1 className='font-bold'>Hints:</h1>
+              <h1 className="font-bold">Hints:</h1>
               {hints?.hints?.length === 0 && <p>No hints available</p>}
               <ul>
                 {hints?.hints?.map((hint: any) => (
                   <li key={hint.lineNumber}>
-                    <p>- <span className='text-red-400'>Line {hint.lineNumber}</span>: {hint.hintStrings[0]}</p>
+                    <p>
+                      - <span className="text-red-400">Line {hint.lineNumber}</span>:{' '}
+                      {hint.hintStrings[0]}
+                    </p>
                   </li>
                 ))}
               </ul>

@@ -2,10 +2,15 @@ import React from 'react';
 import { Button, message, Space, Input, Select, Divider, DatePicker } from 'antd';
 import CustomButton from '../../Buttons/CustomButton/CustomButton';
 
-const TestCases: React.FC<ITutorTestCaseProps> = ({ testCases, updateTestCase, addTestCase, removeLastTestCase }) => {
+const TestCases: React.FC<ITutorTestCaseProps> = ({
+  testCases,
+  updateTestCase,
+  addTestCase,
+  removeLastTestCase,
+}) => {
   return (
     <div className="flex-grow overflow-auto p-2.5">
-      {testCases.map((testCase:ITutorTestCaseResponse, index:number) => (
+      {testCases.map((testCase: ITutorTestCaseResponse, index: number) => (
         <React.Fragment key={index}>
           {index > 0 && <Divider />}
           <div className="mb-2.5">
