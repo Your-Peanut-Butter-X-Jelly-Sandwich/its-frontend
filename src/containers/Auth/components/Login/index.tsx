@@ -76,14 +76,14 @@ const LoginContainer: React.FC<{ isSignedUp: boolean; setSignedUp: (value: boole
           <SocialSignupButton
             type="primary"
             onClick={() => handleSocialSignup('google')}
-            label="Google Signup"
+            label="Continue with Google"
           />
         </Item>
         <Item>
           <SocialSignupButton
             type="primary"
             onClick={() => handleSocialSignup('github')}
-            label="Github Signup"
+            label="Continue with Github"
           />
         </Item>
         <Item>

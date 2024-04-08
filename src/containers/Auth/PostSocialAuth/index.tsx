@@ -18,11 +18,11 @@ const PostSocialAuthContainer: React.FC = () => {
     const data = await authRetrieveUser().unwrap();
     dispatch(setAuthUser(data));
     const locale = getLocale(pathname);
-    if (data.user.is_student) {
+    if (data.is_student) {
       router.replace(`/${locale}/student`);
-    } else if (data.user.is_tutor) {
+    } else if (data.is_tutor) {
       router.push(`/${locale}/tutor`);
-    } else if (data.user.is_manager) {
+    } else if (data.is_manager) {
       router.push(`/${locale}/manager`);
     } else {
       router.push(`/${locale}`);
