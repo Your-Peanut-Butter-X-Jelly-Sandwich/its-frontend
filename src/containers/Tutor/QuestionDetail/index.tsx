@@ -16,6 +16,7 @@ const QuestionDetailContainer: React.FC<ITutorQuestionDetailRequest> = ({ qn_id 
 
   const fetchQuestionDetail = async () => {
     const result = await getQuestionDetail({ qn_id }).unwrap();
+    //@ts-ignore
     setQuestionDetail(result);
   };
 
