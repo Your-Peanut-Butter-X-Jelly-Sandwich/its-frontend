@@ -47,6 +47,9 @@ const SubmissionDetailContainer: React.FC<ITutorSubmissionRequest> = ({ qn_id, s
       // Call refetch to get the latest submission detail after update
       await refetch();
       message.success('Feedback submitted successfully');
+      setTimeout(() => {
+        window.location.href = `/en/tutor/questions/${qn_id}/submissions`;
+      }, 1500);
     } catch (error) {
       console.error('Failed to submit feedback:', error);
       message.error('Failed to submit feedback');
