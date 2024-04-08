@@ -19,12 +19,6 @@ const CARD = {
   marginBottom: '20px',
 };
 
-const ATTEMPT_BUTTON = {
-  backgroundColor: '#1890ff',
-  color: '#fff',
-  borderColor: '#1890ff',
-};
-
 const QuestionsContainer: React.FC = () => {
   const pathname = usePathname();
 
@@ -43,8 +37,13 @@ const QuestionsContainer: React.FC = () => {
               <Text style={{ fontSize: '1.3rem' }}>{question.question_title}</Text>
             </Col>
             <Col>
+              <Link href={`${pathname}/${question.pk}/past-submissions`} passHref>
+                <Button type="primary" className="bg-blue-500 mr-3" id={`${question.pk}`}>
+                  Submissions
+                </Button>
+              </Link>
               <Link href={`${pathname}/${question.pk}`} passHref>
-                <Button style={ATTEMPT_BUTTON} id={`${question.pk}`}>
+                <Button type="primary" className="bg-blue-500" id={`${question.pk}`}>
                   Attempt
                 </Button>
               </Link>

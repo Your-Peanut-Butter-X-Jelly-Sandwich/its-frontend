@@ -19,12 +19,6 @@ const CARD = {
   marginBottom: '20px',
 };
 
-const VIEW_BUTTON = {
-  backgroundColor: '#1890ff',
-  color: '#fff',
-  borderColor: '#1890ff',
-};
-
 type PropsType = { qn_id: string };
 
 const PastSubmissionsContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
@@ -37,7 +31,7 @@ const PastSubmissionsContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => 
       window.location.reload();
     }, 5000);
 
-    if (submissions?.slice().sort((a, b) => b.pk - a.pk)[0].score !== null) {
+    if (submissions?.slice().sort((a, b) => b.pk - a.pk)[0]?.score !== null) {
       clearInterval(interval);
     }
   }, [submissions]);
@@ -67,7 +61,9 @@ const PastSubmissionsContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => 
                         Score: {submission.score} / {submission.total_score}
                       </Text>
                       <Link href={`${pathname}/${submission.pk}`} passHref>
-                        <Button style={VIEW_BUTTON}>View</Button>
+                        <Button type="primary" className="bg-blue-500">
+                          View
+                        </Button>
                       </Link>
                     </div>
                   ) : (

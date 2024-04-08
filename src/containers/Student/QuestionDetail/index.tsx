@@ -58,10 +58,7 @@ const QuestionDetailContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
       </div>
       {/* Code Editor */}
       <div className="w-[50%] bg-gray-400">
-        <div className="h-[4%] flex justify-between">
-          <Button type="link">
-            <Link href={`${pathname}/past-submissions`}>Submissions</Link>
-          </Button>
+        <div className="h-[4%] flex justify-end">
           <Text className="mr-4 mt-1">{data?.language}</Text>
         </div>
         <Editor
