@@ -36,6 +36,5 @@ describe('tutor add question', () => {
 
       cy.contains('button', 'Submit').click();
 
-    });
   });
 });

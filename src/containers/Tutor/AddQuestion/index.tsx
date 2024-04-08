@@ -77,7 +77,7 @@ const AddQuestionContainer = () => {
       // wait for 3 senconds
       setTimeout(() => {
         window.location.href = '/en/tutor/questions/';
-      }, 3000);
+      }, 1500);
     } catch (error) {
       message.error('An error occurred while adding the question.');
     }
