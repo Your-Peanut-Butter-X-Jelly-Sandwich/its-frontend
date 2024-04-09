@@ -41,7 +41,7 @@ const HeaderManager: React.FC = () => {
         </Link>
       </Menu.Item>
       <Menu.Item key="tutor-list" icon={<UserDeleteOutlined />}>
-        <Link href={`/${locale}/manager/tutor-list/`} passHref>
+        <Link href={`/${locale}/manager/tut-list/`} passHref>
           <Menu.Item key="dashboard">Tutor List</Menu.Item>
         </Link>
       </Menu.Item>
