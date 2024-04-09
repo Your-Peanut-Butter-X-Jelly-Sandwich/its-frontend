@@ -5,8 +5,8 @@ import { usePathname } from 'next/navigation';
 import getLocale from '@/common/utils/extractLocale';
 import { Divider, Form, Input, message, Card } from 'antd';
 const { Item } = Form;
-import CustomButton from '../Buttons/CustomButton/CustomButton';
-import SocialSignupButton from '../Buttons/SocialSignupButton/SocialSignupButton';
+import CustomButton from '../Register/components/CustomButton/CustomButton';
+import SocialSignupButton from '../Register/components/SocialSignupButton/SocialSignupButton';
 
 const LoginContainer: React.FC<{ isSignedUp: boolean; setSignedUp: (value: boolean) => void }> = ({
   isSignedUp,

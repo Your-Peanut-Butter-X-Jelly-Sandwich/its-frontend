@@ -1,8 +1,8 @@
 'use client';
 import React from 'react';
 import { useState, useEffect } from 'react';
-import LoginContainer from './components/Login';
-import SignUpContainer from './components/Register';
+import LoginContainer from './Login';
+import SignUpContainer from './Register';
 import { useSearchParams } from 'next/navigation';
 const AuthContainer: React.FC = () => {
   const [isSignedUp, setSignedUp] = useState(false);

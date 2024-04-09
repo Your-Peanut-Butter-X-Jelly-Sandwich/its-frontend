@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import List from '../components/list';
+import List from '../StudentList/components/list';
 import {
   useLazyGetTutorsQuery,
   usePromoteStudentsMutation,

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Input } from 'antd';
-import List from '../components/list';
+import List from './components/list';
 import {
   useLazyGetStudentsQuery,
   usePromoteStudentsMutation,
