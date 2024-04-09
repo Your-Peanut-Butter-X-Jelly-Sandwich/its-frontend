@@ -16,7 +16,6 @@ const TutorList: React.FC = () => {
 
   const getTutorData = async () => {
     const res: { user: ITutor[] } = await getTutors().unwrap();
-    console.log(res);
     setTutors(res.user);
   };
 
@@ -42,13 +41,15 @@ const TutorList: React.FC = () => {
         tutor_ids: selectedIds,
       };
       await demoteTutors(request).unwrap();
-      message.success('Demoted tutors successfully');
+      message.success('Demoted tutor(s) successfully');
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
       window.location.reload();
     } catch (err) {
-      message.error('An error occurred while demoting the tutors');
+      message.error('An error occurred while demoting the tutor(s)');
     }
   };
-  const buffer = () => {};
 
   return (
     <div style={{ padding: '20px', backgroundColor: '#f0f2f5', minHeight: '100vh' }}>
@@ -58,7 +59,6 @@ const TutorList: React.FC = () => {
         handleButtonClick={handleDemoteToStudent}
         listTitle="Tutor List"
         buttonName="Demote to Student"
-        assignStudentClick={buffer}
       />
     </div>
   );

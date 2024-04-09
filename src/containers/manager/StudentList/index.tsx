@@ -43,10 +43,12 @@ const StudentList: React.FC = () => {
         student_ids: selectedIds,
       };
       await promoteStudents(request).unwrap();
-      message.success('Promoted students successfully');
-      window.location.reload();
+      message.success('Promoted student(s) successfully');
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     } catch (err) {
-      message.error('An error occurred while promoting the students');
+      message.error('An error occurred while promoting the student(s)');
     }
   };
 
@@ -63,14 +65,41 @@ const StudentList: React.FC = () => {
           student_ids: selectedIds,
         };
         const response = await assignStudents(request).unwrap();
-        if (response.message) {
-          message.success('Assigned students successfully');
-          window.location.reload();
+      
+        const { success, error } = response;
+      
+        if (success && success.length > 0 && !error) {
+          // All students were successfully assigned
+          const successfulIds = success.map(([tutId, stuId]) => stuId);
+          message.success('Successfully assigned student IDs: ' + successfulIds.join(', '));
+        } else if (!success && error && error.length > 0) {
+          // All students assignment failed
+          const unsuccessfulPairs = error.map(({ pair, reason }) => ({
+            studentId: pair[1],
+            reason
+          }));
+          message.error('Unable to assign: ' + JSON.stringify(unsuccessfulPairs));
+        } else if (success && success.length > 0 && error && error.length > 0) {
+          // Mixed results (some successful, some failed)
+          const successfulIds = success.map(([tutId, stuId]) => stuId);
+          const unsuccessfulPairs = error.map(({ pair, reason }) => ({
+            studentId: pair[1],
+            reason
+          }));
+          message.success('Successfully assigned student IDs: ' + successfulIds.join(', '));
+          message.error('Unable to assign: ' + JSON.stringify(unsuccessfulPairs));
         } else {
-          message.error('Invalid Tutor ID');
+          // Unexpected response format or no data
+          message.error('Invalid response format from server or no data returned');
         }
+      
+        // Reload after 2 seconds
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
       } catch (err) {
-        message.error('An error occurred while assigning the students');
+        console.error('An error occurred while assigning students:', err);
+        message.error('An error occurred while assigning the student(s)');
       }
     } else {
       message.error('Please enter a valid numerical value for the tutor ID.');
