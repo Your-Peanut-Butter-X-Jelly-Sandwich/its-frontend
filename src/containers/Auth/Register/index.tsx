@@ -7,8 +7,8 @@ import { usePathname } from 'next/navigation';
 import getLocale from '@/common/utils/extractLocale';
 const { Item } = Form;
 import { useLazyAuthSignupQuery } from '@/redux/apis/auth';
-import CustomButton from '../Buttons/CustomButton/CustomButton';
-import SocialSignupButton from '../Buttons/SocialSignupButton/SocialSignupButton';
+import CustomButton from './components/CustomButton/CustomButton';
+import SocialSignupButton from './components/SocialSignupButton/SocialSignupButton';
 
 const SignUpContainer: React.FC<{
   isSignedUp: boolean;
