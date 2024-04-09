@@ -8,8 +8,8 @@ import {
   useGetSubmissionDetailQuery,
   useUpdateSubmissionDetailMutation,
 } from '@/redux/apis/tutor/SubmissionDetail';
-import CustomButton from '../components/Buttons/CustomButton/CustomButton';
-import NavButton from '../components/Buttons/NavButton/NavButton';
+import CustomButton from '../AddQuestion/components/Buttons/CustomButton';
+import NavButton from '../AddQuestion/components/Buttons/NavButton';
 import getLocale from '@/common/utils/extractLocale';
 import { usePathname } from 'next/navigation';
 

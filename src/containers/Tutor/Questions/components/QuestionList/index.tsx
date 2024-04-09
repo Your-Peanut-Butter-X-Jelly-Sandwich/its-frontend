@@ -1,6 +1,6 @@
 import React from 'react';
-import CustomButton from '../../Buttons/CustomButton/CustomButton';
-import NavButton from '../../Buttons/NavButton/NavButton';
+import CustomButton from '../../../AddQuestion/components/Buttons/CustomButton';
+import NavButton from '../../../AddQuestion/components/Buttons/NavButton';
 
 // @ts-ignore
 const QuestionList = ({ questionList, pathname, handleDeleteQuestion }) => {

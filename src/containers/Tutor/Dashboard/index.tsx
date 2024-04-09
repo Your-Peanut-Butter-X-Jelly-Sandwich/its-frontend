@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import PersonalInfo from '../components/PersonalInfo';
-import QuestionList from '../components/QuestionList';
+import PersonalInfo from './components/PersonalInfo';
+import QuestionList from './components/QuestionList';
 import { useGetDashboardStatsQuery } from '@/redux/apis/tutor';
 
 const TutorDashboardContainer: React.FC = () => {

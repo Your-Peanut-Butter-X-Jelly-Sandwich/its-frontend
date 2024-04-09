@@ -7,11 +7,11 @@ import {
   useGetQuestionDetailQuery,
   useUpdateQuestionDetailMutation,
 } from '@/redux/apis/tutor/EditQuestion';
-import SubHeader from '../components/SubHeaders/SubHeader';
-import MdEditorTabs from '../components/Editors/MdEditor/MdEditor';
-import CodeEditor from '../components/Editors/CodeEditor/CodeEditor';
-import TestCases from '../components/Editors/TestCaseEditor/TestCaseEditor';
-import CustomButton from '../components/Buttons/CustomButton/CustomButton';
+import SubHeader from '../AddQuestion/components/SubHeaders';
+import MdEditorTabs from '../AddQuestion/components/Editors/MdEditor';
+import CodeEditor from '../AddQuestion/components/Editors/CodeEditor';
+import TestCases from '../AddQuestion/components/Editors/TestCaseEditor';
+import CustomButton from '../AddQuestion/components/Buttons/CustomButton';
 import getLocale from '@/common/utils/extractLocale';
 import { usePathname } from 'next/navigation';
 

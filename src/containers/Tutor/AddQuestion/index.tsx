@@ -3,11 +3,11 @@
 import React, { useState } from 'react';
 import { Button, message, Space, Input, Select, Divider, DatePicker } from 'antd';
 import { useAddQuestionMutation } from '@/redux/apis/tutor/AddQuestion';
-import CustomButton from '../components/Buttons/CustomButton/CustomButton';
-import SubHeader from '../components/SubHeaders/SubHeader';
-import MdEditorTabs from '../components/Editors/MdEditor/MdEditor';
-import CodeEditor from '../components/Editors/CodeEditor/CodeEditor';
-import TestCases from '../components/Editors/TestCaseEditor/TestCaseEditor';
+import CustomButton from './components/Buttons/CustomButton';
+import SubHeader from './components/SubHeaders';
+import MdEditorTabs from './components/Editors/MdEditor';
+import CodeEditor from './components/Editors/CodeEditor';
+import TestCases from './components/Editors/TestCaseEditor';
 import getLocale from '@/common/utils/extractLocale';
 import { usePathname } from 'next/navigation';
 

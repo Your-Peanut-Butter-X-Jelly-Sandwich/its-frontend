@@ -8,8 +8,8 @@ import {
   useLazyGetQuestionsQuery,
   useDeleteQuestionMutation,
 } from '@/redux/apis/tutor/Questions';
-import NavButton from '../components/Buttons/NavButton/NavButton';
-import QuestionList from '../components/Lists/QuestionList/QuestionList';
+import NavButton from '../AddQuestion/components/Buttons/NavButton';
+import QuestionList from './components/QuestionList';
 import getLocale from '@/common/utils/extractLocale';
 
 const QuestionsContainer: React.FC<ITutorQuestionDetailRequest> = ({ qn_id }) => {

@@ -2,8 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 import { useGetSubmissionsQuery } from '@/redux/apis/tutor/Submissions';
-import SubmissionList from '../components/Lists/SubmissionList/SubmissionList';
-import NavButton from '../components/Buttons/NavButton/NavButton';
+import SubmissionList from './components/SubmissionList';
+import NavButton from '../AddQuestion/components/Buttons/NavButton';
 import getLocale from '@/common/utils/extractLocale';
 import { usePathname } from 'next/navigation';
 

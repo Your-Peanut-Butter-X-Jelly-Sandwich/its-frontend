@@ -3,9 +3,9 @@
 import React, { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { useLazyGetQuestionDetailQuery } from '@/redux/apis/tutor/QuestionDetail';
-import NavButton from '../components/Buttons/NavButton/NavButton';
-import CustomButton from '../components/Buttons/CustomButton/CustomButton';
-import QuestionStats from '../components/Stats/QuestionStats/QuestionStats';
+import NavButton from '../AddQuestion/components/Buttons/NavButton';
+import CustomButton from '../AddQuestion/components/Buttons/CustomButton';
+import QuestionStats from '../Dashboard/components/QuestionStats/QuestionStats';
 import getLocale from '@/common/utils/extractLocale';
 
 const QuestionDetailContainer: React.FC<ITutorQuestionDetailRequest> = ({ qn_id }) => {

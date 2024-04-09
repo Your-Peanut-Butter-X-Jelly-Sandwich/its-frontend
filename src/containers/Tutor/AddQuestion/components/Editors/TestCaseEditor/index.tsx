@@ -1,6 +1,6 @@
 import React from 'react';
 import { Space, Input, Divider } from 'antd';
-import CustomButton from '../../Buttons/CustomButton/CustomButton';
+import CustomButton from '../../Buttons/CustomButton';
 import { useState } from 'react';
 const TestCases: React.FC<ITutorTestCaseProps> = ({
   testCases,
