@@ -16,7 +16,6 @@ const TutorList: React.FC = () => {
 
   const getTutorData = async () => {
     const res: { user: ITutor[] } = await getTutors().unwrap();
-    console.log(res);
     setTutors(res.user);
   };
 
@@ -45,7 +44,7 @@ const TutorList: React.FC = () => {
       message.success('Demoted tutor(s) successfully');
       setTimeout(() => {
         window.location.reload();
-      }, 2000);
+      }, 3000);
       window.location.reload();
     } catch (err) {
       message.error('An error occurred while demoting the tutor(s)');

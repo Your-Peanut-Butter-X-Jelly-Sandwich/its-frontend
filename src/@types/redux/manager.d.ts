@@ -25,5 +25,6 @@ interface IAssignStudentRequest {
   student_ids: number[];
 }
 interface IAssignStudentResponse {
-  message: string[];
+  success?: [number, number][];
+  error?: { pair: [number, number]; reason: string }[];
 }
