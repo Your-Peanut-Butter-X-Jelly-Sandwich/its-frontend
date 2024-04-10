@@ -4,6 +4,8 @@ interface ITutorQuestionStatisticsResponse {
   total_submissions: number;
 }
 
+ITutorLanguage = 'python' | 'c';
+
 interface ITutorQuestionDetailRequest {
   qn_id: number;
 }
@@ -15,7 +17,7 @@ interface ITutorQuestionDetailResponse {
     question_title: string;
     question_statement: string;
     ref_program: string;
-    language: 'python' | 'c';
+    language: ITutorLanguage;
     pub_date: string;
     due_date: string;
   };
@@ -40,7 +42,7 @@ interface ITutorCreateNewQuestionRequest {
   question_title: string;
   question_statement: string;
   ref_program: string;
-  language: 'python' | 'c';
+  language: ITutorLanguage;
   due_date: string;
 }
 
@@ -64,7 +66,7 @@ interface ITutorSubmission {
   pk: number;
   qn_id: string;
   submission_number: number;
-  language: 'python' | 'c';
+  language: ITutorLanguage;
   submission_date: string;
   program: string;
   its_feedback_fix_tutor: string;
