@@ -4,7 +4,7 @@ import { Typography, Table, Checkbox, Button } from 'antd';
 const { Title } = Typography;
 
 interface ListProps {
-  users: IStudent[];
+  users: Student[];
   onCheckboxChange: (id: number, checked: boolean) => void;
   handleButtonClick: () => void;
   listTitle: string;
@@ -26,7 +26,7 @@ const List: React.FC<ListProps> = ({
       dataIndex: 'convert',
       key: 'convert',
       width: '5%',
-      render: (text: string, record: IStudent) => (
+      render: (text: string, record: Student) => (
         <Checkbox onChange={(e) => onCheckboxChange(record.id, e.target.checked)} />
       ),
     },

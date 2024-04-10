@@ -29,7 +29,6 @@ const LoginContainer: React.FC<{ isSignedUp: boolean; setSignedUp: (value: boole
       const result = await authLogin({ email, password }).unwrap();
 
       if (result) {
-        console.log(result);
         const { user } = result;
         const locale = getLocale(pathname);
 

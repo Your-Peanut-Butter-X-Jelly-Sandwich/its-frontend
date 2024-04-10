@@ -11,11 +11,11 @@ const TutorList: React.FC = () => {
   const [getTutors] = useLazyGetTutorsQuery();
   const [promoteStudents] = usePromoteStudentsMutation();
   const [demoteTutors] = useDemoteTutorsMutation();
-  const [tutors, setTutors] = useState<IStudent[]>([]);
+  const [tutors, setTutors] = useState<Student[]>([]);
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
 
   const getTutorData = async () => {
-    const res: { user: ITutor[] } = await getTutors().unwrap();
+    const res: { user: Tutor[] } = await getTutors().unwrap();
     setTutors(res.user);
   };
 
@@ -24,7 +24,6 @@ const TutorList: React.FC = () => {
   }, []);
 
   const handleCheckboxChange = (tutorId: number, checked: boolean) => {
-    console.log('Checkbox clicked for', tutorId, 'Checked:', checked);
     setSelectedIds((prevIds) => {
       if (checked) {
         return [...prevIds, tutorId];
@@ -32,12 +31,11 @@ const TutorList: React.FC = () => {
         return prevIds.filter((id) => id !== tutorId);
       }
     });
-    console.log(selectedIds);
   };
 
   const handleDemoteToStudent = async () => {
     try {
-      const request: IDemoteTutorRequest = {
+      const request: DemoteTutorRequest = {
         tutor_ids: selectedIds,
       };
       await demoteTutors(request).unwrap();

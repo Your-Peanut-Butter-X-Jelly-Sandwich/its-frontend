@@ -4,14 +4,14 @@ import { isEmpty } from 'lodash';
 
 export const authApi = ITSApi.injectEndpoints({
   endpoints: (builder) => ({
-    authSignup: builder.query<IAuthSignUpResponse, IAuthSignUpRequest>({
+    authSignup: builder.query<AuthSignUpResponse, AuthSignUpRequest>({
       query: (params) => ({
         url: '/auth/signup',
         method: 'POST',
         body: params,
       }),
     }),
-    authLogin: builder.query<IAuthLoginResponse, IAuthLoginRequest>({
+    authLogin: builder.query<AuthLoginResponse, AuthLoginRequest>({
       query: (params) => ({
         url: '/auth/login',
         method: 'POST',
@@ -24,7 +24,7 @@ export const authApi = ITSApi.injectEndpoints({
         }
       },
     }),
-    authLogout: builder.query<IAuthLogoutResponse, IAuthLogoutRequest>({
+    authLogout: builder.query<AuthLogoutResponse, AuthLogoutRequest>({
       query: (params) => ({
         url: 'auth/logout',
         method: 'POST',
@@ -37,7 +37,7 @@ export const authApi = ITSApi.injectEndpoints({
         }
       },
     }),
-    authRetrieveUser: builder.query<IAuthRetrieveUserResponse, void>({
+    authRetrieveUser: builder.query<AuthRetrieveUserResponse, void>({
       query: () => ({
         url: 'auth/user',
         method: 'GET',
@@ -49,7 +49,7 @@ export const authApi = ITSApi.injectEndpoints({
         }
       },
     }),
-    authUpdatePersonalInfo: builder.mutation<IAuthUpdateUserResponse, IAuthUpdateUserRequest>({
+    authUpdatePersonalInfo: builder.mutation<AuthUpdateUserResponse, AuthUpdateUserRequest>({
       query: (params) => ({
         url: 'auth/update-info',
         method: 'PATCH',

@@ -1,41 +1,41 @@
-interface IAuthState {
+interface AuthState {
   isAuthenticated: boolean;
   user: IUser;
   tokens: IUserTokens;
 }
 
-interface IAuthLoginRequest {
+interface AuthLoginRequest {
   email: string;
   password: string;
 }
 
-interface IAuthLoginResponse {
+interface AuthLoginResponse {
   tokens: IUserTokens;
   user: IUser;
 }
-interface IAuthSignUpRequest extends IAuthLoginRequest {}
+interface AuthSignUpRequest extends AuthLoginRequest {}
 
-interface IAuthSocialSignUpRequest {
+interface AuthSocialSignUpRequest {
   provider: string;
 }
 
-interface IAuthSignUpResponse {
+interface AuthSignUpResponse {
   user: IUser;
 }
 
-interface IAuthRetrieveUserResponse extends IUser {}
+interface AuthRetrieveUserResponse extends IUser {}
 
-interface IAuthUpdateUserRequest {
+interface AuthUpdateUserRequest {
   organisation?: string;
   username?: string;
 }
 
-interface IAuthUpdateUserResponse extends IUser {}
+interface AuthUpdateUserResponse extends IUser {}
 
-interface IAuthLogoutRequest {
+interface AuthLogoutRequest {
   tokens: IUserTokens;
 }
 
-interface IAuthLogoutResponse {
+interface AuthLogoutResponse {
   message: string;
 }
