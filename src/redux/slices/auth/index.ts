@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '@/redux';
 
-const initialState: IAuthState = {
+const initialState: AuthState = {
   isAuthenticated: false,
   user: {
     email: '',
@@ -22,7 +22,7 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setAuthSuccess: (state, { payload }: PayloadAction<IAuthLoginResponse>) => {
+    setAuthSuccess: (state, { payload }: PayloadAction<AuthLoginResponse>) => {
       state.isAuthenticated = true;
       state.user = payload.user;
       state.tokens = payload.tokens;
@@ -32,7 +32,7 @@ const authSlice = createSlice({
       state.tokens.refresh = payload.refresh;
       state.isAuthenticated = true;
     },
-    setAuthUser: (state, { payload }: PayloadAction<IAuthRetrieveUserResponse>) => {
+    setAuthUser: (state, { payload }: PayloadAction<AuthRetrieveUserResponse>) => {
       state.user = payload;
       state.isAuthenticated = true;
     },

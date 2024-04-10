@@ -12,13 +12,13 @@ const StudentList: React.FC = () => {
   const [getStudents] = useLazyGetStudentsQuery();
   const [promoteStudents] = usePromoteStudentsMutation();
   const [assignStudents] = useAssignStudentsMutation();
-  const [students, setStudents] = useState<IStudent[]>([]);
+  const [students, setStudents] = useState<Student[]>([]);
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>('');
 
   const getStudentData = async () => {
-    const res: { user: IStudent[] } = await getStudents().unwrap();
+    const res: { user: Student[] } = await getStudents().unwrap();
     setStudents(res.user);
   };
 
@@ -27,7 +27,6 @@ const StudentList: React.FC = () => {
   }, []);
 
   const handleCheckboxChange = (studentId: number, checked: boolean) => {
-    console.log('Checkbox clicked for', studentId, 'Checked:', checked);
     setSelectedIds((prevIds) => {
       if (checked) {
         return [...prevIds, studentId];
@@ -39,7 +38,7 @@ const StudentList: React.FC = () => {
 
   const handlePromoteToTutor = async () => {
     try {
-      const request: IPromoteStudentRequest = {
+      const request: PromoteStudentRequest = {
         student_ids: selectedIds,
       };
       await promoteStudents(request).unwrap();
@@ -60,7 +59,7 @@ const StudentList: React.FC = () => {
     const tutorId = parseInt(inputValue);
     if (!isNaN(tutorId)) {
       try {
-        const request: IAssignStudentRequest = {
+        const request: AssignStudentRequest = {
           tutor_id: tutorId,
           student_ids: selectedIds,
         };
@@ -72,6 +71,9 @@ const StudentList: React.FC = () => {
           // All students were successfully assigned
           const successfulIds = success.map(([tutId, stuId]) => stuId);
           message.success('Successfully assigned student IDs: ' + successfulIds.join(', '));
+          setTimeout(() => {
+            window.location.reload();
+          }, 3000);
         } else if (!success && error && error.length > 0) {
           // All students assignment failed
           const unsuccessfulPairs = error.map(({ pair, reason }) => ({
@@ -88,15 +90,17 @@ const StudentList: React.FC = () => {
           }));
           message.success('Successfully assigned student IDs: ' + successfulIds.join(', '));
           message.error('Unable to assign: ' + JSON.stringify(unsuccessfulPairs));
+          setTimeout(() => {
+            window.location.reload();
+          }, 3000);
         } else {
           // Unexpected response format or no data
           message.error('Invalid response format from server or no data returned');
+          setTimeout(() => {
+            window.location.reload();
+          }, 3000);
         }
-
-        // Reload after 2 seconds
-        setTimeout(() => {
-          window.location.reload();
-        }, 3000);
+        
       } catch (err) {
         console.error('An error occurred while assigning students:', err);
         message.error('An error occurred while assigning the student(s)');

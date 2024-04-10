@@ -1,4 +1,4 @@
-interface IStudent {
+interface Student {
   id: number;
   email: string;
   organisation: string;
@@ -7,24 +7,24 @@ interface IStudent {
   is_tutor: boolean;
   is_manager: boolean;
 }
-interface ITutor extends IStudent {}
-interface IStudentListResponse {
-  user: IStudent[];
+interface Tutor extends Student {}
+interface StudentListResponse {
+  user: Student[];
 }
-interface ITutorListResponse extends IStudentListResponse {}
-interface IStudentListRequest {}
+interface TutorListResponse extends StudentListResponse {}
+interface StudentListRequest {}
 
-interface IPromoteStudentRequest {
+interface PromoteStudentRequest {
   student_ids: number[];
 }
-interface IDemoteTutorRequest {
+interface DemoteTutorRequest {
   tutor_ids: number[];
 }
-interface IAssignStudentRequest {
+interface AssignStudentRequest {
   tutor_id: number;
   student_ids: number[];
 }
-interface IAssignStudentResponse {
+interface AssignStudentResponse {
   success?: [number, number][];
   error?: { pair: [number, number]; reason: string }[];
 }
