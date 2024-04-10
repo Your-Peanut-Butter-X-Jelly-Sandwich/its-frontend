@@ -8,17 +8,6 @@ import { useGetPastSubmissionsQuery } from '@/redux/apis/student';
 
 const { Title, Text } = Typography;
 
-const PAGE = {
-  padding: '20px',
-  backgroundColor: '#f0f2f5',
-  height: '100%',
-};
-
-const CARD = {
-  backgroundColor: '#ffffff',
-  marginBottom: '20px',
-};
-
 type PropsType = { qn_id: string };
 
 const PastSubmissionsContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
@@ -40,8 +29,8 @@ const PastSubmissionsContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => 
   }, [submissions]);
 
   return (
-    <div style={PAGE} className="h-full">
-      <Title level={2} style={{ marginBottom: '1.5%' }}>
+    <div className="h-full p-5 bg-[#f0f2f5]">
+      <Title level={2} className="mb-[1.5%]">
         Past Submissions
       </Title>
       <div className="h-[92%] flex flex-col justify-between">
@@ -51,10 +40,10 @@ const PastSubmissionsContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => 
             .sort((a, b) => b.pk - a.pk)
             .slice((page - 1) * pageSize, page * pageSize)
             .map((submission: StudentSubmission) => (
-              <Card style={CARD} key={submission.pk}>
+              <Card key={submission.pk} className="bg-[#ffffff] mb-5">
                 <Row justify="space-between" align="middle">
                   <Col>
-                    <Text style={{ fontSize: '1.3rem' }}>
+                    <Text className="text-[1.3rem]">
                       Submission Number:{' '}
                       {submission.submission_number ? submission.submission_number : <Spin />}
                     </Text>
@@ -63,7 +52,7 @@ const PastSubmissionsContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => 
                     <div>
                       {submission.score !== null ? (
                         <div>
-                          <Text style={{ fontSize: '1.3rem', marginRight: '15px' }}>
+                          <Text className="text-[1.3rem] mr-4">
                             Score: {submission.score} / {submission.total_score}
                           </Text>
                           <Link href={`${pathname}/${submission.pk}`} passHref>
@@ -86,7 +75,7 @@ const PastSubmissionsContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => 
             defaultCurrent={1}
             total={submissions?.length}
             pageSize={pageSize}
-            style={{ textAlign: 'center' }}
+            className="text-center"
             onChange={(page) => setPage(page)}
           />
         </div>

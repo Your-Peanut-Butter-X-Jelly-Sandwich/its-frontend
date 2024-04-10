@@ -7,17 +7,6 @@ import { Editor } from '@monaco-editor/react';
 
 const { Paragraph } = Typography;
 
-const PAGE = {
-  padding: '20px',
-  backgroundColor: '#f0f2f5',
-  height: '100%',
-};
-
-const CARD = {
-  height: '100%',
-  border: '1px solid #d9d9d9',
-};
-
 type SubmissionDetailProps = {
   submission_id: string;
 };
@@ -55,10 +44,14 @@ const SubmissionDetailContainer: React.FC<SubmissionDetailProps> = ({ submission
   }, [editor, monaco, hints]);
 
   return (
-    <div style={PAGE}>
+    <div className="h-full p-5 bg-[#f0f2f5]">
       <Row gutter={[24, 24]}>
         <Col xs={24} lg={12}>
-          <Card title="Submission Program" bordered style={CARD}>
+          <Card
+            title="Submission Program"
+            bordered
+            className="h-full border-solid border-[1px] border-[#d9d9d9]"
+          >
             <Editor
               height="70vh"
               defaultLanguage={data?.language}
@@ -85,7 +78,11 @@ const SubmissionDetailContainer: React.FC<SubmissionDetailProps> = ({ submission
           </Card>
         </Col>
         <Col xs={24} lg={12}>
-          <Card title="Tutor Feedback" bordered style={CARD}>
+          <Card
+            title="Tutor Feedback"
+            bordered
+            className="h-full border-solid border-[1px] border-[#d9d9d9]"
+          >
             <Paragraph> {data?.tutor_feedback} </Paragraph>
           </Card>
         </Col>

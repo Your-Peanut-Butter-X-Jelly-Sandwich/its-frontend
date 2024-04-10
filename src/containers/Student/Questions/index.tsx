@@ -8,17 +8,6 @@ import { useGetQuestionsQuery } from '@/redux/apis/student';
 
 const { Title, Text } = Typography;
 
-const PAGE = {
-  padding: '20px',
-  backgroundColor: '#f0f2f5',
-  height: '100%',
-};
-
-const CARD = {
-  backgroundColor: '#ffffff',
-  marginBottom: '20px',
-};
-
 const QuestionsContainer: React.FC = () => {
   const pathname = usePathname();
   const pageSize = 7;
@@ -28,8 +17,8 @@ const QuestionsContainer: React.FC = () => {
   const questions = data?.questions;
 
   return (
-    <div style={PAGE}>
-      <Title level={2} style={{ marginBottom: '1.5%' }}>
+    <div className="h-full p-5 bg-[#f0f2f5]">
+      <Title level={2} className="mb-[1.5%]">
         Select the question you want to attempt!
       </Title>
       <div className="h-[92%] flex flex-col justify-between">
@@ -37,10 +26,10 @@ const QuestionsContainer: React.FC = () => {
           {questions
             ?.slice((page - 1) * pageSize, page * pageSize)
             .map((question: StudentQuestion) => (
-              <Card style={CARD} key={question.pk}>
+              <Card key={question.pk} className="bg-[#ffffff] mb-5">
                 <Row justify="space-between" align="middle">
                   <Col>
-                    <Text style={{ fontSize: '1.3rem' }}>{question.question_title}</Text>
+                    <Text className="text-[1.3rem]">{question.question_title}</Text>
                   </Col>
                   <Col>
                     <Link href={`${pathname}/${question.pk}/past-submissions`} passHref>
@@ -63,7 +52,7 @@ const QuestionsContainer: React.FC = () => {
             defaultCurrent={1}
             total={questions?.length}
             pageSize={pageSize}
-            style={{ textAlign: 'center' }}
+            className="text-center"
             onChange={(page) => setPage(page)}
           />
         </div>
