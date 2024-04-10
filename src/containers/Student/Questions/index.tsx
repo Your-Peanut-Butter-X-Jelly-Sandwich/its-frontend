@@ -36,7 +36,7 @@ const QuestionsContainer: React.FC = () => {
         <div>
           {questions
             ?.slice((page - 1) * pageSize, page * pageSize)
-            .map((question: IStudentQuestion) => (
+            .map((question: StudentQuestion) => (
               <Card style={CARD} key={question.pk}>
                 <Row justify="space-between" align="middle">
                   <Col>

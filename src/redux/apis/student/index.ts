@@ -3,21 +3,21 @@ import { ITSApi } from '@/redux/createApi';
 export const studentApi = ITSApi.injectEndpoints({
   endpoints: (builder) => ({
     getSubmissionDetail: builder.query<
-      IStudentSubmissionDetailResponse,
-      IStudentSubmissionDetailRequest
+      StudentSubmissionDetailResponse,
+      StudentSubmissionDetailRequest
     >({
       query: ({ id }) => ({
         url: `/student/submission/${id}`,
         method: 'GET',
       }),
     }),
-    getQuestions: builder.query<IStudentQuestionsResponse, IStudentQuestionsRequest>({
+    getQuestions: builder.query<StudentQuestionsResponse, StudentQuestionsRequest>({
       query: () => ({
         url: '/student/question',
         method: 'GET',
       }),
     }),
-    getQuestionDetail: builder.query<IStudentQuestionDetailResponse, IStudentQuestionDetailRequest>(
+    getQuestionDetail: builder.query<StudentQuestionDetailResponse, StudentQuestionDetailRequest>(
       {
         query: ({ qn_id }) => ({
           url: `/student/question/${qn_id}`,
@@ -27,8 +27,8 @@ export const studentApi = ITSApi.injectEndpoints({
     ),
 
     postCodeSubmission: builder.mutation<
-      IStudentCodeSubmissionResponse,
-      IStudentCodeSubmissionRequest
+      StudentCodeSubmissionResponse,
+      StudentCodeSubmissionRequest
     >({
       query: (body) => ({
         url: '/student/submission',
@@ -37,8 +37,8 @@ export const studentApi = ITSApi.injectEndpoints({
       }),
     }),
     getPastSubmissions: builder.query<
-      IStudentPastSubmissionsResponse,
-      IStudentPastSubmissionsRequest
+      StudentPastSubmissionsResponse,
+      StudentPastSubmissionsRequest
     >({
       query: (params) => ({
         url: '/student/submission',
@@ -46,7 +46,7 @@ export const studentApi = ITSApi.injectEndpoints({
         params,
       }),
     }),
-    getDashboardStats: builder.query<IStudentDashboardStatsResponse, void>({
+    getDashboardStats: builder.query<StudentDashboardStatsResponse, void>({
       query: () => ({
         url: '/student/dashboard-stats',
         method: 'GET',

@@ -50,7 +50,7 @@ const PastSubmissionsContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => 
             ?.slice()
             .sort((a, b) => b.pk - a.pk)
             .slice((page - 1) * pageSize, page * pageSize)
-            .map((submission: IStudentSubmission) => (
+            .map((submission: StudentSubmission) => (
               <Card style={CARD} key={submission.pk}>
                 <Row justify="space-between" align="middle">
                   <Col>

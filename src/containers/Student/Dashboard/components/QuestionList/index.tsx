@@ -4,7 +4,7 @@ import { FireTwoTone } from '@ant-design/icons';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 type QuestionListType = {
-  questions: IStudentQuestion[];
+  questions: StudentQuestion[];
   time: 'week' | 'month';
 };
 const QuestionList: React.FC<QuestionListType> = ({ questions, time }: QuestionListType) => {

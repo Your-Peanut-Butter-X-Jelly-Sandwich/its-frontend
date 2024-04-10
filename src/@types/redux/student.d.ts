@@ -1,4 +1,4 @@
-interface IStudentQuestionDetailResponse {
+interface StudentQuestionDetailResponse {
   pk: number;
   question_title: string;
   question_statement: string;
@@ -8,11 +8,11 @@ interface IStudentQuestionDetailResponse {
   pub_by: IUser;
 }
 
-interface IStudentQuestionDetailRequest {
+interface StudentQuestionDetailRequest {
   qn_id: number;
 }
 
-interface IStudentQuestion {
+interface StudentQuestion {
   pk: number;
   question_title: string;
   due_date: string;
@@ -22,13 +22,13 @@ interface IStudentQuestion {
   passed: boolean;
 }
 
-interface IStudentQuestionsResponse {
-  questions: IStudentQuestion[];
+interface StudentQuestionsResponse {
+  questions: StudentQuestion[];
 }
 
-interface IStudentQuestionsRequest {}
+interface StudentQuestionsRequest {}
 
-interface IStudentSubmission {
+interface StudentSubmission {
   pk: number;
   submission_number: number;
   score: number;
@@ -44,15 +44,15 @@ interface IStudentSubmission {
   };
 }
 
-interface IStudentPastSubmissionsResponse {
-  submissions: IStudentSubmission[];
+interface StudentPastSubmissionsResponse {
+  submissions: StudentSubmission[];
 }
 
-interface IStudentPastSubmissionsRequest {
+interface StudentPastSubmissionsRequest {
   qn_id: number;
 }
 
-interface IStudentSubmissionDetailResponse {
+interface StudentSubmissionDetailResponse {
   id: number;
   qn_id: number;
   language: string;
@@ -67,11 +67,11 @@ interface IStudentSubmissionDetailResponse {
   its_feedback_hint_student: string;
 }
 
-interface IStudentSubmissionDetailRequest {
+interface StudentSubmissionDetailRequest {
   id: number;
 }
 
-interface IStudentCodeSubmissionResponse {
+interface StudentCodeSubmissionResponse {
   pk: number;
   qn_id: number;
   submission_number: number;
@@ -91,17 +91,17 @@ interface IStudentCodeSubmissionResponse {
   submitted_by: IUser;
 }
 
-interface IStudentCodeSubmissionRequest {
+interface StudentCodeSubmissionRequest {
   qn_id: number;
   language: string;
   program: string;
 }
 
-interface IStudentDashboardStatsResponse {
+interface StudentDashboardStatsResponse {
   personal_info: IUser;
   tutors: IUser[];
   total_question_assigned: number;
   attempted_questions: number;
-  questions_due_in_a_month: IStudentQuestion[];
-  questions_due_in_a_week: IStudentQuestion[];
+  questions_due_in_a_month: StudentQuestion[];
+  questions_due_in_a_week: StudentQuestion[];
 }
