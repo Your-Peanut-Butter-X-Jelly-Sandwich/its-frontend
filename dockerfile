@@ -1,13 +1,9 @@
 FROM node:alpine
 
-ARG API_HOST
-ENV NEXT_PUBLIC_API_HOST=$API_HOST
-
 WORKDIR /app
-COPY package.json .
-COPY yarn.lock .
-RUN yarn install
+COPY package*.json ./
+RUN npm ci
 COPY . .
-RUN yarn build
+EXPOSE 3000
 
-CMD ["yarn", "start"]
+CMD npm run dev
