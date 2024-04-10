@@ -11,7 +11,6 @@ import TestCases from './components/Editors/TestCaseEditor';
 import getLocale from '@/common/utils/extractLocale';
 import { usePathname } from 'next/navigation';
 
-
 const AddQuestionContainer = () => {
   const [markdown, setMarkdown] = useState('');
   //const [testCases, setTestCases] = useState<ITutorTestCase>([{input: '', expectedOutput: '' }]);

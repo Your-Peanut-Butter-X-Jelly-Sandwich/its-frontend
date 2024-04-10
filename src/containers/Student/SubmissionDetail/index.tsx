@@ -46,7 +46,7 @@ const SubmissionDetailContainer: React.FC<SubmissionDetailProps> = ({ submission
           startColumn: editor.getModel().getLineFirstNonWhitespaceColumn(hint.lineNumber),
           endLineNumber: hint.lineNumber,
           endColumn: editor.getModel().getLineLength(hint.lineNumber) + 1,
-          message: hint.hintStrings[0],
+          message: hint.hintStrings ? hint.hintStrings[0] : 'no hint available',
           severity: monaco.MarkerSeverity.Error,
         });
       });

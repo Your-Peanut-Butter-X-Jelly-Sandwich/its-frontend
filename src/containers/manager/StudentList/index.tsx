@@ -65,9 +65,9 @@ const StudentList: React.FC = () => {
           student_ids: selectedIds,
         };
         const response = await assignStudents(request).unwrap();
-      
+
         const { success, error } = response;
-      
+
         if (success && success.length > 0 && !error) {
           // All students were successfully assigned
           const successfulIds = success.map(([tutId, stuId]) => stuId);
@@ -76,7 +76,7 @@ const StudentList: React.FC = () => {
           // All students assignment failed
           const unsuccessfulPairs = error.map(({ pair, reason }) => ({
             studentId: pair[1],
-            reason
+            reason,
           }));
           message.error('Unable to assign: ' + JSON.stringify(unsuccessfulPairs));
         } else if (success && success.length > 0 && error && error.length > 0) {
@@ -84,7 +84,7 @@ const StudentList: React.FC = () => {
           const successfulIds = success.map(([tutId, stuId]) => stuId);
           const unsuccessfulPairs = error.map(({ pair, reason }) => ({
             studentId: pair[1],
-            reason
+            reason,
           }));
           message.success('Successfully assigned student IDs: ' + successfulIds.join(', '));
           message.error('Unable to assign: ' + JSON.stringify(unsuccessfulPairs));
@@ -92,7 +92,7 @@ const StudentList: React.FC = () => {
           // Unexpected response format or no data
           message.error('Invalid response format from server or no data returned');
         }
-      
+
         // Reload after 2 seconds
         setTimeout(() => {
           window.location.reload();

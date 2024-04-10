@@ -17,14 +17,12 @@ export const studentApi = ITSApi.injectEndpoints({
         method: 'GET',
       }),
     }),
-    getQuestionDetail: builder.query<StudentQuestionDetailResponse, StudentQuestionDetailRequest>(
-      {
-        query: ({ qn_id }) => ({
-          url: `/student/question/${qn_id}`,
-          method: 'GET',
-        }),
-      }
-    ),
+    getQuestionDetail: builder.query<StudentQuestionDetailResponse, StudentQuestionDetailRequest>({
+      query: ({ qn_id }) => ({
+        url: `/student/question/${qn_id}`,
+        method: 'GET',
+      }),
+    }),
 
     postCodeSubmission: builder.mutation<
       StudentCodeSubmissionResponse,
