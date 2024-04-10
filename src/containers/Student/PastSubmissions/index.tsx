@@ -34,6 +34,11 @@ const PastSubmissionsContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => 
         Past Submissions
       </Title>
       <div className="h-[92%] flex flex-col justify-between">
+        {submissions?.length === 0 && (
+          <div className="text-center">
+            <h1>No record available!</h1>
+          </div>
+        )}
         <div>
           {submissions
             ?.slice()
