@@ -4,7 +4,7 @@ interface ITutorQuestionStatisticsResponse {
   total_submissions: number;
 }
 
-ITutorLanguage = 'python' | 'c';
+type ITutorLanguage = 'python' | 'c';
 
 interface ITutorQuestionDetailRequest {
   qn_id: number;

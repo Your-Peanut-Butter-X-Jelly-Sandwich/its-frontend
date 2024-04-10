@@ -39,7 +39,7 @@ const EditQuestionContainer: React.FC<ITutorQuestionDetailRequest> = ({ qn_id })
   const [testCases, setTestCases] = useState<Omit<ITutorTestCaseResponse, 'pk'>[]>([
     { input: '', output: '' },
   ]);
-  const [language, setLanguage] = useState<'python' | 'c'>('python');
+  const [language, setLanguage] = useState<ITutorLanguage>('python');
   const [codeContent, setCodeContent] = useState<string>('');
   const [questionTitle, setQuestionTitle] = useState<string>('');
   const [dueDate, setDueDate] = useState<string>('');

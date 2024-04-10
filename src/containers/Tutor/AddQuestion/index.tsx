@@ -68,7 +68,7 @@ const AddQuestionContainer = () => {
       question_title: questionTitle,
       question_statement: markdown,
       ref_program: codeContent,
-      language: language as 'python' | 'c',
+      language: language as ITutorLanguage,
       due_date: dueDate,
       test_cases: testCases.map((testCase, index) => ({
         pk: index,
