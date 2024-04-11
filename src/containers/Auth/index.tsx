@@ -13,7 +13,7 @@ const AuthContainer: React.FC = () => {
   }, []);
   return (
     <div className="h-screen flex flex-row justify-center items-center">
-      {isSignedUp ? (
+      {!isSignedUp ? (
         <LoginContainer isSignedUp={isSignedUp} setSignedUp={setSignedUp} />
       ) : (
         <SignUpContainer isSignedUp={isSignedUp} setSignedUp={setSignedUp} />

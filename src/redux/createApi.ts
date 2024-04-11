@@ -10,6 +10,7 @@ import { RootState } from '.';
 import { Mutex } from 'async-mutex';
 import { isEmpty } from 'lodash';
 import { setAuthTokens, setLogout } from './slices/auth';
+import { access } from 'fs';
 
 const mutex = new Mutex();
 
@@ -43,7 +44,7 @@ const itsBaseQueryWithReauth: BaseQueryFn<any | FetchArgs, unknown, FetchBaseQue
   /* When user tries to access data that requires authentication */
   // If encountering 401 Unauthorized error, an additional request is sent to attempt to refresh an authorization token,
   // and re-try the initial query after re-authorizing.
-  if (result.error && result.error.status === 401) {
+  if (result.error && result.error.status === 403) {
     if (!mutex.isLocked()) {
       const release = await mutex.acquire();
       try {
@@ -53,23 +54,28 @@ const itsBaseQueryWithReauth: BaseQueryFn<any | FetchArgs, unknown, FetchBaseQue
         const { tokens } = (api.getState() as RootState).auth;
         const refreshToken = tokens.refresh;
         // Request new access token with refresh token
-        const { data } = await plainBaseQuery()(
+        const { data, error } = await plainBaseQuery()(
           {
             url: '/auth/token/refresh',
             method: 'POST',
-            params: {
-              refreshToken,
+            body: {
+              refresh: refreshToken,
             },
           },
           api,
           extraOptions
         );
+        // When refresh token has also expired, reload (reload will trigger redirection to login page)
+        if (error) {
+          api.dispatch(setLogout());
+          window.location.reload();
+        }
         // If the request is successful, update the redux store with the new access token and retry the initial query.
         if (!isEmpty(data)) {
           // Get the new access and refresh tokens from the response
-          const { tokens: newTokens } = data as { tokens: IUserTokens };
+          const { access: newAccessToken } = data as { access: string };
           // Update redux with the new tokens
-          api.dispatch(setAuthTokens(newTokens));
+          api.dispatch(setAuthTokens({ access: newAccessToken, refresh: refreshToken }));
           // retry the initial query
           result = await baseQueryWithAuth()(args, api, extraOptions);
         } else {
