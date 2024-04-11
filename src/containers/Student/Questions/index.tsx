@@ -16,6 +16,13 @@ const QuestionsContainer: React.FC = () => {
   const { data } = useGetQuestionsQuery({});
   const questions = data?.questions;
 
+  const canAttempt = (dueDate: string) => {
+    const today = new Date();
+    const todayStr = today.toISOString().split('T')[0];
+    const d1 = Date.parse(todayStr);
+    const d2 = Date.parse(dueDate);
+    return d1 < d2;
+  };
   return (
     <div className="h-full p-5 bg-[#f0f2f5]">
       <Title level={2} className="mb-[1.5%]">
@@ -33,12 +40,22 @@ const QuestionsContainer: React.FC = () => {
                   </Col>
                   <Col>
                     <Link href={`${pathname}/${question.pk}/past-submissions`} passHref>
-                      <Button type="primary" className="bg-blue-500 mr-3" id={`${question.pk}`}>
-                        Submissions
+                      <Button
+                        type="primary"
+                        className="bg-blue-500 mr-3"
+                        id={`${question.pk}`}
+                        disabled={!question.attempted}
+                      >
+                        Past Submissions
                       </Button>
                     </Link>
                     <Link href={`${pathname}/${question.pk}`} passHref>
-                      <Button type="primary" className="bg-blue-500" id={`${question.pk}`}>
+                      <Button
+                        type="primary"
+                        className="bg-blue-500"
+                        id={`${question.pk}`}
+                        disabled={!canAttempt(question.due_date)}
+                      >
                         Attempt
                       </Button>
                     </Link>
