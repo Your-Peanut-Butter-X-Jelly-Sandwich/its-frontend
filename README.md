@@ -32,7 +32,7 @@ Mac users may encounter error when installing, refer to this [link](https://stac
 
 ### Using npm command
 
-Run the development server with the following command:
+1. Run the development server with the following command:
 
 ```bash
 npm run dev
@@ -40,4 +40,4 @@ npm run dev
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
