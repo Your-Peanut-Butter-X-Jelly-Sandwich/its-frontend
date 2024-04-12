@@ -17,7 +17,7 @@ const LoginContainer: React.FC<{ isSignUp: boolean; setIsSignUp: (value: boolean
   const pathname = usePathname();
 
   const handleSocialSignup = (provider: string) => {
-    window.location.href = `http://localhost:8000/auth/${provider}/login`;
+    window.location.href = `http://127.0.0.1:8000/auth/${provider}/login`;
   };
   const handleSignUpClick = () => {
     setIsSignUp(true);
