@@ -96,7 +96,7 @@ const EditQuestionContainer: React.FC<ITutorQuestionDetailRequest> = ({ qn_id })
         due_date: dueDate,
         test_cases: testCases.map((tc) => ({
           input: tc.input,
-          expectedOutput: tc.output,
+          output: tc.output,
         })),
         total_students: questionData.total_students,
         passes: questionData.passes,

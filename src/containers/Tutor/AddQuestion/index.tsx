@@ -13,7 +13,6 @@ import { usePathname } from 'next/navigation';
 
 const AddQuestionContainer = () => {
   const [markdown, setMarkdown] = useState('');
-  //const [testCases, setTestCases] = useState<ITutorTestCase>([{input: '', expectedOutput: '' }]);
   const [testCases, setTestCases] = useState<ITutorTestCase[]>([{ input: '', output: '' }]);
   const [language, setLanguage] = useState('python');
   const [codeContent, setCodeContent] = useState('');

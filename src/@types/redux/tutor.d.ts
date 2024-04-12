@@ -113,7 +113,7 @@ interface ITutorMdEditorProps {
 }
 
 interface ITutorTestCaseProps {
-  testCases: ITutorTestCaseResponse[];
+  testCases: ITutorTestCase[];
   updateTestCase: (index: number, field: string, value: string) => void;
   addTestCase: () => void;
   removeLastTestCase: () => void;

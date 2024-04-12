@@ -10,7 +10,8 @@ const TestCases: React.FC<ITutorTestCaseProps> = ({
 }) => {
   return (
     <div className="flex-grow overflow-auto p-2.5">
-      {testCases.map((testCase: ITutorTestCaseResponse, index: number) => (
+      {testCases.map((testCase: ITutorTestCase, index: number) => (
+        console.log('testCases', testCases),
         <React.Fragment key={index}>
           {index > 0 && <Divider />}
           <div className="mb-2.5 flex flex-col gap-2">
