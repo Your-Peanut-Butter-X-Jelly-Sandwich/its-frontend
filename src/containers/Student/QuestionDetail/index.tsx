@@ -3,9 +3,9 @@
 import React from 'react';
 import { usePathname } from 'next/navigation';
 import Editor from '@monaco-editor/react';
-import Markdown from 'react-markdown';
 import { Button, Typography } from 'antd';
 import { useGetQuestionDetailQuery, usePostCodeSubmissionMutation } from '@/redux/apis/student';
+import MDEditor from '@uiw/react-md-editor';
 const { Text } = Typography;
 
 type PropsType = {
@@ -48,11 +48,11 @@ const QuestionDetailContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
   };
 
   return (
-    <div className="flex bg-gray-100 h-full">
-      <div className="w-[50%] p-10">
+    <div className="flex bg-white h-full">
+      <div className="w-[50%] pl-7 pt-9 pb-9">
         {/* Problem Statement */}
-        <div className="h-full overflow-auto">
-          <Markdown>{problemStatement}</Markdown>
+        <div className="h-full overflow-auto" data-color-mode="light">
+          <MDEditor.Markdown source={problemStatement} />
         </div>
       </div>
       {/* Code Editor */}
