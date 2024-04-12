@@ -128,8 +128,8 @@ const EditQuestionContainer: React.FC<ITutorQuestionDetailRequest> = ({ qn_id })
         language={language}
         dueDate={dueDate}
       />
-      <div className="flex flex-col h-[87vh]">
-        <div className="flex flex-grow">
+      <div className="flex flex-col min-h-0 grow shrink overflow-scroll">
+      <div className="flex grow shrink">
           {/* Left side: Markdown Editor and Preview */}
           <MdEditorTabs
             // @ts-ignore
