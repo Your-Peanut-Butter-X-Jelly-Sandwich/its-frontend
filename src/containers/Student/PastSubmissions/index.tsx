@@ -61,9 +61,6 @@ const PastSubmissionsContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => 
                             Score: {submission.score} / {submission.total_score}
                           </Text>
                           <Link href={`${pathname}/${submission.pk}`} passHref>
-                            {/* <Button type="primary" className="bg-blue-500">
-                              View
-                            </Button> */}
                             <button
                               type="button"
                               className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300"

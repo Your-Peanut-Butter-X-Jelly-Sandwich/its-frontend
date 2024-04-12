@@ -48,7 +48,7 @@ const QuestionsContainer: React.FC = () => {
                     <Link href={`${pathname}/${question.pk}/past-submissions`} passHref>
                       <button
                         type="button"
-                        className="bg-blue-500 text-white py-2 px-4 mr-3 rounded hover:bg-blue-700 transition duration-300"
+                        className="bg-blue-500 text-white py-2 px-4 mr-3 rounded hover:bg-blue-700 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-500"
                         id={`${question.pk}`}
                         disabled={!question.attempted}
                       >
@@ -58,7 +58,7 @@ const QuestionsContainer: React.FC = () => {
                     <Link href={`${pathname}/${question.pk}`} passHref>
                       <button
                         type="button"
-                        className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700 transition duration-300"
+                        className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-500"
                         id={`${question.pk}`}
                         disabled={!canAttempt(question.due_date)}
                       >
