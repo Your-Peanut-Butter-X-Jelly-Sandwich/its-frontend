@@ -48,7 +48,7 @@ const SignUpContainer: React.FC<{
     }
   };
   const handleLoginClick = () => {
-    setSignedUp(true);
+    setSignedUp(false);
   };
 
   return (

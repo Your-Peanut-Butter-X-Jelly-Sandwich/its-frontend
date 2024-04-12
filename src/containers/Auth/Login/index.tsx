@@ -20,7 +20,7 @@ const LoginContainer: React.FC<{ isSignedUp: boolean; setSignedUp: (value: boole
     window.location.href = `http://localhost:8000/auth/${provider}/login`;
   };
   const handleSignUpClick = () => {
-    setSignedUp(false);
+    setSignedUp(true);
   };
   const handleLogin = async () => {
     try {
