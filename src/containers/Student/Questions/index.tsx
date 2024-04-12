@@ -3,7 +3,8 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Button, Typography, Card, Row, Col, Pagination } from 'antd';
+import { Button, Typography, Card, Row, Col, Pagination, Tag } from 'antd';
+import { CheckCircleOutlined } from '@ant-design/icons';
 import { useGetQuestionsQuery } from '@/redux/apis/student';
 
 const { Title, Text } = Typography;
@@ -37,6 +38,11 @@ const QuestionsContainer: React.FC = () => {
                 <Row justify="space-between" align="middle">
                   <Col>
                     <Text className="text-[1.3rem]">{question.question_title}</Text>
+                    {question.passed && (
+                      <Tag className="ml-3" icon={<CheckCircleOutlined />} color="#87d068">
+                        Passed
+                      </Tag>
+                    )}
                   </Col>
                   <Col>
                     <Link href={`${pathname}/${question.pk}/past-submissions`} passHref>
@@ -52,7 +58,7 @@ const QuestionsContainer: React.FC = () => {
                     <Link href={`${pathname}/${question.pk}`} passHref>
                       <Button
                         type="primary"
-                        className="bg-blue-500"
+                        className="bg-green-500"
                         id={`${question.pk}`}
                         disabled={!canAttempt(question.due_date)}
                       >
