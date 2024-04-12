@@ -42,7 +42,7 @@ const HeaderTutor: React.FC = () => {
     } else if (pathname == `/${locale}/tutor/questions`) {
       return 'check-questions';
     }
-    return 'dashboard'; 
+    return 'dashboard';
   };
 
   const defaultSelectedKey = getDefaultSelectedKey();

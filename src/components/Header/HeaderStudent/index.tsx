@@ -33,7 +33,8 @@ const HeaderStudent: React.FC = () => {
     }
   };
 
-  const defaultSelectedKey = String(window.location.pathname).split('/')[3] == 'questions' ? 'check-questions' : 'dashboard';
+  const defaultSelectedKey =
+    String(window.location.pathname).split('/')[3] == 'questions' ? 'check-questions' : 'dashboard';
 
   return (
     <Menu mode="horizontal" theme="dark" defaultSelectedKeys={[defaultSelectedKey]}>

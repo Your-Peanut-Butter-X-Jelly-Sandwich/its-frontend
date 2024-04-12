@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Button, Typography, Card, Row, Col, Spin, Pagination } from 'antd';
+import { Typography, Card, Row, Col, Spin, Pagination } from 'antd';
 import { useGetPastSubmissionsQuery } from '@/redux/apis/student';
 
 const { Title, Text } = Typography;
@@ -61,9 +61,13 @@ const PastSubmissionsContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => 
                             Score: {submission.score} / {submission.total_score}
                           </Text>
                           <Link href={`${pathname}/${submission.pk}`} passHref>
-                            <Button type="primary" className="bg-blue-500">
+                            <button
+                              type="button"
+                              className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
+                              id={`${submission.pk}`}
+                            >
                               View
-                            </Button>
+                            </button>
                           </Link>
                         </div>
                       ) : (
