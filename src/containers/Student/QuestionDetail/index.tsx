@@ -3,7 +3,7 @@
 import React from 'react';
 import { usePathname } from 'next/navigation';
 import Editor from '@monaco-editor/react';
-import { Button, Typography } from 'antd';
+import { Typography } from 'antd';
 import { useGetQuestionDetailQuery, usePostCodeSubmissionMutation } from '@/redux/apis/student';
 import MDEditor from '@uiw/react-md-editor';
 const { Text } = Typography;
@@ -55,7 +55,7 @@ const QuestionDetailContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
           <MDEditor.Markdown source={problemStatement} />
         </div>
       </div>
-      <div className='w-[0.1%] bg-black'></div>
+      <div className="w-[0.1%] bg-black"></div>
       {/* Code Editor */}
       <div className="w-[49.95%] bg-gray-400">
         <div className="h-[4%] flex justify-end">
@@ -68,15 +68,15 @@ const QuestionDetailContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
           onChange={(newValue, e) => setCode(newValue)}
         />
         <div className="h-[6%] w-full flex justify-center items-center">
-          <Button
+          <button
             id="submit-button"
-            type="primary"
-            className="bg-blue-500"
+            type="button"
+            className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
             onClick={handleSubmit}
             disabled={isLoading}
           >
             Submit
-          </Button>
+          </button>
         </div>
       </div>
     </div>

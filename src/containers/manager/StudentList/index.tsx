@@ -100,7 +100,6 @@ const StudentList: React.FC = () => {
             window.location.reload();
           }, 3000);
         }
-        
       } catch (err) {
         console.error('An error occurred while assigning students:', err);
         message.error('An error occurred while assigning the student(s)');
