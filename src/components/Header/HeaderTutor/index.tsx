@@ -33,7 +33,19 @@ const HeaderTutor: React.FC = () => {
     }
   };
 
-  const defaultSelectedKey = 'dashboard';
+  const getDefaultSelectedKey = () => {
+    console.log(pathname);
+    if (pathname == `/${locale}/tutor`) {
+      return 'dashboard';
+    } else if (pathname == `/${locale}/tutor/add-question`) {
+      return 'add-question';
+    } else if (pathname == `/${locale}/tutor/questions`) {
+      return 'check-questions';
+    }
+    return 'dashboard'; 
+  };
+
+  const defaultSelectedKey = getDefaultSelectedKey();
 
   return (
     <Menu mode="horizontal" theme="dark" defaultSelectedKeys={[defaultSelectedKey]}>
