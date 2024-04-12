@@ -1,0 +1,10 @@
+{
+  "Landing": {
+    "title": "ITS에 환영합니다",
+    "Header": {
+      "its": "지능형 튜터링 시스템",
+      "login": "로그인",
+      "signup": "가입하기"
+    }
+  }
+}

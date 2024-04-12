@@ -1,5 +1,10 @@
 {
   "Landing": {
-    "title": "WILLKOMMEN BEI ITS"
+    "title": "WILLKOMMEN BEI Intelligentes Nachhilfesystem",
+    "Header": {
+      "its": "Intelligentes Nachhilfesystem",
+      "login": "Anmeldung",
+      "signup": "Melden Sie sich an"
+    }
   }
 }
