@@ -48,7 +48,7 @@ const SubmissionDetailContainer: React.FC<SubmissionDetailProps> = ({ submission
       <Row gutter={[24, 24]}>
         <Col xs={24} lg={12}>
           <Card
-            title="Submission Program"
+            title="Submitted Program"
             bordered
             className="h-full border-solid border-[1px] border-[#d9d9d9]"
           >
