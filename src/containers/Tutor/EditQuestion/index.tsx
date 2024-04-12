@@ -119,7 +119,7 @@ const EditQuestionContainer: React.FC<ITutorQuestionDetailRequest> = ({ qn_id })
   };
 
   return (
-    <div className="p-5 bg-gray-100 min-h-screen">
+    <div className="flex flex-col p-5 min-h-0 h-full gap-5">
       <SubHeader
         questionTitle={questionTitle}
         setQuestionTitle={setQuestionTitle}
@@ -175,11 +175,11 @@ const EditQuestionContainer: React.FC<ITutorQuestionDetailRequest> = ({ qn_id })
         </div>
       </div>
 
-      <div className="fixed bottom-5 right-5">
+      <div className="flex justify-center items-center">
         <CustomButton
-          className="bg-blue-600 text-white border border-blue-600"
+          className="bg-blue-500-500 text-white shadow-md w-52 font-semibold"
           onClick={handleSubmission}
-          label="Submit"
+          label="Update"
         />
       </div>
     </div>
