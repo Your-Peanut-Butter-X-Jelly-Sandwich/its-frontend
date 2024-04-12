@@ -49,14 +49,15 @@ const QuestionDetailContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
 
   return (
     <div className="flex bg-white h-full">
-      <div className="w-[50%] pl-7 pt-9 pb-9">
+      <div className="w-[49.95%] pl-7 pt-9 pb-9 pr-7">
         {/* Problem Statement */}
         <div className="h-full overflow-auto" data-color-mode="light">
           <MDEditor.Markdown source={problemStatement} />
         </div>
       </div>
+      <div className='w-[0.1%] bg-black'></div>
       {/* Code Editor */}
-      <div className="w-[50%] bg-gray-400">
+      <div className="w-[49.95%] bg-gray-400">
         <div className="h-[4%] flex justify-end">
           <Text className="mr-4 mt-1">{data?.language}</Text>
         </div>
