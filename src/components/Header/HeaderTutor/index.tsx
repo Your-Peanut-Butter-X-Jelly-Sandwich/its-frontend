@@ -32,8 +32,11 @@ const HeaderTutor: React.FC = () => {
       message.error('Error logging out');
     }
   };
+
+  const defaultSelectedKey = 'dashboard';
+
   return (
-    <Menu mode="horizontal" theme="dark">
+    <Menu mode="horizontal" theme="dark" defaultSelectedKeys={[defaultSelectedKey]}>
       <Menu.Item key="dashboard" icon={<DesktopOutlined />}>
         <Link href={`/${locale}/tutor/`} passHref>
           <Menu.Item key="dashboard">Dashboard</Menu.Item>
