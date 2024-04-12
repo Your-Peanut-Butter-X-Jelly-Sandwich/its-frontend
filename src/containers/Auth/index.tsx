@@ -5,18 +5,18 @@ import LoginContainer from './Login';
 import SignUpContainer from './Register';
 import { useSearchParams } from 'next/navigation';
 const AuthContainer: React.FC = () => {
-  const [isSignedUp, setSignedUp] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false);
   const searchParams = useSearchParams();
   useEffect(() => {
     const action = searchParams.get('action');
-    setSignedUp(action == 'login');
+    setIsSignUp(action == 'signup');
   }, []);
   return (
     <div className="h-screen flex flex-row justify-center items-center">
-      {!isSignedUp ? (
-        <LoginContainer isSignedUp={isSignedUp} setSignedUp={setSignedUp} />
+      {!isSignUp ? (
+        <LoginContainer isSignUp={isSignUp} setIsSignUp={setIsSignUp} />
       ) : (
-        <SignUpContainer isSignedUp={isSignedUp} setSignedUp={setSignedUp} />
+        <SignUpContainer isSignUp={isSignUp} setIsSignUp={setIsSignUp} />
       )}
     </div>
   );

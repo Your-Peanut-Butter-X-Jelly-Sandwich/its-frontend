@@ -11,9 +11,9 @@ import CustomButton from './components/CustomButton/CustomButton';
 import SocialSignupButton from './components/SocialSignupButton/SocialSignupButton';
 
 const SignUpContainer: React.FC<{
-  isSignedUp: boolean;
-  setSignedUp: (value: boolean) => void;
-}> = ({ isSignedUp, setSignedUp }) => {
+  isSignUp: boolean;
+  setIsSignUp: (value: boolean) => void;
+}> = ({ isSignUp, setIsSignUp }) => {
   const [form] = Form.useForm();
   const pathname = usePathname();
   const handleSocialSignup = (provider: string) => {
@@ -41,14 +41,14 @@ const SignUpContainer: React.FC<{
       const password = form.getFieldValue('password');
       const result = await authSignup({ email, password }).unwrap();
       if (result) {
-        setSignedUp(true);
+        setIsSignUp(false);
       }
     } catch (error) {
       message.error('Error signing up');
     }
   };
   const handleLoginClick = () => {
-    setSignedUp(false);
+    setIsSignUp(false);
   };
 
   return (
