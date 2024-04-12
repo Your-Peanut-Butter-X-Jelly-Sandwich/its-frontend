@@ -1,21 +1,17 @@
 import React from 'react';
-// import Link from "next/link";
 import { usePathname } from 'next/navigation';
 import getLocale from '@/common/utils/extractLocale';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 const HeaderLanding: React.FC = () => {
-  // const router = useRouter();
   const pathname = usePathname();
   const locale = getLocale(pathname);
-  // const handleLogin = () => {
-  //   router.push(`/${locale}/auth`);
-  // };
-  // const handleSignUp = () => {};
+  const t = useTranslations('Landing.Header');
   return (
     <div className="bg-black h-20 px-10 text-white">
       <div className="flex justify-between h-full">
         <div className="flex flex-col justify-center">
-          <div className="text-xl">Intelligent Tutoring System</div>
+          <div className="text-xl">{t('its')}</div>
         </div>
         <div className="flex flex-col justify-center">
           <div className="flex justify-center gap-10 font-semibold text-lg">
@@ -26,7 +22,7 @@ const HeaderLanding: React.FC = () => {
                   query: { action: 'login' },
                 }}
               >
-                Login
+                {t('login')}
               </Link>
             </div>
             <div className="text-center cursor-pointer hover:text-xl duration-150">
@@ -36,7 +32,7 @@ const HeaderLanding: React.FC = () => {
                   query: { action: 'signup' },
                 }}
               >
-                Signup
+                {t('signup')}
               </Link>
             </div>
           </div>

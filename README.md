@@ -27,7 +27,7 @@ Mac users may encounter error when installing, refer to this [link](https://stac
 ### Using Docker
 
 1. Install `Docker` into your system.
-2. Run `docker-compose up --build frontend` to run the Django server
+2. Run `docker-compose up -d --build` to run the Django server
 3. Application is available at [http://localhost:3000](http://localhost:3000)
 
 ### Using npm command
