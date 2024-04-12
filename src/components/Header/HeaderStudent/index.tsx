@@ -32,8 +32,11 @@ const HeaderStudent: React.FC = () => {
       message.error('Error logging out');
     }
   };
+
+  const defaultSelectedKey = String(window.location.pathname).split('/')[3] == 'questions' ? 'check-questions' : 'dashboard';
+
   return (
-    <Menu mode="horizontal" theme="dark">
+    <Menu mode="horizontal" theme="dark" defaultSelectedKeys={[defaultSelectedKey]}>
       <Menu.Item key="dashboard" icon={<DesktopOutlined />}>
         <Link href={`/${locale}/student/`} passHref>
           <Menu.Item key="dashboard">Dashboard</Menu.Item>

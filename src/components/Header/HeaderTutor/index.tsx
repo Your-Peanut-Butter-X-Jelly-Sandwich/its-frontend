@@ -32,8 +32,23 @@ const HeaderTutor: React.FC = () => {
       message.error('Error logging out');
     }
   };
+
+  const getDefaultSelectedKey = () => {
+    console.log(pathname);
+    if (pathname == `/${locale}/tutor`) {
+      return 'dashboard';
+    } else if (pathname == `/${locale}/tutor/add-question`) {
+      return 'add-question';
+    } else if (pathname == `/${locale}/tutor/questions`) {
+      return 'check-questions';
+    }
+    return 'dashboard'; 
+  };
+
+  const defaultSelectedKey = getDefaultSelectedKey();
+
   return (
-    <Menu mode="horizontal" theme="dark">
+    <Menu mode="horizontal" theme="dark" defaultSelectedKeys={[defaultSelectedKey]}>
       <Menu.Item key="dashboard" icon={<DesktopOutlined />}>
         <Link href={`/${locale}/tutor/`} passHref>
           <Menu.Item key="dashboard">Dashboard</Menu.Item>
