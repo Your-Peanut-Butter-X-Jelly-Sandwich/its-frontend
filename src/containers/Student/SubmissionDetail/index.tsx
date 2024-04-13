@@ -39,8 +39,7 @@ const SubmissionDetailContainer: React.FC<SubmissionDetailProps> = ({ submission
 
   React.useEffect(() => {
     if (data) {
-      console.log(data);
-      sethints(data.its_feedback_hint_student);
+      sethints(JSON.parse(data.its_feedback_hint_student));
     }
   }, [data]);
 
