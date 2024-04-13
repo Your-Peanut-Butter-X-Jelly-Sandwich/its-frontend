@@ -4,7 +4,11 @@ import React from 'react';
 import { usePathname } from 'next/navigation';
 import Editor from '@monaco-editor/react';
 import { Typography } from 'antd';
-import { useGetQuestionDetailQuery, usePostCodeSubmissionMutation } from '@/redux/apis/student';
+import {
+  useGetQuestionDetailQuery,
+  usePostCodeSubmissionMutation,
+  useGetSubmissionDetailQuery,
+} from '@/redux/apis/student';
 import MDEditor from '@uiw/react-md-editor';
 const { Text } = Typography;
 
@@ -14,20 +18,29 @@ type PropsType = {
 
 const QuestionDetailContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
   const pathname = usePathname();
+  const submission_id = new URLSearchParams(window.location.search).get('submission_id');
 
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const [code, setCode] = React.useState<string | undefined>('# Write your code here\n');
   const { data } = useGetQuestionDetailQuery({ qn_id: Number(qn_id) });
   const [postCodeSubmission] = usePostCodeSubmissionMutation();
 
-  const problemStatement = `
-  # **${data?.question_title}**
+  const { data: submissionData } = useGetSubmissionDetailQuery({
+    id: Number(submission_id),
+  });
 
+  React.useEffect(() => {
+    if (submissionData) {
+      setCode(submissionData.program);
+    }
+  }, [submissionData]);
+
+  const problemStatement = `
+  # **${data?.question_title}**  
   ${data?.question_statement}
   `;
 
   const handleSubmit = async () => {
-    setIsLoading(true);
     try {
       if (code) {
         const result = await postCodeSubmission({
@@ -42,10 +55,18 @@ const QuestionDetailContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => {
       }
     } catch (error) {
       alert('Error in submitting the code');
-    } finally {
-      setIsLoading(false);
     }
   };
+
+  React.useEffect(() => {
+    if (data) {
+      if (Date.parse(data.due_date) < Date.parse(new Date().toISOString().split('T')[0])) {
+        window.location.href = pathname.split('/').slice(0, 4).join('/');
+      } else setIsLoading(false);
+    }
+  }, [data, pathname]);
+
+  if (isLoading) return null;
 
   return (
     <div className="flex bg-white h-full">
