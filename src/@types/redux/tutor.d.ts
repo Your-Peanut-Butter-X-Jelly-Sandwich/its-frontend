@@ -81,6 +81,13 @@ interface ITutorSubmissionRequest {
   submission_id: number;
 }
 
+type ITutorSubmissionRequestParam = {
+  params: {
+    qn_id: string;
+    submission_id: string;
+  };
+};
+
 interface ITutorGetQuestionResponse {
   pk: number;
   question_title: string;

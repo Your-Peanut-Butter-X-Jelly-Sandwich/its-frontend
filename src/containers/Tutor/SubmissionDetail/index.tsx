@@ -23,6 +23,13 @@ const SubmissionDetailContainer: React.FC<ITutorSubmissionRequest> = ({ qn_id, s
   const [updateSubmissionDetail] = useUpdateSubmissionDetailMutation();
   const pathname = usePathname();
   const locale = getLocale(pathname);
+  const [hints, sethints] = React.useState<any>([]);
+
+  useEffect(() => {
+    if (submissionDetail) {
+      sethints(JSON.parse(submissionDetail.its_feedback_fix_tutor));
+    }
+  }, [submissionDetail]);
 
   useEffect(() => {
     if (submissionDetail) {
@@ -68,7 +75,7 @@ const SubmissionDetailContainer: React.FC<ITutorSubmissionRequest> = ({ qn_id, s
   };
 
   return (
-    <div style={{ padding: 24, backgroundColor: '#F0F2F5', minHeight: '100vh' }}>
+    <div className="flex flex-col p-5 min-h-0 h-full gap-5">
       <div className="flex justify-between items-stretch w-full">
         <NavButton
           href={`/${locale}/tutor/questions/${qn_id}/submissions`}
@@ -83,16 +90,19 @@ const SubmissionDetailContainer: React.FC<ITutorSubmissionRequest> = ({ qn_id, s
       </div>
 
       <h1>Submissions for Question {qn_id}</h1>
-      <div className="flex flex-col h-screen">
-        <div className="flex flex-1 gap-5 p-3 overflow-hidden">
+      <div className="flex flex-col min-h-0 grow shrink overflow-scroll">
+        <div className="flex grow shrink">
           <div className="flex-1 bg-white shadow rounded overflow-hidden">
             <Editor
-              height="100%"
+              height="70vh"
               language="python"
               theme="vs-light"
               value={code}
               options={editorOptions}
             />
+            <div className="text-gray-600 text-sm bold p-2">
+              Hints: {hints.length > 0 ? hints : 'No hints available'}
+            </div>
           </div>
           <div className="flex-1 bg-white shadow rounded overflow-hidden">
             <Input.TextArea
