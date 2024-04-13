@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { Typography, Card, Row, Col, Spin, Pagination } from 'antd';
 import { useGetPastSubmissionsQuery } from '@/redux/apis/student';
 import ButtonBack from '@/components/ButtonBack';
-
+import path from 'path';
 const { Title, Text } = Typography;
 
 type PropsType = { qn_id: string };
@@ -37,7 +37,7 @@ const PastSubmissionsContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => 
       <Title level={2} className="mb-0">
         Past Submissions
       </Title>
-      <ButtonBack>Re-Attempt</ButtonBack>
+      <ButtonBack url={pathname.substring(0, pathname.lastIndexOf('/'))}>Re-Attempt</ButtonBack>
       <div className="flex-1 flex flex-col justify-between">
         {submissions?.length === 0 && (
           <div className="text-center">

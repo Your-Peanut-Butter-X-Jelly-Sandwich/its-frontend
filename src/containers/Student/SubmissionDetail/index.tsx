@@ -62,7 +62,9 @@ const SubmissionDetailContainer: React.FC<SubmissionDetailProps> = ({ submission
 
   return (
     <div className="h-full flex flex-col gap-5 p-5 bg-[#f0f2f5]">
-      <ButtonBack>All Past Submissions</ButtonBack>
+      <ButtonBack url={pathname.substring(0, pathname.lastIndexOf('/'))}>
+        All Past Submissions
+      </ButtonBack>
       <div className="flex-1 min-h-0">
         <Row gutter={[24, 24]} className="max-h-full h-full">
           <Col xs={24} lg={12} className="max-h-full h-full">
