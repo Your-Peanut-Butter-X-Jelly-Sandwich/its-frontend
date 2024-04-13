@@ -6,7 +6,7 @@ import { useGetSubmissionDetailQuery, useGetQuestionDetailQuery } from '@/redux/
 import { Editor } from '@monaco-editor/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-
+import { DoubleLeftOutlined } from '@ant-design/icons';
 const { Paragraph } = Typography;
 
 type SubmissionDetailProps = {
@@ -62,25 +62,33 @@ const SubmissionDetailContainer: React.FC<SubmissionDetailProps> = ({ submission
   }, [editor, monaco, hints]);
 
   return (
-    <div className="h-full p-5 bg-[#f0f2f5]">
-      <div className="h-[95%]">
-        <Row gutter={[24, 24]}>
-          <Col xs={24} lg={12}>
+    <div className="h-full flex flex-col gap-5 p-5 bg-[#f0f2f5]">
+      <div className="cursor-pointer font-bold" onClick={() => history.back()}>
+        <span className="group bg-white px-4 py-3 rounded-lg shadow-md hover:bg-[#4096ff] hover:text-white duration-200">
+          <DoubleLeftOutlined className="group-hover:-translate-x-2 duration-100" /> All Past
+          Submissions
+        </span>
+      </div>
+      <div className="flex-1 min-h-0">
+        <Row gutter={[24, 24]} className="max-h-full h-full">
+          <Col xs={24} lg={12} className="max-h-full h-full">
             <Card
               title="Submitted Program"
               bordered
-              className="h-full border-solid border-[1px] border-[#d9d9d9]"
+              className="flex flex-col max-h-full h-full border-solid border-[1px] border-[#d9d9d9]"
+              classNames={{ body: 'min-h-0 max-h-full grow flex flex-col' }}
             >
               <Editor
-                height="70vh"
+                width={'100%'}
                 defaultLanguage={data?.language}
                 value={data?.program}
                 onMount={(editor, monaco) => {
                   setEditor(editor);
                   setMonaco(monaco);
                 }}
+                className="flex-1"
               />
-              <div>
+              <div className="basis-1/5">
                 <h1 className="font-bold">Hints:</h1>
                 {hints?.hints?.length === 0 && <p>No hints available</p>}
                 <ul>
@@ -96,18 +104,18 @@ const SubmissionDetailContainer: React.FC<SubmissionDetailProps> = ({ submission
               </div>
             </Card>
           </Col>
-          <Col xs={24} lg={12}>
+          <Col xs={24} lg={12} className="min-h-0">
             <Card
               title="Tutor Feedback"
               bordered
-              className="h-full border-solid border-[1px] border-[#d9d9d9]"
+              className="h-full border-solid border-[1px] border-[#d9d9d9] min-h-0"
             >
               <Paragraph> {data?.tutor_feedback} </Paragraph>
             </Card>
           </Col>
         </Row>
       </div>
-      <div className="h-[5%] flex justify-center items-center mt-3">
+      <div className="flex justify-center items-center mt-3">
         <Link href={`${questionDetailPathname}?submission_id=${submission_id}`} passHref>
           <button
             type="button"
