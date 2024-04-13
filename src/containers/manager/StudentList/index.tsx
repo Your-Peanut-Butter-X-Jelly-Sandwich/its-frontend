@@ -128,6 +128,7 @@ const StudentList: React.FC = () => {
         title="Assign Students to Tutor"
         open={modalVisible}
         onOk={handleModalOk}
+        okType="default"
         onCancel={handleModalCancel}
       >
         <p>Enter the tutor ID:</p>
