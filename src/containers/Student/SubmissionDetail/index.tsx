@@ -6,7 +6,7 @@ import { useGetSubmissionDetailQuery, useGetQuestionDetailQuery } from '@/redux/
 import { Editor } from '@monaco-editor/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { DoubleLeftOutlined } from '@ant-design/icons';
+import ButtonBack from '@/components/ButtonBack';
 const { Paragraph } = Typography;
 
 type SubmissionDetailProps = {
@@ -63,12 +63,7 @@ const SubmissionDetailContainer: React.FC<SubmissionDetailProps> = ({ submission
 
   return (
     <div className="h-full flex flex-col gap-5 p-5 bg-[#f0f2f5]">
-      <div className="cursor-pointer font-bold" onClick={() => history.back()}>
-        <span className="group bg-white px-4 py-3 rounded-lg shadow-md hover:bg-[#4096ff] hover:text-white duration-200">
-          <DoubleLeftOutlined className="group-hover:-translate-x-2 duration-100" /> All Past
-          Submissions
-        </span>
-      </div>
+      <ButtonBack>All Past Submissions</ButtonBack>
       <div className="flex-1 min-h-0">
         <Row gutter={[24, 24]} className="max-h-full h-full">
           <Col xs={24} lg={12} className="max-h-full h-full">

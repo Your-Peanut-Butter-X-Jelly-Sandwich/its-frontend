@@ -30,6 +30,7 @@ interface StudentQuestionsRequest {}
 
 interface StudentSubmission {
   pk: number;
+  status: string;
   submission_number: number;
   score: number;
   total_score: number;

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Typography, Card, Row, Col, Spin, Pagination } from 'antd';
 import { useGetPastSubmissionsQuery } from '@/redux/apis/student';
+import ButtonBack from '@/components/ButtonBack';
 
 const { Title, Text } = Typography;
 
@@ -23,17 +24,21 @@ const PastSubmissionsContainer: React.FC<PropsType> = ({ qn_id }: PropsType) => 
       window.location.reload();
     }, 5000);
 
-    if (submissions?.slice().sort((a, b) => b.pk - a.pk)[0]?.score !== null) {
+    // if (submissions?.slice().sort((a, b) => b.pk - a.pk)[0]?.score !== null) {
+    //   clearInterval(interval);
+    // }
+    if (submissions?.slice().sort((a, b) => b.pk - a.pk)[0]?.status !== 'pending') {
       clearInterval(interval);
     }
   }, [submissions]);
 
   return (
-    <div className="h-full p-5 bg-[#f0f2f5]">
-      <Title level={2} className="mb-[1.5%]">
+    <div className="h-full flex flex-col p-5 gap-5 bg-[#f0f2f5]">
+      <Title level={2} className="mb-0">
         Past Submissions
       </Title>
-      <div className="h-[92%] flex flex-col justify-between">
+      <ButtonBack>Re-Attempt</ButtonBack>
+      <div className="flex-1 flex flex-col justify-between">
         {submissions?.length === 0 && (
           <div className="text-center">
             <h1>No record available!</h1>
