@@ -8,10 +8,7 @@ const { Item } = Form;
 import CustomButton from '../Register/components/CustomButton/CustomButton';
 import SocialSignupButton from '../Register/components/SocialSignupButton/SocialSignupButton';
 
-const LoginContainer: React.FC<{ isSignUp: boolean; setIsSignUp: (value: boolean) => void }> = ({
-  isSignUp,
-  setIsSignUp,
-}) => {
+const LoginContainer: React.FC<{ setIsSignUp: (value: boolean) => void }> = ({ setIsSignUp }) => {
   const [form] = Form.useForm();
   const [authLogin] = useLazyAuthLoginQuery();
   const pathname = usePathname();

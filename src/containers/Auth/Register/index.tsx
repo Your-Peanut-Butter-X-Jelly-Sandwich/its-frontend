@@ -11,9 +11,8 @@ import CustomButton from './components/CustomButton/CustomButton';
 import SocialSignupButton from './components/SocialSignupButton/SocialSignupButton';
 
 const SignUpContainer: React.FC<{
-  isSignUp: boolean;
   setIsSignUp: (value: boolean) => void;
-}> = ({ isSignUp, setIsSignUp }) => {
+}> = ({ setIsSignUp }) => {
   const [form] = Form.useForm();
   const pathname = usePathname();
   const handleSocialSignup = (provider: string) => {
