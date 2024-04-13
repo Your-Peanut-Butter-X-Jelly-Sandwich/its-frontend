@@ -87,7 +87,7 @@ const SubmissionDetailContainer: React.FC<SubmissionDetailProps> = ({ submission
                     <li key={hint.lineNumber}>
                       <p>
                         - <span className="text-red-400">Line {hint.lineNumber}</span>:{' '}
-                        {hint.hintStrings[0]}
+                        {hint.hintStrings ? hint.hintStrings[0] : 'no hint available'}
                       </p>
                     </li>
                   ))}
