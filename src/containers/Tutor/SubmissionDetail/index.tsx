@@ -24,6 +24,33 @@ const SubmissionDetailContainer: React.FC<ITutorSubmissionRequest> = ({ qn_id, s
   const pathname = usePathname();
   const locale = getLocale(pathname);
 
+  const [editor, setEditor] = React.useState<any>();
+  const [monaco, setMonaco] = React.useState<any>();
+  const [fixes, setFixes] = React.useState<any>([]);
+
+  React.useEffect(() => {
+    if (submissionDetail) {
+      setFixes(JSON.parse(submissionDetail.its_feedback_fix_tutor));
+    }
+  }, [submissionDetail]);
+
+  React.useEffect(() => {
+    if (editor && monaco && fixes) {
+      const markers: any = [];
+      fixes?.fixes?.map((fix: any) => {
+        markers.push({
+          startLineNumber: fix.lineNumber,
+          startColumn: editor.getModel().getLineFirstNonWhitespaceColumn(fix.lineNumber),
+          endLineNumber: fix.lineNumber,
+          endColumn: editor.getModel().getLineLength(fix.lineNumber) + 1,
+          message: fix.newExpr ?? 'no fix available',
+          severity: monaco.MarkerSeverity.Error,
+        });
+      });
+      monaco.editor.setModelMarkers(editor.getModel(), 'owner', markers);
+    }
+  }, [editor, monaco, fixes]);
+
   useEffect(() => {
     if (submissionDetail) {
       setFeedback(submissionDetail.tutor_feedback);
@@ -60,15 +87,8 @@ const SubmissionDetailContainer: React.FC<ITutorSubmissionRequest> = ({ qn_id, s
     }
   };
 
-  const editorOptions = {
-    selectOnLineNumbers: true,
-    readOnly: true,
-    language: 'python',
-    theme: 'vs-light',
-  };
-
   return (
-    <div style={{ padding: 24, backgroundColor: '#F0F2F5', minHeight: '100vh' }}>
+    <div className="flex flex-col p-5 min-h-0 h-full gap-5">
       <div className="flex justify-between items-stretch w-full">
         <NavButton
           href={`/${locale}/tutor/questions/${qn_id}/submissions`}
@@ -83,16 +103,33 @@ const SubmissionDetailContainer: React.FC<ITutorSubmissionRequest> = ({ qn_id, s
       </div>
 
       <h1>Submissions for Question {qn_id}</h1>
-      <div className="flex flex-col h-screen">
-        <div className="flex flex-1 gap-5 p-3 overflow-hidden">
+      <div className="flex flex-col min-h-0 grow shrink overflow-scroll">
+        <div className="flex grow shrink">
           <div className="flex-1 bg-white shadow rounded overflow-hidden">
             <Editor
-              height="100%"
+              height="70vh"
               language="python"
               theme="vs-light"
               value={code}
-              options={editorOptions}
+              onMount={(editor, monaco) => {
+                setEditor(editor);
+                setMonaco(monaco);
+              }}
             />
+            <div className="p-5">
+              <h1 className="font-bold">Fixes:</h1>
+              {fixes?.fixes?.length === 0 && <p>No fixes available</p>}
+              <ul>
+                {fixes?.fixes?.map((fix: any) => (
+                  <li key={fix.lineNumber}>
+                    <p>
+                      - <span className="text-red-400">Line {fix.lineNumber}</span>:{' '}
+                      {fix.newExpr ?? 'no fix available'}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
           <div className="flex-1 bg-white shadow rounded overflow-hidden">
             <Input.TextArea

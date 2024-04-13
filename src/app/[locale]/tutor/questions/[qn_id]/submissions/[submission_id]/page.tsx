@@ -1,14 +1,9 @@
 import { NextPage } from 'next';
 import SubmissionDetailContainer from '@/containers/Tutor/SubmissionDetail';
-type ParamsType = {
-  params: {
-    qn_id: string;
-    submission_id: string;
-  };
-};
-const SubmissionDetailPage: NextPage<ParamsType> = ({ params }: ParamsType) => {
+
+const SubmissionDetailPage: NextPage<ITutorSubmissionRequestParam> = ({ params }: ITutorSubmissionRequestParam) => {
   return (
-    <div>
+    <div className="grow shrink">
       {/* @ts-ignore */}
       <SubmissionDetailContainer {...params} />
     </div>
