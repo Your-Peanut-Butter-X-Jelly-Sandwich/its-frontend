@@ -8,7 +8,7 @@ type ParamsType = {
 
 const EditPage: NextPage<ParamsType> = ({ params }: ParamsType) => {
   return (
-    <div className="grow shrink">
+    <div className="h-full max-h-full">
       {/* @ts-ignore */}
       <EditQuestionContainer {...params} />
     </div>

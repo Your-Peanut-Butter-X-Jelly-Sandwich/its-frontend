@@ -103,8 +103,8 @@ const SubmissionDetailContainer: React.FC<ITutorSubmissionRequest> = ({ qn_id, s
       </div>
 
       <h1>Submissions for Question {qn_id}</h1>
-      <div className="flex flex-col min-h-0 grow shrink overflow-scroll">
-        <div className="flex grow shrink">
+      <div className="flex flex-col h-screen">
+        <div className="flex flex-1 gap-5 p-3 overflow-hidden">
           <div className="flex-1 bg-white shadow rounded overflow-hidden">
             <Editor
               height="70vh"

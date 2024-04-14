@@ -8,7 +8,7 @@ type ParamsType = {
 };
 const QuestionPage: NextPage<ParamsType> = ({ params }: ParamsType) => {
   return (
-    <div>
+    <div className="h-full max-h-full">
       {/* @ts-ignore */}
       <QuestionDetailContainer {...params} />
     </div>

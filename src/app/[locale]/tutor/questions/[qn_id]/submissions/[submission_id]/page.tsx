@@ -3,7 +3,7 @@ import SubmissionDetailContainer from '@/containers/Tutor/SubmissionDetail';
 
 const SubmissionDetailPage: NextPage<ITutorSubmissionRequestParam> = ({ params }: ITutorSubmissionRequestParam) => {
   return (
-    <div className="grow shrink">
+    <div className="h-full max-h-full">
       {/* @ts-ignore */}
       <SubmissionDetailContainer {...params} />
     </div>
