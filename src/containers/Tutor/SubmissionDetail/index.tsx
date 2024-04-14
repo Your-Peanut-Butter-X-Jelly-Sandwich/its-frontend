@@ -1,8 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Input, Button, message } from 'antd';
-import Link from 'next/link';
+import { Row, Col, Card, Input, Button, message } from 'antd';
 import Editor from '@monaco-editor/react';
 import {
   useGetSubmissionDetailQuery,
@@ -29,6 +28,7 @@ const SubmissionDetailContainer: React.FC<ITutorSubmissionRequest> = ({ qn_id, s
   const [fixes, setFixes] = React.useState<any>([]);
 
   React.useEffect(() => {
+    console.log(submissionDetail);
     if (submissionDetail) {
       setFixes(JSON.parse(submissionDetail.its_feedback_fix_tutor));
     }
@@ -88,13 +88,16 @@ const SubmissionDetailContainer: React.FC<ITutorSubmissionRequest> = ({ qn_id, s
   };
 
   return (
-    <div className="flex flex-col p-5 min-h-0 h-full gap-5">
+    <div className="h-full flex flex-col gap-5 p-5 bg-[#f0f2f5]">
       <div className="flex justify-between items-stretch w-full">
         <NavButton
           href={`/${locale}/tutor/questions/${qn_id}/submissions`}
           buttonText="Back to Submissions"
           className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
         />
+        <div className='flex gap-5 font-bold text-2xl'>
+          <h1>Submissions for Question {qn_id}</h1>
+        </div>
         <CustomButton
           onClick={handleSubmitFeedback}
           label="Submit Feedback"
@@ -102,21 +105,28 @@ const SubmissionDetailContainer: React.FC<ITutorSubmissionRequest> = ({ qn_id, s
         />
       </div>
 
-      <h1>Submissions for Question {qn_id}</h1>
-      <div className="flex flex-col h-screen">
-        <div className="flex flex-1 gap-5 p-3 overflow-hidden">
-          <div className="flex-1 bg-white shadow rounded overflow-hidden">
+      
+      <div className="flex-1 min-h-0">
+        <Row gutter={[24, 24]} className="max-h-full h-full">
+          <Col xs={24} lg={12} className="max-h-full h-full">
+            <Card
+                title="Submitted Program"
+                bordered
+                className="flex flex-col max-h-full h-full border-solid border-[1px] border-[#d9d9d9]"
+                classNames={{ body: 'min-h-0 max-h-full grow flex flex-col' }}
+              >
             <Editor
-              height="70vh"
-              language="python"
+              width={'100%'}
+              language={submissionDetail?.language}
               theme="vs-light"
               value={code}
               onMount={(editor, monaco) => {
                 setEditor(editor);
                 setMonaco(monaco);
               }}
+              className="flex-1"
             />
-            <div className="p-5">
+            <div className="basis-1/5">
               <h1 className="font-bold">Fixes:</h1>
               {fixes?.fixes?.length === 0 && <p>No fixes available</p>}
               <ul>
@@ -130,16 +140,18 @@ const SubmissionDetailContainer: React.FC<ITutorSubmissionRequest> = ({ qn_id, s
                 ))}
               </ul>
             </div>
-          </div>
-          <div className="flex-1 bg-white shadow rounded overflow-hidden">
+          </Card>
+          </Col>
+
+          <Col xs={24} lg={12} className="min-h-0">
             <Input.TextArea
               placeholder="Enter your feedback here..."
               style={{ width: '100%', height: '100%' }}
               value={feedback}
               onChange={handleFeedbackChange}
             />
-          </div>
-        </div>
+          </Col>
+        </Row>
       </div>
     </div>
   );
