@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import TutorList from '@/containers/manager/TutorList';
+import TutorList from '@/containers/Manager/TutorList';
 import { NextPage } from 'next';
 
 const TutorListPage: NextPage = () => {
