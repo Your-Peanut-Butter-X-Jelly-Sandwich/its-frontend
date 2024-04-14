@@ -8,4 +8,13 @@ export const SUPPORTED_LANGUAGE_OPTIONS: { value: string; label: string }[] = [
   { value: 'id', label: 'id | bahasa Indonesia' },
 ];
 
+export const WORDCLOUD: { [locale: string]: string } = {
+  cz: '欢迎来到智能辅导系统',
+  de: 'WILLKOMMEN BEI Intelligentes Nachhilfesystem',
+  en: 'WELCOME TO ITS',
+  es: 'BIENVENIDO A ITS',
+  id: 'Selamat datang di Sistem Bimbingan Belajar Cerdas',
+  kr: 'ITS에 환영합니다',
+};
+
 export default SUPPORTED_LANGUAGES;
