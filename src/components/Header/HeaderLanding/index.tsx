@@ -3,6 +3,7 @@ import { usePathname } from 'next/navigation';
 import getLocale from '@/common/utils/extractLocale';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
+import LanguageSelector from '@/components/LanguageSelector';
 const HeaderLanding: React.FC = () => {
   const pathname = usePathname();
   const locale = getLocale(pathname);
@@ -35,6 +36,7 @@ const HeaderLanding: React.FC = () => {
                 {t('signup')}
               </Link>
             </div>
+            <LanguageSelector />
           </div>
         </div>
       </div>

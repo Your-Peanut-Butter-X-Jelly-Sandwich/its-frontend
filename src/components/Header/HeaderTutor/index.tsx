@@ -14,7 +14,7 @@ import { useLazyAuthLogoutQuery } from '@/redux/apis/auth';
 import { usePathname } from 'next/navigation';
 import getLocale from '@/common/utils/extractLocale';
 import { authSelector } from '@/redux/slices/auth';
-
+import LanguageSelector from '@/components/LanguageSelector';
 const HeaderTutor: React.FC = () => {
   const [authLogout] = useLazyAuthLogoutQuery();
   const pathname = usePathname();
@@ -71,6 +71,9 @@ const HeaderTutor: React.FC = () => {
         onClick={handleLogout}
       >
         <Menu.Item key="dashboard">Log Out</Menu.Item>
+      </Menu.Item>
+      <Menu.Item>
+        <LanguageSelector />
       </Menu.Item>
     </Menu>
   );

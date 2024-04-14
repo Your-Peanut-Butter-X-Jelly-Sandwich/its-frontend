@@ -1,19 +1,14 @@
 'use client';
-
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Menu, message } from 'antd';
-import {
-  DesktopOutlined,
-  QuestionCircleOutlined,
-  CheckSquareOutlined,
-  LogoutOutlined,
-} from '@ant-design/icons';
+import { DesktopOutlined, CheckSquareOutlined, LogoutOutlined } from '@ant-design/icons';
 import Link from 'next/link';
 import { useLazyAuthLogoutQuery } from '@/redux/apis/auth';
 import { usePathname } from 'next/navigation';
 import getLocale from '@/common/utils/extractLocale';
 import { authSelector } from '@/redux/slices/auth';
+import LanguageSelector from '@/components/LanguageSelector';
 
 const HeaderStudent: React.FC = () => {
   const [authLogout] = useLazyAuthLogoutQuery();
@@ -48,6 +43,7 @@ const HeaderStudent: React.FC = () => {
           <Menu.Item key="dashboard">Check Questions</Menu.Item>
         </Link>
       </Menu.Item>
+
       <Menu.Item
         key="logout"
         icon={<LogoutOutlined />}
@@ -55,6 +51,9 @@ const HeaderStudent: React.FC = () => {
         onClick={handleLogout}
       >
         <Menu.Item key="dashboard">Log Out</Menu.Item>
+      </Menu.Item>
+      <Menu.Item>
+        <LanguageSelector />
       </Menu.Item>
     </Menu>
   );
