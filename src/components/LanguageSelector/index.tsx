@@ -5,6 +5,7 @@ import { useTransition } from 'react';
 import { Select } from 'antd';
 import { SUPPORTED_LANGUAGE_OPTIONS } from '@/constants/supportedLang';
 import { useLocale } from 'next-intl';
+import path from 'path';
 const LanguageSelector: React.FC = () => {
   const router = useRouter();
   const pathname = usePathname();
@@ -13,7 +14,7 @@ const LanguageSelector: React.FC = () => {
   const locale = useLocale();
   const handleChangeLang = (value: string) => {
     startTransition(() => {
-      const newPath = pathname.replace(params.locale as string, value);
+      const newPath = '/' + value + pathname.substring(3);
       router.replace(newPath);
     });
   };
