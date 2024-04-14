@@ -34,7 +34,6 @@ const HeaderTutor: React.FC = () => {
   };
 
   const getDefaultSelectedKey = () => {
-    console.log(pathname);
     if (pathname == `/${locale}/tutor`) {
       return 'dashboard';
     } else if (pathname == `/${locale}/tutor/add-question`) {
