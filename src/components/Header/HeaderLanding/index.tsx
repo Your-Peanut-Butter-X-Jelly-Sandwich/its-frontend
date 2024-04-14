@@ -16,6 +16,7 @@ const HeaderLanding: React.FC = () => {
         </div>
         <div className="flex flex-col justify-center">
           <div className="flex justify-center gap-10 font-semibold text-lg">
+            <LanguageSelector />
             <div className="text-center cursor-pointer hover:text-xl duration-150">
               <Link
                 href={{
@@ -36,7 +37,6 @@ const HeaderLanding: React.FC = () => {
                 {t('signup')}
               </Link>
             </div>
-            <LanguageSelector />
           </div>
         </div>
       </div>

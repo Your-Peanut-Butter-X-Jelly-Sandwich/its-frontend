@@ -63,16 +63,11 @@ const HeaderTutor: React.FC = () => {
           <Menu.Item key="dashboard">Check Questions</Menu.Item>
         </Link>
       </Menu.Item>
-      <Menu.Item
-        key="logout"
-        icon={<LogoutOutlined />}
-        style={{ marginLeft: 'auto' }}
-        onClick={handleLogout}
-      >
-        <Menu.Item key="dashboard">Log Out</Menu.Item>
-      </Menu.Item>
-      <Menu.Item>
+      <Menu.Item style={{ marginLeft: 'auto' }}>
         <LanguageSelector />
+      </Menu.Item>
+      <Menu.Item key="logout" icon={<LogoutOutlined />} onClick={handleLogout}>
+        <Menu.Item key="dashboard">Log Out</Menu.Item>
       </Menu.Item>
     </Menu>
   );
