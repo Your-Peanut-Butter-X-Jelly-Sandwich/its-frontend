@@ -12,6 +12,6 @@ jobs:
         with:
           node-version: 20
       - name: Install dependencies
-        run: yarn dev
+        run: yarn install
       - name: Build
         run: yarn build
