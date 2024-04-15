@@ -1,0 +1,10 @@
+{
+  "Landing": {
+    "title": "BIENVENIDO A ITS",
+    "Header": {
+      "its": "Sistema de tutoría inteligente",
+      "login": "Acceso",
+      "signup": "Inscribirse"
+    }
+  }
+}

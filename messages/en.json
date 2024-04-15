@@ -1,0 +1,10 @@
+{
+  "Landing": {
+    "title": "WELCOME TO ITS",
+    "Header": {
+      "its": "Intelligent Tutoring System",
+      "login": "Login",
+      "signup": "Signup"
+    }
+  }
+}
