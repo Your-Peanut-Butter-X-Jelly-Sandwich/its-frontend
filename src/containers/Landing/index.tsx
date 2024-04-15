@@ -55,7 +55,10 @@ const LandingContainer: React.FC = () => {
                   key={index}
                 >
                   <div
-                    className={`text-${word.fontSize} text-${word.textColor}`}
+                    style={{
+                      fontSize: word.fontSize,
+                      color: word.textColor,
+                    }}
                   >
                     {word.text}
                   </div>
