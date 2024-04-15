@@ -12,7 +12,7 @@ const QuestionList = ({ questionList, pathname, handleDeleteQuestion }) => {
             <div className="flex justify-between items-center">
               <div>
                 <p className="font-semibold">{item.question_title}</p>
-                <p>Published: {item.pub_date}</p>
+                <p>Published: {new Date(item.pub_date).toISOString().slice(0, 19).replace('T', ' ')} </p>
                 <p>Due by: {item.due_date}</p>
               </div>
               <div className="flex space-x-2">
