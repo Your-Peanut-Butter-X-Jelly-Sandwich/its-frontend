@@ -13,15 +13,15 @@ const TutorList: React.FC = () => {
   const [demoteTutors] = useDemoteTutorsMutation();
   const [tutors, setTutors] = useState<Student[]>([]);
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
-
-  const getTutorData = async () => {
-    const res: { user: Tutor[] } = await getTutors().unwrap();
-    setTutors(res.user);
-  };
-
+  
   useEffect(() => {
+    const getTutorData = async () => {
+      const res: { user: Tutor[] } = await getTutors().unwrap();
+      setTutors(res.user);
+    };
+  
     getTutorData();
-  }, []);
+  }, [getTutors]);
 
   const handleCheckboxChange = (tutorId: number, checked: boolean) => {
     setSelectedIds((prevIds) => {

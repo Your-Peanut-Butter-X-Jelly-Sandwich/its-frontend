@@ -17,14 +17,15 @@ const StudentList: React.FC = () => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>('');
 
-  const getStudentData = async () => {
-    const res: { user: Student[] } = await getStudents().unwrap();
-    setStudents(res.user);
-  };
-
   useEffect(() => {
+    const getStudentData = async () => {
+      const res: { user: Student[] } = await getStudents().unwrap();
+      setStudents(res.user);
+    };
+
     getStudentData();
-  }, []);
+  }, [getStudents]);
+
 
   const handleCheckboxChange = (studentId: number, checked: boolean) => {
     setSelectedIds((prevIds) => {
