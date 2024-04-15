@@ -144,12 +144,12 @@ const SubmissionDetailContainer: React.FC<ITutorSubmissionRequest> = ({ qn_id, s
           </Col>
 
           <Col xs={24} lg={12} className="min-h-0">
-            <Input.TextArea
-              placeholder="Enter your feedback here..."
-              style={{ width: '100%', height: '100%' }}
-              value={feedback}
-              onChange={handleFeedbackChange}
-            />
+          <Input.TextArea
+            placeholder="Enter your feedback here..."
+            className="w-full h-full"
+            value={feedback}
+            onChange={handleFeedbackChange}
+          />
           </Col>
         </Row>
       </div>

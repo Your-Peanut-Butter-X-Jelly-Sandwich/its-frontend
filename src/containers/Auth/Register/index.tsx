@@ -51,7 +51,7 @@ const SignUpContainer: React.FC<{
   };
 
   return (
-    <Card title="Sign Up" style={{ width: '100%', maxWidth: 400, borderRadius: 8 }}>
+    <Card title="Sign Up" className="w-full max-w-sm rounded-lg">
       <Form form={form} layout="vertical">
         <Item
           label="Email"
@@ -95,11 +95,7 @@ const SignUpContainer: React.FC<{
         </Item>
         <Item>
           Already have an account?{' '}
-          <a
-            id="login-link"
-            onClick={() => handleLoginClick()}
-            style={{ textDecoration: 'underline' }}
-          >
+          <a onClick={() => handleLoginClick()} className="underline">
             Login
           </a>
         </Item>

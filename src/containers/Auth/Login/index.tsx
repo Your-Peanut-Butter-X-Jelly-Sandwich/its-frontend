@@ -43,7 +43,7 @@ const LoginContainer: React.FC<{ setIsSignUp: (value: boolean) => void }> = ({ s
   };
 
   return (
-    <Card title="Login" style={{ width: '100%', maxWidth: 400, borderRadius: 8 }}>
+    <Card title="Login" className="w-full max-w-xs rounded-lg">
       <Form form={form} layout="vertical">
         <Item
           label="Email"
@@ -84,9 +84,9 @@ const LoginContainer: React.FC<{ setIsSignUp: (value: boolean) => void }> = ({ s
         </Item>
         <Item>
           No account yet?{' '}
-          <a onClick={() => handleSignUpClick()} style={{ textDecoration: 'underline' }}>
+          <a onClick={() => handleSignUpClick()} className="underline">
             Sign up
-          </a>{' '}
+          </a>
         </Item>
       </Form>
     </Card>

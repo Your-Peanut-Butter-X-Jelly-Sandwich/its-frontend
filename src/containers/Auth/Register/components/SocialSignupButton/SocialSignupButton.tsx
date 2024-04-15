@@ -9,7 +9,7 @@ interface SocialSignupButtonProps {
 }
 
 const SocialSignupButton: React.FC<SocialSignupButtonProps> = ({ type, onClick, label }) => (
-  <Button type={type} onClick={onClick} style={{ backgroundColor: '#40a9ff', width: '100%' }}>
+  <Button type={type} onClick={onClick} className="bg-blue-400 w-full">
     <Space>
       {label.toLowerCase().includes('google') && <GoogleOutlined />}
       {label.toLowerCase().includes('github') && <GithubOutlined />}
