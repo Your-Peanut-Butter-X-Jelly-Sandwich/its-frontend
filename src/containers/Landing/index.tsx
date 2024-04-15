@@ -46,12 +46,13 @@ const LandingContainer: React.FC = () => {
       <div className="h-full font-bold flex justify-center">
         <div className="flex flex-col justify-center">
           <div className="max-w-[1000px]">
-            {words.map((word) => {
+            {words.map((word, index) => {
               return (
                 <motion.div
                   initial={{ x: 0, opacity: 0 }}
                   animate={{ x: word.translateX, opacity: 1 }}
                   transition={{ duration: 1 }}
+                  key={index}
                 >
                   <div
                     style={{
