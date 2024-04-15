@@ -43,15 +43,14 @@ const List: React.FC<ListProps> = ({
   ];
 
   return (
-    <div style={{ padding: '20px', backgroundColor: '#f0f2f5', minHeight: '100vh' }}>
+    <div className="p-5 bg-gray-50 min-h-screen">
       <Title level={2}>{listTitle}</Title>
-      <Button style={{ marginBottom: '2%' }} onClick={handleButtonClick}>
+      <Button className="mb-2" onClick={handleButtonClick}>
         {buttonName}
       </Button>
       {assignStudentClick && (
-        <Button style={{ marginBottom: '2%', marginLeft: '2%' }} onClick={assignStudentClick}>
-          {' '}
-          Assign to Tutor{' '}
+        <Button className="mb-2 ml-2" onClick={assignStudentClick}>
+          Assign to Tutor
         </Button>
       )}
       <Table
@@ -59,7 +58,7 @@ const List: React.FC<ListProps> = ({
         dataSource={users}
         pagination={false}
         scroll={{ x: 'max-content' }}
-        style={{ backgroundColor: '#ffffff' }}
+        className="bg-white"
       />
     </div>
   );

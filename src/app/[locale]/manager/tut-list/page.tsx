@@ -5,7 +5,7 @@ import { NextPage } from 'next';
 
 const TutorListPage: NextPage = () => {
   return (
-    <div>
+    <div className="h-full max-h-full">
       <TutorList />
     </div>
   );

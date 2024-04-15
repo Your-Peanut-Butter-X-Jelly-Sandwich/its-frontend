@@ -115,7 +115,7 @@ const StudentList: React.FC = () => {
   };
 
   return (
-    <div style={{ padding: '20px', backgroundColor: '#f0f2f5', minHeight: '100vh' }}>
+    <div className="p-5 bg-gray-50 min-h-screen">
       <List
         users={students}
         onCheckboxChange={handleCheckboxChange}
@@ -135,7 +135,7 @@ const StudentList: React.FC = () => {
         <Input type="number" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
       </Modal>
     </div>
-  );
+  );  
 };
 
 export default StudentList;

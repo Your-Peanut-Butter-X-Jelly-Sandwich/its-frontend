@@ -50,7 +50,7 @@ const TutorList: React.FC = () => {
   };
 
   return (
-    <div style={{ padding: '20px', backgroundColor: '#f0f2f5', minHeight: '100vh' }}>
+    <div className="p-5 bg-gray-50 min-h-screen">
       <List
         users={tutors}
         onCheckboxChange={handleCheckboxChange}
@@ -60,6 +60,7 @@ const TutorList: React.FC = () => {
       />
     </div>
   );
+  
 };
 
 export default TutorList;

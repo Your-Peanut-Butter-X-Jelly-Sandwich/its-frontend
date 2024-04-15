@@ -5,7 +5,7 @@ import StudentList from '@/containers/Manager/StudentList';
 
 const ManagerPage: NextPage = () => {
   return (
-    <div>
+    <div className="h-full max-h-full">
       <StudentList />
     </div>
   );
