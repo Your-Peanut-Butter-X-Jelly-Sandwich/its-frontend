@@ -63,7 +63,7 @@ const HeaderTutor: React.FC = () => {
           <Menu.Item key="dashboard">Check Questions</Menu.Item>
         </Link>
       </Menu.Item>
-      <Menu.Item className="ml-auto">
+      <Menu.Item style={{ marginLeft: 'auto' }}>
         <LanguageSelector />
       </Menu.Item>
       <Menu.Item key="logout" icon={<LogoutOutlined />} onClick={handleLogout}>
